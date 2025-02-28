@@ -1,0 +1,6 @@
+streamlit>=1.42.0
+plotly>=6.0.0
+orjson>=3.10.15
+# TODO: Point to a specific commit hash once the branch is merged
+git+https://github.com/ArcadiaImpact/inspect_evals_scoring.git@eval-test-run
+pyyaml>=6.0.1

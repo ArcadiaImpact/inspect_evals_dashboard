@@ -1,0 +1,51 @@
+prod:
+  evaluations:
+    agents:
+      - name: code_generation
+        default_scorer: code_quality
+        default_metric: correctness
+        path: s3://eval-data/agents/code-gen
+    assistants:
+      - name: helpfulness
+        default_scorer: human_rating
+        default_metric: helpful_score
+        path: s3://eval-data/assistants/helpfulness
+
+stage:
+  evaluations:
+    agents:
+      - name: code_generation
+        default_scorer: code_quality
+        default_metric: correctness
+        path: s3://eval-stage/agents/code-gen
+    assistants:
+      - name: helpfulness
+        default_scorer: human_rating
+        default_metric: helpful_score
+        path: s3://eval-stage/assistants/helpfulness
+
+dev:
+  evaluations:
+    agents:
+      - name: code_generation
+        default_scorer: code_quality
+        default_metric: correctness
+        path: s3://eval-dev/agents/code-gen
+    assistants:
+      - name: helpfulness
+        default_scorer: human_rating
+        default_metric: helpful_score
+        path: s3://eval-dev/assistants/helpfulness
+
+test:
+  evaluations:
+    agents:
+      - name: code_generation
+        default_scorer: code_quality
+        default_metric: correctness
+        path: test/agents/code-gen
+    assistants:
+      - name: helpfulness
+        default_scorer: human_rating
+        default_metric: helpful_score
+        path: test/assistants/helpfulness
