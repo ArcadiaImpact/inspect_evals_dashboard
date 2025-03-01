@@ -4,7 +4,7 @@ orjson>=3.10.15
 # TODO: Point to a specific commit hash once the branch is merged
 # TODO: Make sure this works locally without the token
 # git+https://github.com/ArcadiaImpact/inspect_evals_scoring.git@eval-test-run
-https://x-access-token:${GITHUB_TOKEN}@github.com/ArcadiaImpact/inspect_evals_scoring.git@eval-test-run
+git+https://x-access-token:${GITHUB_TOKEN}@github.com/ArcadiaImpact/inspect_evals_scoring.git@eval-test-run
 pyyaml>=6.0.1
 s3fs>=2024.12.0
 st-files-connection>=0.1.0
