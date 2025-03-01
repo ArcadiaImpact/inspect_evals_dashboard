@@ -1,8 +1,11 @@
-import plotly.graph_objs as go
 from inspect_evals_scoring.process_log import DashboardLog
+import plotly.graph_objs as go
+import streamlit as st
+from src.dashboard_log_utils import dashboard_log_hash_func 
 from src.plots.plot_utils import create_hover_text
 
 
+@st.cache_data(hash_funcs={DashboardLog: dashboard_log_hash_func})
 def create_bar_chart(eval_logs: list[DashboardLog], metric: str):
     # Extract data from filtered logs
     models = [log.model_metadata.name for log in eval_logs]

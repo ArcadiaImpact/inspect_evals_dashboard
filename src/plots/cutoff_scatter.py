@@ -1,9 +1,12 @@
+from inspect_evals_scoring.process_log import DashboardLog
+from src.dashboard_log_utils import dashboard_log_hash_func
+from src.plots.plot_utils import create_hover_text
 import pandas as pd
 import plotly.graph_objs as go
-from inspect_evals_scoring.process_log import DashboardLog
-from src.plots.plot_utils import create_hover_text
+import streamlit as st
 
 
+@st.cache_data(hash_funcs={DashboardLog: dashboard_log_hash_func})
 def create_cutoff_scatter(
     eval_logs: list[DashboardLog],
     metric: str,

@@ -7,7 +7,6 @@ A Streamlit-based web application for visualizing results of AI evaluations base
 ```bash
 ├── app.py
 ├── config.yml
-├── .env
 ├── requirements.txt
 ├── pyproject.toml
 ├── .streamlit
@@ -22,14 +21,18 @@ A Streamlit-based web application for visualizing results of AI evaluations base
 │   │   │   ├── knowledge.py
 │   │   │   ├── mathematics.py
 │   │   │   ├── reasoning.py
-│   │   │   └── safeguards.py
-│   │   ├── page_utils.py
+│   │   │   ├── safeguards.py
+│   │   │   └── template.py
 │   │   ├── changelog.py
 │   │   └── docs.py
 │   └── plots
-│       └── bar.py
-└── utils
-    └── config.py
+│       ├── bar.py
+│       ├── cutoff_scatter.py
+│       ├── pairwise.py
+│       └── plot_utils.py
+│   ├── dashboard_log_utils.py
+│   ├── load_eval_logs.py
+│   └── config.py
 ```
 
 ## Setup and Installation
@@ -54,13 +57,13 @@ source venv/bin/activate  # On Windows, use: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. Set up environment variables in `.env`:
+4. Set up environment variables in `.streamlit/secrets.toml`:
 
-```env
-STREAMLIT_ENV=dev
-AWS_ACCESS_KEY_ID=your_access_key
-AWS_SECRET_ACCESS_KEY=your_secret_key
-AWS_DEFAULT_REGION=your_region
+```toml
+STREAMLIT_ENV = "dev"
+AWS_ACCESS_KEY_ID = "your_access_key"
+AWS_SECRET_ACCESS_KEY = "your_secret_key"
+AWS_DEFAULT_REGION = "eu-west-2"
 ```
 
 5. Run the application:
@@ -88,7 +91,7 @@ The application will be available at `http://localhost:8501`
 
 ## Configuration
 
-The application supports different environments (dev, stage, prod) configured through `config.yml`.
+The application supports different environments (test,dev, stage, prod) configured through `config.yml`.
 Set the environment using the STREAMLIT_ENV environment variable:
 
 ```bash
@@ -104,7 +107,7 @@ STREAMLIT_ENV=prod streamlit run app.py
 
 ### Environment Variables
 
-- `STREAMLIT_ENV`: Environment to use (dev/stage/prod). Defaults to 'dev'
+- `STREAMLIT_ENV`: Environment to use (test/dev/stage/prod). Defaults to 'dev'
 - `AWS_ACCESS_KEY_ID`: AWS access key for S3 access
 - `AWS_SECRET_ACCESS_KEY`: AWS secret key for S3 access
 - `AWS_DEFAULT_REGION`: AWS region for S3 access

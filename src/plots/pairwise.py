@@ -1,8 +1,11 @@
+from inspect_evals_scoring.process_log import DashboardLog
 import numpy as np
 import pandas as pd
-from inspect_evals_scoring.process_log import DashboardLog
+import streamlit as st
+from src.dashboard_log_utils import dashboard_log_hash_func
 
 
+@st.cache_data(hash_funcs={DashboardLog: dashboard_log_hash_func})
 def create_pairwise_analysis_table(
     eval_logs: list[DashboardLog],
     model_name: str,

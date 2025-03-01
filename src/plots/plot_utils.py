@@ -31,9 +31,9 @@ def highlight_confidence_intervals(
             # Extract the two numbers from the string (format like "(6.17%, 93.83%)")
             lower, upper = [float(x.strip(" %")) for x in ci_values.strip("()").split(",")]
             if lower > 0 and upper > 0:
-                styles[ci_column_idx] = "background-color: #90EE90"  # Light green
+                styles[ci_column_idx] = "background-color: #98BC98"  # Light green
             elif lower < 0 and upper < 0:
-                styles[ci_column_idx] = "background-color: #FFB6C6"  # Light red
+                styles[ci_column_idx] = "background-color: #BC9898"  # Light red
         except:
             pass
     return styles

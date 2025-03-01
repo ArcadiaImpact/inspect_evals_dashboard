@@ -1,16 +1,16 @@
 import os
 import yaml
 from typing import Dict, Any
+import streamlit as st
 
-def load_config() -> Dict[Any, Any]:
+
+@st.cache_data
+def load_config() -> Dict[str, Any]:
     """
-    Load configuration from config.yaml and environment variables.
-    Environment variables take precedence over yaml config.
+    Load evaluation logs configuration from config.yaml.
     """
-    # Get environment from ENV variable, default to 'dev'
     env = os.getenv('STREAMLIT_ENV', 'dev')
     
-    # Load YAML config
     config_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'config.yml')
     try:
         with open(config_path, 'r') as f:

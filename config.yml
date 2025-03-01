@@ -1,51 +1,188 @@
+# TODO: Create pydantic model for config
+# TODO: Use default_scorer and default_metric in template.py
 prod:
   evaluations:
     agents:
-      - name: code_generation
-        default_scorer: code_quality
-        default_metric: correctness
-        path: s3://eval-data/agents/code-gen
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
     assistants:
-      - name: helpfulness
-        default_scorer: human_rating
-        default_metric: helpful_score
-        path: s3://eval-data/assistants/helpfulness
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    coding:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    cybersecurity:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    knowledge:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    mathematics:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    reasoning:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    safeguards:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
 
 stage:
   evaluations:
     agents:
-      - name: code_generation
-        default_scorer: code_quality
-        default_metric: correctness
-        path: s3://eval-stage/agents/code-gen
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
     assistants:
-      - name: helpfulness
-        default_scorer: human_rating
-        default_metric: helpful_score
-        path: s3://eval-stage/assistants/helpfulness
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    coding:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    cybersecurity:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    knowledge:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    mathematics:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    reasoning:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    safeguards:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
 
 dev:
   evaluations:
     agents:
-      - name: code_generation
-        default_scorer: code_quality
-        default_metric: correctness
-        path: s3://eval-dev/agents/code-gen
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
     assistants:
-      - name: helpfulness
-        default_scorer: human_rating
-        default_metric: helpful_score
-        path: s3://eval-dev/assistants/helpfulness
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    coding:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    cybersecurity:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    knowledge:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    mathematics:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    reasoning:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+    safeguards:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
 
 test:
   evaluations:
     agents:
-      - name: code_generation
-        default_scorer: code_quality
-        default_metric: correctness
-        path: test/agents/code-gen
-    assistants:
-      - name: helpfulness
-        default_scorer: human_rating
-        default_metric: helpful_score
-        path: test/assistants/helpfulness
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths: 
+          - test/data/pubmedqa/1.json
+          - test/data/pubmedqa/2.json
