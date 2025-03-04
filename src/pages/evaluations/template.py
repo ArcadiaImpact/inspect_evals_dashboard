@@ -2,7 +2,8 @@ import json
 
 import streamlit as st
 
-from inspect_evals_scoring.process_log import DashboardLog
+# from inspect_evals_scoring.process_log import DashboardLog
+from src.log_utils.dashboard_log import DashboardLog
 from src.log_utils.dashboard_log_utils import get_metrics
 from src.plots.bar import create_bar_chart
 from src.plots.cutoff_scatter import create_cutoff_scatter
