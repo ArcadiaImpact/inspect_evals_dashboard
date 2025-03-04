@@ -1,5 +1,5 @@
 from src.config import load_config
-from src.load_eval_logs import get_log_paths, load_evaluation_logs
+from src.log_utils.load_eval_logs import get_log_paths, load_evaluation_logs
 from src.pages.evaluations.template import render_page
 import streamlit as st
 

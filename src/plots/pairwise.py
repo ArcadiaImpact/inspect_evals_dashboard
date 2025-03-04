@@ -1,8 +1,9 @@
-from inspect_evals_scoring.process_log import DashboardLog
+# from inspect_evals_scoring.process_log import DashboardLog
+from src.log_utils.dashboard_log import DashboardLog
 import numpy as np
 import pandas as pd
 import streamlit as st
-from src.dashboard_log_utils import dashboard_log_hash_func
+from src.log_utils.dashboard_log_utils import dashboard_log_hash_func
 
 
 @st.cache_data(hash_funcs={DashboardLog: dashboard_log_hash_func})
@@ -57,7 +58,7 @@ def create_pairwise_analysis_table(
             z_score = diff / combined_se
 
             rows.append({
-                "Task": task,
+                "Task": task.removeprefix("inspect_evals/"),
                 "# Questions": model_log.results.completed_samples,
                 "Model": model_name,
                 "Baseline": baseline_name,

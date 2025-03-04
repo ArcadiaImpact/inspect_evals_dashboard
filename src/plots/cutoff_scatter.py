@@ -1,5 +1,6 @@
-from inspect_evals_scoring.process_log import DashboardLog
-from src.dashboard_log_utils import dashboard_log_hash_func
+# from inspect_evals_scoring.process_log import DashboardLog
+from src.log_utils.dashboard_log import DashboardLog
+from src.log_utils.dashboard_log_utils import dashboard_log_hash_func
 from src.plots.plot_utils import create_hover_text
 import pandas as pd
 import plotly.graph_objs as go

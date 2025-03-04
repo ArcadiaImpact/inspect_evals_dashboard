@@ -1,5 +1,6 @@
 import streamlit as st
-from inspect_evals_scoring.process_log import DashboardLog
+# from inspect_evals_scoring.process_log import DashboardLog
+from src.log_utils.dashboard_log import DashboardLog
 
 
 def dashboard_log_hash_func(obj: DashboardLog) -> str:

@@ -3,7 +3,7 @@ import json
 import streamlit as st
 
 from inspect_evals_scoring.process_log import DashboardLog
-from src.dashboard_log_utils import get_metrics
+from src.log_utils.dashboard_log_utils import get_metrics
 from src.plots.bar import create_bar_chart
 from src.plots.cutoff_scatter import create_cutoff_scatter
 from src.plots.pairwise import create_pairwise_analysis_table
@@ -113,25 +113,12 @@ def render_page(eval_logs: list[DashboardLog]):
                 """
     )
 
-    col5, col6, col7, col8 = st.columns(4)
+    col5, col6, col7 = st.columns(3)
 
     with col5:
-        pairwise_task_name = st.selectbox(
-            "Evaluation/task",
-            sorted(set(log.eval.task for log in eval_logs)),
-            index=0,
-            format_func=lambda option: option.removeprefix("inspect_evals/"),
-            help="Name of the evaluation and the task",
-            label_visibility="visible",
-            key="pairwise_analysis_task_name",
-        )
-
-    pairwise_logs = [log for log in eval_logs if log.eval.task == pairwise_task_name]
-
-    with col6:
         model_name = st.selectbox(
             "Model name",
-            sorted(set(log.eval.model for log in pairwise_logs)),
+            sorted(set(log.eval.model for log in eval_logs)),
             index=0,
             format_func=lambda option: option.split("/")[-1],
             help="Name of the model to compare against",
@@ -139,10 +126,10 @@ def render_page(eval_logs: list[DashboardLog]):
             key="pairwise_analysis_model_name",
         )
 
-    with col7:
+    with col6:
         baseline_name = st.selectbox(
-            "Baseline model",
-            sorted(set(log.eval.model for log in pairwise_logs)),
+            "Baseline model name",
+            sorted(set(log.eval.model for log in eval_logs)),
             index=1,
             format_func=lambda option: option.split("/")[-1],
             help="Name of the baseline model to compare against",
@@ -150,12 +137,12 @@ def render_page(eval_logs: list[DashboardLog]):
             key="pairwise_analysis_baseline_name",
         )
 
-    pairwise_logs = [log for log in pairwise_logs if log.eval.model in [model_name, baseline_name]]
+    pairwise_logs = [log for log in eval_logs if log.eval.model in [model_name, baseline_name]]
 
     # Get available metrics from filtered logs
     task_metrics = set().union(*[get_metrics(log) for log in pairwise_logs])
 
-    with col8:
+    with col7:
         pairwise_metric = st.selectbox(
             "Metric",
             sorted(task_metrics),

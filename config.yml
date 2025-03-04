@@ -128,6 +128,9 @@ dev:
         paths: 
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
     assistants:
       - name: pubmedqa
         default_scorer: choice
@@ -135,6 +138,9 @@ dev:
         paths: 
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
     coding:
       - name: pubmedqa
         default_scorer: choice
@@ -142,6 +148,9 @@ dev:
         paths: 
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
     cybersecurity:
       - name: pubmedqa
         default_scorer: choice
@@ -149,6 +158,9 @@ dev:
         paths: 
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
     knowledge:
       - name: pubmedqa
         default_scorer: choice
@@ -156,6 +168,9 @@ dev:
         paths: 
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
     mathematics:
       - name: pubmedqa
         default_scorer: choice
@@ -163,6 +178,9 @@ dev:
         paths: 
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
     reasoning:
       - name: pubmedqa
         default_scorer: choice
@@ -170,6 +188,9 @@ dev:
         paths: 
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
     safeguards:
       - name: pubmedqa
         default_scorer: choice
@@ -177,6 +198,9 @@ dev:
         paths: 
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
+          - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
 
 test:
   evaluations:
