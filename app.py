@@ -16,7 +16,7 @@ def home_content():
         """
         **Welcome to the Inspect Evals Dashboard - a comprehensive suite for assessing various capabilities of LLMs.**
 
-        Inspect Evals is a repository of community contributed LLM evaluations for Inspect AI. Inspect Evals was created in collaboration by the UK AISI, Arcadia Impact, and the Vector Institute.
+        Inspect Evals is a repository of community-contributed LLM evaluations for Inspect AI. Inspect Evals was created in collaboration by the UK AISI, Arcadia Impact, and the Vector Institute.
         
         This dashboard showcases how well a diverse set of LLMs perform on the evaluations implemented in Inspect Evals. Its main aim is to provide access to this data for downstream use. Our data store is continuously updated with new results as new models and evaluations are published.
 
