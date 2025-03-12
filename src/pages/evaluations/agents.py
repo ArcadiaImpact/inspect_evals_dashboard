@@ -4,7 +4,7 @@ from src.pages.evaluations.template import render_page
 import streamlit as st
 
 
-st.title("Agents Evaluations")
+st.title("Agentic Evaluations")
 
 st.markdown("""
             Agentic capabilities enable autonomous goal pursuit and decision-making without constant human guidance, while agentic AI evaluations measure how effectively these systems can decompose tasks, navigate environments, select tools, maintain goal alignment, and recover from failures through multi-step challenges requiring planning, reasoning, and adaptation.
