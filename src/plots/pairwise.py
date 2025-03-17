@@ -1,5 +1,5 @@
 # from inspect_evals_scoring.process_log import DashboardLog
-from src.log_utils.dashboard_log import DashboardLog
+from inspect_evals_dashboard_schema import DashboardLog
 import numpy as np
 import pandas as pd
 import streamlit as st
