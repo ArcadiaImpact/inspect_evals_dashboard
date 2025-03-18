@@ -10,6 +10,23 @@ def home_content():
         page_icon="🤖",
         layout="wide"
     )
+
+    # Add global styles
+    st.markdown("""
+        <style>
+        .flex-center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+        .header-without-anchor span {
+            display: none !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
     st.title("Inspect Evals Dashboard")
     
     st.markdown(
@@ -29,8 +46,14 @@ def home_content():
     titles = ["20 Models", "35 Evals", "127 Tasks"]
     cols = st.columns(len(titles))
     for idx, col in enumerate(cols):
-        markdown = f"<h1 style='text-align: center'>{titles[idx]}</h1>"
-        col.container(height=120).markdown(markdown, unsafe_allow_html=True)
+        c = col.container(height=120)
+        c.markdown(f"""
+                <div class="flex-center-container">
+                    <h1 class="header-without-anchor" style="padding: 16px">{titles[idx]}</h1>
+                </div>
+                """, unsafe_allow_html=True)
+
+
 
     st.markdown(
         """
