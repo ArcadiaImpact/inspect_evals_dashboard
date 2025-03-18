@@ -1,15 +1,32 @@
 import os
+import re
 import yaml
 from typing import Optional
 import streamlit as st
 
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel, field_validator
 
 class EvaluationConfig(BaseModel):
     name: str
     default_scorer: str
     default_metric: str
     paths: list[str]
+
+    @field_validator('paths')
+    @classmethod
+    def substitute_env_vars(cls, paths: list[str]) -> list[str]:
+        def return_environment_variable_or_throw(m):
+            if m.group(1) not in os.environ:
+                raise Exception("Unable to substitute an environment variable in the config, it's not set: $" + m.group(1))
+            return os.environ[m.group(1)]
+
+        processed_paths = []
+        for path in paths:
+            # Look for $ENV_VAR patterns
+            path = re.sub(r'\$([A-Za-z0-9_]+)', return_environment_variable_or_throw, path)
+            processed_paths.append(path)
+
+        return processed_paths
 
 
 class EnvironmentConfig(BaseModel):
