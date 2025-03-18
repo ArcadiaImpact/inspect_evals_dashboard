@@ -1,6 +1,6 @@
 import pandas as pd
 # from inspect_evals_scoring.process_log import DashboardLog
-from src.log_utils.dashboard_log import DashboardLog
+from inspect_evals_dashboard_schema import DashboardLog
 
 
 def create_hover_text(log: DashboardLog, human_baseline: float = None) -> str:
