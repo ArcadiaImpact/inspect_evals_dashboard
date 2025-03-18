@@ -11,6 +11,6 @@ st.markdown("""
             """
 )
 
-config = load_config().evaluations.agents
+config = load_config().agents
 eval_logs = load_evaluation_logs(get_log_paths(config))
 render_page(eval_logs)
