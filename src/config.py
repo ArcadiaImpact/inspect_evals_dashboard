@@ -1,6 +1,6 @@
 import os
 import yaml
-from typing import Dict, Any, List, Optional
+from typing import Optional
 import streamlit as st
 
 from pydantic import BaseModel, model_validator
@@ -9,23 +9,23 @@ class EvaluationConfig(BaseModel):
     name: str
     default_scorer: str
     default_metric: str
-    paths: List[str]
+    paths: list[str]
 
 
 class EnvironmentConfig(BaseModel):
-    agents: Optional[List[EvaluationConfig]] = []
-    assistants: Optional[List[EvaluationConfig]] = []
-    coding: Optional[List[EvaluationConfig]] = []
-    cybersecurity: Optional[List[EvaluationConfig]] = []
-    knowledge: Optional[List[EvaluationConfig]] = []
-    mathematics: Optional[List[EvaluationConfig]] = []
-    reasoning: Optional[List[EvaluationConfig]] = []
-    safeguards: Optional[List[EvaluationConfig]] = []
+    agents: Optional[list[EvaluationConfig]] = []
+    assistants: Optional[list[EvaluationConfig]] = []
+    coding: Optional[list[EvaluationConfig]] = []
+    cybersecurity: Optional[list[EvaluationConfig]] = []
+    knowledge: Optional[list[EvaluationConfig]] = []
+    mathematics: Optional[list[EvaluationConfig]] = []
+    reasoning: Optional[list[EvaluationConfig]] = []
+    safeguards: Optional[list[EvaluationConfig]] = []
 
 
 
 @st.cache_data
-def load_config() -> Dict[str, Any]:
+def load_config() -> EnvironmentConfig:
     """
     Load evaluation logs configuration from config.yaml.
     """
