@@ -11,6 +11,6 @@ st.markdown("""
             """
 )
 
-config = load_config()["evaluations"]["reasoning"]
+config = load_config().reasoning
 eval_logs = load_evaluation_logs(get_log_paths(config))
 render_page(eval_logs)
