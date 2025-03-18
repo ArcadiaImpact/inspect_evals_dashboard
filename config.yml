@@ -6,56 +6,56 @@ prod:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
     assistants:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
     coding:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
     cybersecurity:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
     knowledge:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
     mathematics:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
     reasoning:
-      - name: pubmedqa
+      - name: bhh
         default_scorer: choice
         default_metric: accuracy
-        paths: 
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+        paths:
+          - s3://inspect-evals-dashboard/dev/bbh/openai+gpt-4o-mini/2025-03-17-11-33-27-39fce29d/2025-03-17T11-43-40+00-00_bbh_dAXjNXrPiyyHakCT44WNpt.eval.dashboard.json
+          - s3://inspect-evals-dashboard/dev/bbh/openai+gpt-4o/2025-03-17-06-12-09-e31f0b6b/2025-03-17T06-21-45+00-00_bbh_mntaTStbNrSDdvBqGAD7yQ.eval.dashboard.json
     safeguards:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
 
@@ -65,56 +65,56 @@ stage:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
     assistants:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
     coding:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
     cybersecurity:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
     knowledge:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
     mathematics:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
     reasoning:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
     safeguards:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
 
@@ -124,7 +124,7 @@ dev:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
@@ -134,7 +134,7 @@ dev:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
@@ -144,7 +144,7 @@ dev:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
@@ -154,47 +154,46 @@ dev:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
     knowledge:
-      - name: pubmedqa
+      - name: commonsense_qa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
+        paths:
+          - s3://inspect-evals-dashboard/dev/commonsense_qa/openai+gpt-4o-mini/2025-03-17-11-33-27-39fce29d/2025-03-17T11-44-04+00-00_commonsense-qa_2NJgGxngSffXgCBv7Hgm35.eval.dashboard.json
+          - s3://inspect-evals-dashboard/dev/commonsense_qa/openai+gpt-4o/2025-03-17-06-12-09-e31f0b6b/2025-03-17T06-22-01+00-00_commonsense-qa_bRPRpqdpVMSUQKtUH43HY8.eval.dashboard.json
+      - name: gpqa_diamond
+        default_scorer: choice
+        default_metric: accuracy
+        paths:
+          - s3://inspect-evals-dashboard/dev/gpqa_diamond/openai+gpt-4o-mini/2025-03-17-11-33-27-39fce29d/2025-03-17T11-45-12+00-00_gpqa-diamond_9BJELMPy6R88nJe3Bgs734.eval.dashboard.json
     mathematics:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
     reasoning:
-      - name: pubmedqa
+      - name: bhh
         default_scorer: choice
         default_metric: accuracy
-        paths: 
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
+        paths:
+          - s3://inspect-evals-dashboard/dev/bbh/openai+gpt-4o-mini/2025-03-17-11-33-27-39fce29d/2025-03-17T11-43-40+00-00_bbh_dAXjNXrPiyyHakCT44WNpt.eval.dashboard.json
+          - s3://inspect-evals-dashboard/dev/bbh/openai+gpt-4o/2025-03-17-06-12-09-e31f0b6b/2025-03-17T06-21-45+00-00_bbh_mntaTStbNrSDdvBqGAD7yQ.eval.dashboard.json
     safeguards:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
           - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
@@ -207,6 +206,6 @@ test:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
-        paths: 
+        paths:
           - test/data/pubmedqa/1.json
           - test/data/pubmedqa/2.json
