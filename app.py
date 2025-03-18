@@ -14,13 +14,16 @@ def home_content():
     
     st.markdown(
         """
-        **Welcome to the Inspect Evals Dashboard - a comprehensive suite for assessing various capabilities of LLMs.**
+        **A comprehensive suite for assessing various capabilities of LLMs**
 
         Inspect Evals is a repository of community-contributed LLM evaluations for Inspect AI. Inspect Evals was created in collaboration by the UK AISI, Arcadia Impact, and the Vector Institute.
         
         This dashboard showcases how well a diverse set of LLMs perform on the evaluations implemented in Inspect Evals. Its main aim is to provide access to this data for downstream use. Our data store is continuously updated with new results as new models and evaluations are published.
 
-        We aim to serve three key audiences: researchers who predict scaling laws and work on the science of evaluations (including those focused on visualization practices); analysts who process model performance data for decision-makers; and technical teams who run internal evaluations against industry benchmarks.
+        We aim to serve three key audiences: 
+        1. researchers who predict scaling laws and work on the science of evaluations (including those focused on visualization practices); 
+        2. analysts who process model performance data for decision-makers; 
+        3. technical teams who run internal evaluations against industry benchmarks.
     """)
 
     titles = ["20 Models", "35 Evals", "127 Tasks"]
