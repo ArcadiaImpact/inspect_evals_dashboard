@@ -46,4 +46,4 @@ def load_evaluation_logs(evaluation_paths: list[str]) -> list[DashboardLog]:
 
 
 def get_log_paths(config: list[dict]) -> list[str]:
-    return list(chain.from_iterable([t["paths"] for t in config]))
+    return list(chain.from_iterable([t.paths for t in config]))
