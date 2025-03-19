@@ -69,7 +69,7 @@ def render_page(eval_logs: list[DashboardLog], eval_configs: list[EvaluationConf
     # Get available metrics from filtered logs
     task_metrics = sorted(set().union(*[get_metrics(log) for log in naive_logs]))
 
-    index = None
+    index = 0
     try:
         filtered_config_by_name = [c for c in eval_configs if naive_task_name.endswith("/" + c.name)]
         if filtered_config_by_name:
