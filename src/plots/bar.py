@@ -11,8 +11,8 @@ def create_bar_chart(eval_logs: list[DashboardLog], metric: str):
     # Extract data from filtered logs
     models = [log.model_metadata.name for log in eval_logs]
 
-    # Find metrics by name (only one score per model)
-    # TODO: Handle multiple scores per model
+    # Find metrics by name (only one scorer per model)
+    # TODO: Handle multiple scorers per model
     metric_values = [
         next(v.value for k, v in log.results.scores[0].metrics.items() if k == metric)
         for log in eval_logs
