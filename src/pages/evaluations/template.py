@@ -83,7 +83,6 @@ def render_page(eval_logs: list[DashboardLog]):
         eval_details = naive_logs[0]
         st.text("")  # Add a blank line for spacing
         st.markdown("##### Evaluation details:")
-        # TODO: Add a link to task path
         st.markdown(f"""
                     - **Name:** {eval_details.eval_metadata.title}
                     - **Description:** {eval_details.eval_metadata.description}
