@@ -1,7 +1,6 @@
 import os
 import re
 import yaml
-from typing import Optional
 import streamlit as st
 
 from pydantic import BaseModel, field_validator
@@ -30,14 +29,14 @@ class EvaluationConfig(BaseModel):
 
 
 class EnvironmentConfig(BaseModel):
-    agents: Optional[list[EvaluationConfig]] = []
-    assistants: Optional[list[EvaluationConfig]] = []
-    coding: Optional[list[EvaluationConfig]] = []
-    cybersecurity: Optional[list[EvaluationConfig]] = []
-    knowledge: Optional[list[EvaluationConfig]] = []
-    mathematics: Optional[list[EvaluationConfig]] = []
-    reasoning: Optional[list[EvaluationConfig]] = []
-    safeguards: Optional[list[EvaluationConfig]] = []
+    agents: list[EvaluationConfig] = []
+    assistants: list[EvaluationConfig] = []
+    coding: list[EvaluationConfig] = []
+    cybersecurity: list[EvaluationConfig] = []
+    knowledge: list[EvaluationConfig] = []
+    mathematics: list[EvaluationConfig] = []
+    reasoning: list[EvaluationConfig] = []
+    safeguards: list[EvaluationConfig] = []
 
 
 

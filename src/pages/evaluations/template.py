@@ -4,6 +4,7 @@ import streamlit as st
 
 # from inspect_evals_scoring.process_log import DashboardLog
 from inspect_evals_dashboard_schema import DashboardLog
+from config import EvaluationConfig
 from src.log_utils.dashboard_log_utils import get_metrics
 from src.plots.bar import create_bar_chart
 from src.plots.cutoff_scatter import create_cutoff_scatter
@@ -11,7 +12,7 @@ from src.plots.pairwise import create_pairwise_analysis_table
 from src.plots.plot_utils import highlight_confidence_intervals
 
 
-def render_page(eval_logs: list[DashboardLog]):
+def render_page(eval_logs: list[DashboardLog], eval_configs: list[EvaluationConfig]):
     st.subheader("Naive cross-model comparison")
     st.markdown("""
                 Graphs in this section compare how different AI models perform on the same task. We call this a "naive" comparison because it uses simple averages to compare models, which doesn't tell us if one model is statistically significantly better than another. For more reliable comparisons, check out the next section. To get more accurate scores, we evaluate each sample in a dataset multiple times using the epochs feature in Inspect AI.
@@ -66,13 +67,21 @@ def render_page(eval_logs: list[DashboardLog]):
     ]
 
     # Get available metrics from filtered logs
-    task_metrics = set().union(*[get_metrics(log) for log in naive_logs])
+    task_metrics = sorted(set().union(*[get_metrics(log) for log in naive_logs]))
+
+    index = None
+    try:
+        filtered_config_by_name = [c for c in eval_configs if naive_task_name.endswith("/" + c.name)]
+        if filtered_config_by_name:
+            index = task_metrics.index(filtered_config_by_name[0].default_metric)
+    except:
+        pass
 
     with col4:
         metric = st.selectbox(
             "Metric",
-            sorted(task_metrics),
-            index=0,
+            task_metrics,
+            index=index,
             help="Evaluation metric",
             label_visibility="visible",
             key="cross_model_comparison_metric",

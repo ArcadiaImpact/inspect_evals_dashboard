@@ -13,4 +13,4 @@ st.markdown("""
 
 config = load_config().knowledge
 eval_logs = load_evaluation_logs(get_log_paths(config))
-render_page(eval_logs)
+render_page(eval_logs, config)

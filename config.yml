@@ -1,4 +1,4 @@
-# TODO: Use default_scorer and default_metric in template.py
+# TODO: Use default_scorer in template.py
 # TODO: Make S3 bucket name an environment variable
 prod:
   evaluations:
