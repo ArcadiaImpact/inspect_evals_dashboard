@@ -1,10 +1,7 @@
-import sys
-import os
 import pytest
 from pytest import MonkeyPatch
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
-from config import EvaluationConfig
+from src.config import EvaluationConfig
 
 
 def test_substitute_env_vars_replaces_variables():
