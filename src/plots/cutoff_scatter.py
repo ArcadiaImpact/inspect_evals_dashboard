@@ -115,8 +115,6 @@ def create_cutoff_scatter(
         title=f"Comparison of {metric} values across models by knowledge cutoff date",
         xaxis_title="Knowledge cutoff date",
         yaxis_title=f"Value of {metric} metric",
-        # TODO: Consider setting yaxis_range between some min and max value
-        # yaxis_range=[0, 1],
         xaxis_tickangle=45,
     )
 
