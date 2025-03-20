@@ -32,7 +32,6 @@ def create_cutoff_scatter(
             None,
         )
 
-    # TODO: Handle multiple scorers per eval log
     plot_data = []
     for log in eval_logs:
         metrics = find_metrics(log, eval_configs)
