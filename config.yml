@@ -7,57 +7,57 @@ prod:
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
     assistants:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
     coding:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
     cybersecurity:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
     knowledge:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
     mathematics:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
     reasoning:
       - name: bhh
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/bbh/openai+gpt-4o-mini/2025-03-17-11-33-27-39fce29d/2025-03-17T11-43-40+00-00_bbh_dAXjNXrPiyyHakCT44WNpt.eval.dashboard.json
-          - s3://inspect-evals-dashboard/dev/bbh/openai+gpt-4o/2025-03-17-06-12-09-e31f0b6b/2025-03-17T06-21-45+00-00_bbh_mntaTStbNrSDdvBqGAD7yQ.eval.dashboard.json
+          - s3://$S3_BUCKET/dev/bbh/openai+gpt-4o-mini/2025-03-17-11-33-27-39fce29d/2025-03-17T11-43-40+00-00_bbh_dAXjNXrPiyyHakCT44WNpt.eval.dashboard.json
+          - s3://$S3_BUCKET/dev/bbh/openai+gpt-4o/2025-03-17-06-12-09-e31f0b6b/2025-03-17T06-21-45+00-00_bbh_mntaTStbNrSDdvBqGAD7yQ.eval.dashboard.json
     safeguards:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
 
 stage:
   evaluations:
@@ -66,57 +66,57 @@ stage:
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
     assistants:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
     coding:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
     cybersecurity:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
     knowledge:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
     mathematics:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
     reasoning:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
     safeguards:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
 
 dev:
   evaluations:
@@ -125,102 +125,102 @@ dev:
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/3.json
+          - s3://$S3_BUCKET/dev/pubmedqa/4.json
+          - s3://$S3_BUCKET/dev/pubmedqa/5.json
     assistants:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/3.json
+          - s3://$S3_BUCKET/dev/pubmedqa/4.json
+          - s3://$S3_BUCKET/dev/pubmedqa/5.json
     coding:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/3.json
+          - s3://$S3_BUCKET/dev/pubmedqa/4.json
+          - s3://$S3_BUCKET/dev/pubmedqa/5.json
     cybersecurity:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/3.json
+          - s3://$S3_BUCKET/dev/pubmedqa/4.json
+          - s3://$S3_BUCKET/dev/pubmedqa/5.json
     knowledge:
       - name: commonsense_qa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/commonsense_qa/openai+gpt-4o-mini/2025-03-17-11-33-27-39fce29d/2025-03-17T11-44-04+00-00_commonsense-qa_2NJgGxngSffXgCBv7Hgm35.eval.dashboard.json
-          - s3://inspect-evals-dashboard/dev/commonsense_qa/openai+gpt-4o/2025-03-17-06-12-09-e31f0b6b/2025-03-17T06-22-01+00-00_commonsense-qa_bRPRpqdpVMSUQKtUH43HY8.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/commonsense_qa/anthropic+claude-3-7-sonnet-20250219/2025-03-19-03-51-07-1110860b/2025-03-19T04-59-54+00-00_commonsense-qa_hc2EKqNRpRLzZ7hFnsPiTQ.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/commonsense_qa/grok+grok-2-1212/2025-03-19-03-51-07-1110860b/2025-03-19T03-53-47+00-00_commonsense-qa_9v5evKgxYH2kisaeoaNRTU.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/commonsense_qa/mistral+mistral-large-latest/2025-03-19-03-51-07-1110860b/2025-03-19T04-59-54+00-00_commonsense-qa_SW54bJvzqdYT36NqQzHCk9.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/commonsense_qa/mistral+mistral-small-latest/2025-03-19-03-51-07-1110860b/2025-03-19T04-59-54+00-00_commonsense-qa_WHSVGyMyrTyqaYA62xLcav.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/commonsense_qa/openai+gpt-4o-mini/2025-03-19-03-51-07-1110860b/2025-03-19T03-53-47+00-00_commonsense-qa_fP6UWXs4f7q6E77ygw5zEZ.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/commonsense_qa/openai+gpt-4o/2025-03-19-03-51-07-1110860b/2025-03-19T03-53-47+00-00_commonsense-qa_28ydCrCvnZZrWWKv5ZyXrQ.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/commonsense_qa/openrouter+deepseek+deepseek-chat/2025-03-19-03-51-07-1110860b/2025-03-19T03-53-47+00-00_commonsense-qa_hkZ3BNeXAFXMLbuAgLx5d8.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/commonsense_qa/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-51-07-1110860b/2025-03-19T03-53-47+00-00_commonsense-qa_FaiNNoD4u8EN7twkMbr9Gj.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/commonsense_qa/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-03-51-07-1110860b/2025-03-19T03-53-47+00-00_commonsense-qa_3vJwE788kocZPWM5cwBBui.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/commonsense_qa/openrouter+qwen+qwen-2-vl-72b-instruct/2025-03-19-03-51-07-1110860b/2025-03-19T06-43-11+00-00_commonsense-qa_FMojf23SX93e4VXYfYrmC5.eval.dashboard.json
+          - s3://$S3_BUCKET/dev/commonsense_qa/openai+gpt-4o-mini/2025-03-17-11-33-27-39fce29d/2025-03-17T11-44-04+00-00_commonsense-qa_2NJgGxngSffXgCBv7Hgm35.eval.dashboard.json
+          - s3://$S3_BUCKET/dev/commonsense_qa/openai+gpt-4o/2025-03-17-06-12-09-e31f0b6b/2025-03-17T06-22-01+00-00_commonsense-qa_bRPRpqdpVMSUQKtUH43HY8.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/commonsense_qa/anthropic+claude-3-7-sonnet-20250219/2025-03-19-03-51-07-1110860b/2025-03-19T04-59-54+00-00_commonsense-qa_hc2EKqNRpRLzZ7hFnsPiTQ.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/commonsense_qa/grok+grok-2-1212/2025-03-19-03-51-07-1110860b/2025-03-19T03-53-47+00-00_commonsense-qa_9v5evKgxYH2kisaeoaNRTU.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/commonsense_qa/mistral+mistral-large-latest/2025-03-19-03-51-07-1110860b/2025-03-19T04-59-54+00-00_commonsense-qa_SW54bJvzqdYT36NqQzHCk9.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/commonsense_qa/mistral+mistral-small-latest/2025-03-19-03-51-07-1110860b/2025-03-19T04-59-54+00-00_commonsense-qa_WHSVGyMyrTyqaYA62xLcav.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/commonsense_qa/openai+gpt-4o-mini/2025-03-19-03-51-07-1110860b/2025-03-19T03-53-47+00-00_commonsense-qa_fP6UWXs4f7q6E77ygw5zEZ.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/commonsense_qa/openai+gpt-4o/2025-03-19-03-51-07-1110860b/2025-03-19T03-53-47+00-00_commonsense-qa_28ydCrCvnZZrWWKv5ZyXrQ.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/commonsense_qa/openrouter+deepseek+deepseek-chat/2025-03-19-03-51-07-1110860b/2025-03-19T03-53-47+00-00_commonsense-qa_hkZ3BNeXAFXMLbuAgLx5d8.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/commonsense_qa/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-51-07-1110860b/2025-03-19T03-53-47+00-00_commonsense-qa_FaiNNoD4u8EN7twkMbr9Gj.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/commonsense_qa/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-03-51-07-1110860b/2025-03-19T03-53-47+00-00_commonsense-qa_3vJwE788kocZPWM5cwBBui.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/commonsense_qa/openrouter+qwen+qwen-2-vl-72b-instruct/2025-03-19-03-51-07-1110860b/2025-03-19T06-43-11+00-00_commonsense-qa_FMojf23SX93e4VXYfYrmC5.eval.dashboard.json
       - name: gpqa_diamond
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/gpqa_diamond/openai+gpt-4o-mini/2025-03-17-11-33-27-39fce29d/2025-03-17T11-45-12+00-00_gpqa-diamond_9BJELMPy6R88nJe3Bgs734.eval.dashboard.json
+          - s3://$S3_BUCKET/dev/gpqa_diamond/openai+gpt-4o-mini/2025-03-17-11-33-27-39fce29d/2025-03-17T11-45-12+00-00_gpqa-diamond_9BJELMPy6R88nJe3Bgs734.eval.dashboard.json
     mathematics:
       - name: gsm8k
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/logs/stage/gsm8k/mistral+mistral-large-latest/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_UVCC2jzJ7Tzdx9utopctFn.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/gsm8k/mistral+mistral-small-latest/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_oGYtVysKrr3THnnd4Dv7cu.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/gsm8k/openai+gpt-4o-mini/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_Yqb2W9tGQveuNxMJbREdhk.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/gsm8k/openai+gpt-4o/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_RkFTQodnGh7eYyCDm7UP6a.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/gsm8k/openrouter+deepseek+deepseek-chat/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_4doXVuP4qHiMeayWBENZqf.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/gsm8k/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_fYRSsWdrTN3PRa6toYQskf.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/gsm8k/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_8sm4vz6Mi3VW6sSm3HVLck.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/gsm8k/mistral+mistral-large-latest/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_UVCC2jzJ7Tzdx9utopctFn.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/gsm8k/mistral+mistral-small-latest/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_oGYtVysKrr3THnnd4Dv7cu.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/gsm8k/openai+gpt-4o-mini/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_Yqb2W9tGQveuNxMJbREdhk.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/gsm8k/openai+gpt-4o/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_RkFTQodnGh7eYyCDm7UP6a.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/gsm8k/openrouter+deepseek+deepseek-chat/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_4doXVuP4qHiMeayWBENZqf.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/gsm8k/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_fYRSsWdrTN3PRa6toYQskf.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/gsm8k/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_8sm4vz6Mi3VW6sSm3HVLck.eval.dashboard.json
     reasoning:
       - name: bhh
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/bbh/openai+gpt-4o-mini/2025-03-17-11-33-27-39fce29d/2025-03-17T11-43-40+00-00_bbh_dAXjNXrPiyyHakCT44WNpt.eval.dashboard.json
-          - s3://inspect-evals-dashboard/dev/bbh/openai+gpt-4o/2025-03-17-06-12-09-e31f0b6b/2025-03-17T06-21-45+00-00_bbh_mntaTStbNrSDdvBqGAD7yQ.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/bbh/anthropic+claude-3-7-sonnet-20250219/2025-03-19-03-50-35-693a222d/2025-03-19T04-38-58+00-00_bbh_RxchDcsLppFHA6kuwuoL83.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/bbh/grok+grok-2-1212/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_7JZNhgQ7FMMWntRAehbxd8.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/bbh/mistral+mistral-large-latest/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_XiMwuidzJjNRGBS8mXPXrW.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/bbh/mistral+mistral-small-latest/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_AaNsDsCU5ugYaqCRzsLLuR.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/bbh/openai+gpt-4o-mini/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_AkBF6Ze93sPLZdmaxeXbDX.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/bbh/openai+gpt-4o/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_49YhWkhkFcFtfCn37QQqqo.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/bbh/openrouter+deepseek+deepseek-chat/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_XisL3dpLtjBf9zWcWxjYrg.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/bbh/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_Gh8QAFG2USJs2mEZx4tGkY.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/bbh/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_jTfpLYU3TvLfeCLbi4GdZu.eval.dashboard.json
-          - s3://inspect-evals-dashboard/logs/stage/bbh/openrouter+qwen+qwen-2-vl-72b-instruct/2025-03-19-03-50-35-693a222d/2025-03-19T04-38-58+00-00_bbh_i4SuZzVUiusyZAPTxeXbCQ.eval.dashboard.json
+          - s3://$S3_BUCKET/dev/bbh/openai+gpt-4o-mini/2025-03-17-11-33-27-39fce29d/2025-03-17T11-43-40+00-00_bbh_dAXjNXrPiyyHakCT44WNpt.eval.dashboard.json
+          - s3://$S3_BUCKET/dev/bbh/openai+gpt-4o/2025-03-17-06-12-09-e31f0b6b/2025-03-17T06-21-45+00-00_bbh_mntaTStbNrSDdvBqGAD7yQ.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/bbh/anthropic+claude-3-7-sonnet-20250219/2025-03-19-03-50-35-693a222d/2025-03-19T04-38-58+00-00_bbh_RxchDcsLppFHA6kuwuoL83.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/bbh/grok+grok-2-1212/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_7JZNhgQ7FMMWntRAehbxd8.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/bbh/mistral+mistral-large-latest/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_XiMwuidzJjNRGBS8mXPXrW.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/bbh/mistral+mistral-small-latest/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_AaNsDsCU5ugYaqCRzsLLuR.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/bbh/openai+gpt-4o-mini/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_AkBF6Ze93sPLZdmaxeXbDX.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/bbh/openai+gpt-4o/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_49YhWkhkFcFtfCn37QQqqo.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/bbh/openrouter+deepseek+deepseek-chat/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_XisL3dpLtjBf9zWcWxjYrg.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/bbh/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_Gh8QAFG2USJs2mEZx4tGkY.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/bbh/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_jTfpLYU3TvLfeCLbi4GdZu.eval.dashboard.json
+          - s3://$S3_BUCKET/logs/stage/bbh/openrouter+qwen+qwen-2-vl-72b-instruct/2025-03-19-03-50-35-693a222d/2025-03-19T04-38-58+00-00_bbh_i4SuZzVUiusyZAPTxeXbCQ.eval.dashboard.json
     safeguards:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://inspect-evals-dashboard/dev/pubmedqa/1.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/2.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/3.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/4.json
-          - s3://inspect-evals-dashboard/dev/pubmedqa/5.json
+          - s3://$S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$S3_BUCKET/dev/pubmedqa/2.json
+          - s3://$S3_BUCKET/dev/pubmedqa/3.json
+          - s3://$S3_BUCKET/dev/pubmedqa/4.json
+          - s3://$S3_BUCKET/dev/pubmedqa/5.json
 
 test:
   evaluations:
