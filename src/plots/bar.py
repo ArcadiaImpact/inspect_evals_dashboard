@@ -2,23 +2,22 @@
 from inspect_evals_dashboard_schema import DashboardLog
 import plotly.graph_objs as go
 import streamlit as st
-from src.log_utils.dashboard_log_utils import dashboard_log_hash_func 
+from config import EvaluationConfig
+from src.log_utils.dashboard_log_utils import dashboard_log_hash_func, find_metrics 
 from src.plots.plot_utils import create_hover_text
 
 
-@st.cache_data(hash_funcs={DashboardLog: dashboard_log_hash_func})
-def create_bar_chart(eval_logs: list[DashboardLog], metric: str):
+@st.cache_data(hash_funcs={DashboardLog: dashboard_log_hash_func, EvaluationConfig: id})
+def create_bar_chart(eval_logs: list[DashboardLog], eval_configs: list[EvaluationConfig], metric: str):
     # Extract data from filtered logs
     models = [log.model_metadata.name for log in eval_logs]
 
-    # Find metrics by name (only one scorer per model)
-    # TODO: Handle multiple scorers per model
     metric_values = [
-        next(v.value for k, v in log.results.scores[0].metrics.items() if k == metric)
+        next(v.value for k, v in find_metrics(log, eval_configs).items() if k == metric)
         for log in eval_logs
     ]
     metric_errors = [
-        next(v.value for k, v in log.results.scores[0].metrics.items() if k == "stderr")
+        next(v.value for k, v in find_metrics(log, eval_configs).items() if k == "stderr")
         for log in eval_logs
     ]
 

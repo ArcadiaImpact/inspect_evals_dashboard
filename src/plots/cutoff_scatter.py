@@ -1,15 +1,17 @@
 # from inspect_evals_scoring.process_log import DashboardLog
 from inspect_evals_dashboard_schema import DashboardLog
-from src.log_utils.dashboard_log_utils import dashboard_log_hash_func
+from config import EvaluationConfig
+from src.log_utils.dashboard_log_utils import dashboard_log_hash_func, find_metrics
 from src.plots.plot_utils import create_hover_text
 import pandas as pd
 import plotly.graph_objs as go
 import streamlit as st
 
 
-@st.cache_data(hash_funcs={DashboardLog: dashboard_log_hash_func})
+@st.cache_data(hash_funcs={DashboardLog: dashboard_log_hash_func, EvaluationConfig: id})
 def create_cutoff_scatter(
     eval_logs: list[DashboardLog],
+    eval_configs: list[EvaluationConfig],
     metric: str,
 ):
     """
@@ -33,10 +35,11 @@ def create_cutoff_scatter(
     # TODO: Handle multiple scorers per eval log
     plot_data = []
     for log in eval_logs:
-        metric_value = log.results.scores[0].metrics[metric].value
+        metrics = find_metrics(log, eval_configs)
+        metric_value = metrics[metric].value
         stderr = (
-            log.results.scores[0].metrics.get("stderr", 0).value
-            if "stderr" in log.results.scores[0].metrics
+            metrics.get("stderr", 0).value
+            if "stderr" in metrics
             else 0
         )
         if metric_value:

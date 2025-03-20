@@ -5,7 +5,7 @@ import streamlit as st
 # from inspect_evals_scoring.process_log import DashboardLog
 from inspect_evals_dashboard_schema import DashboardLog
 from config import EvaluationConfig
-from src.log_utils.dashboard_log_utils import get_metrics
+from src.log_utils.dashboard_log_utils import get_all_metrics
 from src.plots.bar import create_bar_chart
 from src.plots.cutoff_scatter import create_cutoff_scatter
 from src.plots.pairwise import create_pairwise_analysis_table
@@ -67,7 +67,7 @@ def render_page(eval_logs: list[DashboardLog], eval_configs: list[EvaluationConf
     ]
 
     # Get available metrics from filtered logs
-    task_metrics = sorted(set().union(*[get_metrics(log) for log in naive_logs]))
+    task_metrics = sorted(set().union(*[get_all_metrics(log) for log in naive_logs]))
 
     index = 0
     try:
@@ -101,10 +101,10 @@ def render_page(eval_logs: list[DashboardLog], eval_configs: list[EvaluationConf
         )
         st.text("")  # Add a blank line for spacing
 
-        fig_bar = create_bar_chart(naive_logs, metric)
+        fig_bar = create_bar_chart(naive_logs, eval_configs, metric)
         st.plotly_chart(fig_bar)
 
-        fig_cutoff = create_cutoff_scatter(naive_logs, metric)
+        fig_cutoff = create_cutoff_scatter(naive_logs, eval_configs, metric)
         st.plotly_chart(fig_cutoff)
 
         st.download_button(
@@ -149,7 +149,7 @@ def render_page(eval_logs: list[DashboardLog], eval_configs: list[EvaluationConf
     pairwise_logs = [log for log in eval_logs if log.eval.model in [model_name, baseline_name]]
 
     # Get available metrics from filtered logs
-    task_metrics = set().union(*[get_metrics(log) for log in pairwise_logs])
+    task_metrics = set().union(*[get_all_metrics(log) for log in pairwise_logs])
 
     with col7:
         pairwise_metric = st.selectbox(
