@@ -77,27 +77,27 @@ def home_content():
 home = st.Page(home_content, title="Home", icon="🏠")
 docs = st.Page("src/pages/docs.py", title="Documentation", icon="📚")
 changelog = st.Page("src/pages/changelog.py", title="Changelog", icon="📝")
-evals_coding = st.Page("src/pages/evaluations/coding.py", title="Coding", icon="💻")
+evals_agents = st.Page("src/pages/evaluations/agents.py", title="Agents", icon="🤖")
 evals_assistants = st.Page("src/pages/evaluations/assistants.py", title="Assistants", icon="💬")
+evals_coding = st.Page("src/pages/evaluations/coding.py", title="Coding", icon="💻")
 evals_cybersecurity = st.Page("src/pages/evaluations/cybersecurity.py", title="Cybersecurity", icon="🔒")
-evals_safeguards = st.Page("src/pages/evaluations/safeguards.py", title="Safeguards", icon="🛡️")
+evals_knowledge = st.Page("src/pages/evaluations/knowledge.py", title="Knowledge", icon="🎓")
 evals_mathematics = st.Page("src/pages/evaluations/mathematics.py", title="Mathematics", icon="➗")
 evals_reasoning = st.Page("src/pages/evaluations/reasoning.py", title="Reasoning", icon="🧩")
-evals_knowledge = st.Page("src/pages/evaluations/knowledge.py", title="Knowledge", icon="🎓")
-evals_agents = st.Page("src/pages/evaluations/agents.py", title="Agents", icon="🤖")
+evals_safeguards = st.Page("src/pages/evaluations/safeguards.py", title="Safeguards", icon="🛡️")
 
 pg = st.navigation(
     {
         "Navigation": [home, docs, changelog],
         "Evaluations": [
-            evals_coding,
+            evals_agents,
             evals_assistants,
+            evals_coding,
             evals_cybersecurity,
-            evals_safeguards,
+            evals_knowledge,
             evals_mathematics,
             evals_reasoning,
-            evals_knowledge,
-            evals_agents
+            evals_safeguards
         ]
     }
 )

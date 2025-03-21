@@ -5,24 +5,30 @@ import streamlit as st
 
 from pydantic import BaseModel, field_validator
 
+
 class EvaluationConfig(BaseModel):
     name: str
     default_scorer: str
     default_metric: str
     paths: list[str]
 
+    @property
+    def prefixed_name(self) -> str:
+        return f"inspect_evals/{self.name}"
+
     @field_validator('paths')
     @classmethod
     def substitute_env_vars(cls, paths: list[str]) -> list[str]:
         def return_environment_variable_or_throw(m):
-            if m.group(1) not in os.environ:
-                raise Exception("Unable to substitute an environment variable in the config, it's not set: $" + m.group(1))
-            return os.environ[m.group(1)]
+            var_name = m.group(1) or m.group(2)  # group(1) for $VAR, group(2) for ${VAR}
+            if var_name not in os.environ:
+                raise Exception("Unable to substitute an environment variable in the config, it's not set: $" + var_name)
+            return os.environ[var_name]
 
         processed_paths = []
         for path in paths:
-            # Look for $ENV_VAR patterns
-            path = re.sub(r'\$([A-Za-z0-9_]+)', return_environment_variable_or_throw, path)
+            # Look for both $ENV_VAR and ${ENV_VAR} patterns
+            path = re.sub(r'\$([A-Za-z0-9_]+)|\$\{([A-Za-z0-9_]+)\}', return_environment_variable_or_throw, path)
             processed_paths.append(path)
 
         return processed_paths
@@ -37,7 +43,6 @@ class EnvironmentConfig(BaseModel):
     mathematics: list[EvaluationConfig] = []
     reasoning: list[EvaluationConfig] = []
     safeguards: list[EvaluationConfig] = []
-
 
 
 @st.cache_data
@@ -58,4 +63,3 @@ def load_config() -> EnvironmentConfig:
         raise ValueError(f"Environment '{env}' not found in config.yml")
     
     return EnvironmentConfig.model_validate(raw_config[env]['evaluations'])
-
