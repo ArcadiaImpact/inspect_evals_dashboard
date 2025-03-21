@@ -1,34 +1,30 @@
-# from inspect_evals_scoring.process_log import DashboardLog
-from inspect_evals_dashboard_schema import DashboardLog
 import plotly.graph_objs as go
 import streamlit as st
-from src.log_utils.dashboard_log_utils import dashboard_log_hash_func 
+
+from inspect_evals_dashboard_schema import DashboardLog
+
+from src.log_utils.dashboard_log_utils import dashboard_log_hash_func, get_scorer_by_name
 from src.plots.plot_utils import create_hover_text
 
 
 @st.cache_data(hash_funcs={DashboardLog: dashboard_log_hash_func})
-def create_bar_chart(eval_logs: list[DashboardLog], metric: str):
+def create_bar_chart(eval_logs: list[DashboardLog], scorer: str, metric: str) -> go.Figure:
     # Extract data from filtered logs
     models = [log.model_metadata.name for log in eval_logs]
 
-    # Find metrics by name (only one scorer per model)
-    # TODO: Handle multiple scorers per model
     metric_values = [
-        next(v.value for k, v in log.results.scores[0].metrics.items() if k == metric)
+        next(v.value for k, v in get_scorer_by_name(log, scorer).metrics.items() if k == metric)
         for log in eval_logs
     ]
     metric_errors = [
-        next(v.value for k, v in log.results.scores[0].metrics.items() if k == "stderr")
+        next(v.value for k, v in get_scorer_by_name(log, scorer).metrics.items() if k == "stderr")
         for log in eval_logs
     ]
 
     # Baseline value (using first model's baseline)
     human_baseline = None
-    if eval_logs and eval_logs[0].task_metadata.baselines:
-        human_baseline = next(
-            (b.score for b in eval_logs[0].task_metadata.baselines if b.metric == metric),
-            None,
-        )
+    if eval_logs and eval_logs[0].task_metadata.human_baseline:
+        human_baseline = eval_logs[0].task_metadata.human_baseline.score
 
     # Create hover text with detailed information
     # TODO: Inspect logs link should be clickable

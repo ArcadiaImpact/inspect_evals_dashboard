@@ -1,17 +1,17 @@
 import json
+from typing import Any
 
 import streamlit as st
-
-# from inspect_evals_scoring.process_log import DashboardLog
 from inspect_evals_dashboard_schema import DashboardLog
-from src.log_utils.dashboard_log_utils import get_metrics
+
+from src.log_utils.dashboard_log_utils import get_all_metrics
 from src.plots.bar import create_bar_chart
 from src.plots.cutoff_scatter import create_cutoff_scatter
 from src.plots.pairwise import create_pairwise_analysis_table
 from src.plots.plot_utils import highlight_confidence_intervals
 
 
-def render_page(eval_logs: list[DashboardLog]):
+def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[str, str]]):
     st.subheader("Naive cross-model comparison")
     st.markdown("""
                 Graphs in this section compare how different AI models perform on the same task. We call this a "naive" comparison because it uses simple averages to compare models, which doesn't tell us if one model is statistically significantly better than another. For more reliable comparisons, check out the next section. To get more accurate scores, we evaluate each sample in a dataset multiple times using the epochs feature in Inspect AI.
@@ -31,7 +31,7 @@ def render_page(eval_logs: list[DashboardLog]):
             key="cross_model_comparison_task_name",
         )
 
-    naive_logs = [log for log in eval_logs if log.eval.task == naive_task_name]
+    naive_logs: list[DashboardLog] = [log for log in eval_logs if log.eval.task == naive_task_name]
 
     with col2:
         model_provider = st.selectbox(
@@ -43,7 +43,7 @@ def render_page(eval_logs: list[DashboardLog]):
             key="cross_model_comparison_model_provider",
         )
 
-    naive_logs = [
+    naive_logs: list[DashboardLog] = [
         log
         for log in naive_logs
         if log.model_metadata.provider == model_provider or model_provider is None
@@ -59,20 +59,25 @@ def render_page(eval_logs: list[DashboardLog]):
             key="cross_model_comparison_model_family",
         )
 
-    naive_logs = [
+    naive_logs: list[DashboardLog] = [
         log
         for log in naive_logs
         if log.model_metadata.family == model_family or model_family is None
     ]
 
     # Get available metrics from filtered logs
-    task_metrics = set().union(*[get_metrics(log) for log in naive_logs])
+    task_metrics: list[str] = sorted(set().union(*[get_all_metrics(log) for log in naive_logs]))
+    
+    try:
+        metric_index: int = task_metrics.index(default_values[naive_task_name]["default_metric"])
+    except Exception:
+        metric_index = 0
 
     with col4:
         metric = st.selectbox(
             "Metric",
-            sorted(task_metrics),
-            index=0,
+            task_metrics,
+            index=metric_index,
             help="Evaluation metric",
             label_visibility="visible",
             key="cross_model_comparison_metric",
@@ -92,10 +97,12 @@ def render_page(eval_logs: list[DashboardLog]):
         )
         st.text("")  # Add a blank line for spacing
 
-        fig_bar = create_bar_chart(naive_logs, metric)
+        scorer = default_values[naive_task_name]["default_scorer"]
+        
+        fig_bar = create_bar_chart(naive_logs, scorer, metric)
         st.plotly_chart(fig_bar)
 
-        fig_cutoff = create_cutoff_scatter(naive_logs, metric)
+        fig_cutoff = create_cutoff_scatter(naive_logs, scorer, metric)
         st.plotly_chart(fig_cutoff)
 
         st.download_button(
@@ -140,7 +147,7 @@ def render_page(eval_logs: list[DashboardLog]):
     pairwise_logs = [log for log in eval_logs if log.eval.model in [model_name, baseline_name]]
 
     # Get available metrics from filtered logs
-    task_metrics = set().union(*[get_metrics(log) for log in pairwise_logs])
+    task_metrics = sorted(set().union(*[get_all_metrics(log) for log in pairwise_logs]))
 
     with col7:
         pairwise_metric = st.selectbox(

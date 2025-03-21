@@ -1,17 +1,19 @@
-# from inspect_evals_scoring.process_log import DashboardLog
-from inspect_evals_dashboard_schema import DashboardLog
-from src.log_utils.dashboard_log_utils import dashboard_log_hash_func
-from src.plots.plot_utils import create_hover_text
 import pandas as pd
 import plotly.graph_objs as go
 import streamlit as st
+
+from inspect_evals_dashboard_schema import DashboardLog
+
+from src.log_utils.dashboard_log_utils import dashboard_log_hash_func, get_scorer_by_name
+from src.plots.plot_utils import create_hover_text
 
 
 @st.cache_data(hash_funcs={DashboardLog: dashboard_log_hash_func})
 def create_cutoff_scatter(
     eval_logs: list[DashboardLog],
+    scorer: str,
     metric: str,
-):
+) -> go.Figure:
     """
     Create a plotly figure showing model performance over time.
 
@@ -24,19 +26,16 @@ def create_cutoff_scatter(
     """
     # Get human baseline if available, otherwise set to None
     human_baseline = None
-    if eval_logs and eval_logs[0].task_metadata.baselines:
-        human_baseline = next(
-            (b.score for b in eval_logs[0].task_metadata.baselines if b.metric == metric),
-            None,
-        )
+    if eval_logs and eval_logs[0].task_metadata.human_baseline:
+        human_baseline = eval_logs[0].task_metadata.human_baseline.score
 
-    # TODO: Handle multiple scorers per eval log
     plot_data = []
     for log in eval_logs:
-        metric_value = log.results.scores[0].metrics[metric].value
+        scorer = get_scorer_by_name(log, scorer)
+        metric_value = scorer.metrics[metric].value
         stderr = (
-            log.results.scores[0].metrics.get("stderr", 0).value
-            if "stderr" in log.results.scores[0].metrics
+            scorer.metrics.get("stderr", 0).value
+            if "stderr" in scorer.metrics
             else 0
         )
         if metric_value:
