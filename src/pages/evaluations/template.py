@@ -34,11 +34,11 @@ def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[st
     naive_logs: list[DashboardLog] = [log for log in eval_logs if log.eval.task == naive_task_name]
 
     with col2:
-        model_provider = st.selectbox(
-            "Model provider",
+        model_providers = st.multiselect(
+            "Model providers",
             sorted(set(log.model_metadata.provider for log in naive_logs)),
-            index=None,
-            help="Name of the model developer company",
+            default=None,
+            help="Name of the model developer companies",
             label_visibility="visible",
             key="cross_model_comparison_model_provider",
         )
@@ -46,15 +46,15 @@ def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[st
     naive_logs: list[DashboardLog] = [
         log
         for log in naive_logs
-        if log.model_metadata.provider == model_provider or model_provider is None
+        if log.model_metadata.provider in model_providers or not model_providers
     ]
 
     with col3:
-        model_family = st.selectbox(
-            "Model family",
+        model_families = st.multiselect(
+            "Model families",
             sorted(set(log.model_metadata.family for log in naive_logs)),
-            index=None,
-            help="Name of the model family",
+            default=None,
+            help="Name of the model families",
             label_visibility="visible",
             key="cross_model_comparison_model_family",
         )
@@ -62,7 +62,7 @@ def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[st
     naive_logs: list[DashboardLog] = [
         log
         for log in naive_logs
-        if log.model_metadata.family == model_family or model_family is None
+        if log.model_metadata.family in model_families or not model_families
     ]
 
     # Get available metrics from filtered logs
