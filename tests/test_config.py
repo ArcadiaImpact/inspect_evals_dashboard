@@ -30,7 +30,6 @@ def test_substitute_env_vars_replaces_variables():
         ]
 
 
-
 def test_substitute_env_vars_multiple_variables(monkeypatch):
     with MonkeyPatch.context() as mp:
         mp.setenv('VAR1', 'first')
@@ -46,7 +45,6 @@ def test_substitute_env_vars_multiple_variables(monkeypatch):
         
         # Assert
         assert config.paths == ["first/second/first-second.json"]
-
 
 
 def test_substitute_env_vars_missing_variable(monkeypatch):

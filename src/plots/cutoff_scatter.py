@@ -4,11 +4,11 @@ import streamlit as st
 
 from inspect_evals_dashboard_schema import DashboardLog
 
-from src.log_utils.dashboard_log_utils import dashboard_log_hash_func, get_scorer_by_name
+from src.log_utils.dashboard_log_utils import get_scorer_by_name
 from src.plots.plot_utils import create_hover_text
 
 
-@st.cache_data(hash_funcs={DashboardLog: dashboard_log_hash_func})
+@st.cache_data(hash_funcs={DashboardLog: id})
 def create_cutoff_scatter(
     eval_logs: list[DashboardLog],
     scorer: str,
@@ -84,17 +84,28 @@ def create_cutoff_scatter(
     best_performers = df.loc[df.groupby("date")["value"].idxmax()]
     best_performers = best_performers.sort_values("date")
 
-    fig.add_trace(
-        go.Scatter(
-            x=best_performers["date"],
-            y=best_performers["value"],
-            mode="lines",
-            name="Performance frontier",
-            line=dict(color="rgba(100, 100, 100, 0.5)", width=2),
-            hovertemplate="Mean: %{y:.2f}<br>%{customdata}<extra></extra>",
-            customdata=provider_data["hover_text"],
+    # Create performance frontier by only keeping points that improve upon previous max
+    frontier_points = []
+    current_max = float('-inf')
+    for _, row in best_performers.iterrows():
+        if row['value'] > current_max:
+            frontier_points.append(row)
+            current_max = row['value']
+    
+    frontier_df = pd.DataFrame(frontier_points)
+    
+    if not frontier_df.empty:
+        fig.add_trace(
+            go.Scatter(
+                x=frontier_df["date"],
+                y=frontier_df["value"],
+                mode="lines",
+                name="Performance frontier",
+                line=dict(color="rgba(100, 100, 100, 0.5)", width=2),
+                hovertemplate="Mean: %{y:.2f}<br>%{customdata}<extra></extra>",
+                customdata=frontier_df["hover_text"],
+            )
         )
-    )
 
     # Add human baseline if it exists
     if human_baseline is not None:
@@ -114,8 +125,11 @@ def create_cutoff_scatter(
         title=f"Comparison of {metric} values across models by knowledge cutoff date",
         xaxis_title="Knowledge cutoff date",
         yaxis_title=f"Value of {metric} metric",
-        # TODO: Consider setting yaxis_range between some min and max value
-        # yaxis_range=[0, 1],
+        # TODO:Consider setting yaxis_range between some min and max value (test with real data)
+        # yaxis=dict(
+        #     range=[0, max(df['value'].max() * 1.1, human_baseline or 0)],  # Add 10% padding to the max value
+        #     zeroline=True,
+        # ),
         xaxis_tickangle=45,
     )
 

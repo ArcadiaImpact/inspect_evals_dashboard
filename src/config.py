@@ -44,6 +44,19 @@ class EnvironmentConfig(BaseModel):
     reasoning: list[EvaluationConfig] = []
     safeguards: list[EvaluationConfig] = []
 
+    @property
+    def total_tasks(self) -> int:
+        return sum(len(getattr(self, field)) for field in self.model_fields)
+
+    @property
+    def total_runs(self) -> int:
+        return sum(len(task.paths) for field in self.model_fields for task in getattr(self, field))
+
+    @property
+    def total_models(self) -> int:
+        # This is an imperfect proxy to get the number of models from the first task in knowledge
+        return len(self.knowledge[0].paths) if self.knowledge else 0
+
 
 @st.cache_data
 def load_config() -> EnvironmentConfig:

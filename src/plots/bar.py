@@ -3,11 +3,11 @@ import streamlit as st
 
 from inspect_evals_dashboard_schema import DashboardLog
 
-from src.log_utils.dashboard_log_utils import dashboard_log_hash_func, get_scorer_by_name
+from src.log_utils.dashboard_log_utils import get_scorer_by_name
 from src.plots.plot_utils import create_hover_text
 
 
-@st.cache_data(hash_funcs={DashboardLog: dashboard_log_hash_func})
+@st.cache_data(hash_funcs={DashboardLog: id})
 def create_bar_chart(eval_logs: list[DashboardLog], scorer: str, metric: str) -> go.Figure:
     # Extract data from filtered logs
     models = [log.model_metadata.name for log in eval_logs]
