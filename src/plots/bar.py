@@ -21,9 +21,9 @@ def create_bar_chart(eval_logs: list[DashboardLog], scorer: str, metric: str) ->
         for log in eval_logs
     ]
 
-    # Baseline value (using first model's baseline)
+    # Baseline value - get human_baseline from the first model that has it
     human_baseline = None
-    if eval_logs and eval_logs[0].task_metadata.human_baseline:
+    if eval_logs and getattr(eval_logs[0].task_metadata, 'human_baseline', None):
         human_baseline = eval_logs[0].task_metadata.human_baseline.score
 
     # Create hover text with detailed information
