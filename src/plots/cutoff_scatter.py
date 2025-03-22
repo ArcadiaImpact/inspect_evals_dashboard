@@ -57,7 +57,7 @@ def create_cutoff_scatter(
 
     fig = go.Figure()
 
-    color_palette = ["#74aa9c", "#8e44ad", "#e67e22", "#3498db", "#e74c3c", "#2ecc71", "#f1c40f"]
+    color_palette = ["#74aa9c", "#8e44ad", "#e67e22", "#3498db", "#e74c3c", "#2ecc71", "#f1c40f", "#1abc9c", "#9b59b6", "#d35400"]
     providers = df["provider"].unique()
     colors = {
         provider: color_palette[i % len(color_palette)] for i, provider in enumerate(providers)
