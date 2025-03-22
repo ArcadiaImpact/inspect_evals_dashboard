@@ -26,7 +26,7 @@ def create_cutoff_scatter(
     """
     # Get human baseline if available, otherwise set to None
     human_baseline = None
-    if eval_logs and eval_logs[0].task_metadata.human_baseline:
+    if eval_logs and getattr(eval_logs[0].task_metadata, 'human_baseline', None):
         human_baseline = eval_logs[0].task_metadata.human_baseline.score
 
     plot_data = []
