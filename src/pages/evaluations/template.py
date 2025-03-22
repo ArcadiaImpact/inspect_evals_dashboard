@@ -99,6 +99,9 @@ def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[st
         
         fig_bar = create_bar_chart(naive_logs, scorer, metric)
         st.plotly_chart(fig_bar)
+        with st.expander("Inspect Eval logs"):
+            st.markdown(" · ".join([f"<a href='{log.location}'>{log.model_metadata.name}</a>" for log in naive_logs]), unsafe_allow_html=True)
+
 
         fig_cutoff = create_cutoff_scatter(naive_logs, scorer, metric)
         st.plotly_chart(fig_cutoff)
