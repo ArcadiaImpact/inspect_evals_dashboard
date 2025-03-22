@@ -110,7 +110,7 @@ def create_radar_chart(category_logs: dict[str, list[DashboardLog]], selected_mo
         theta=categories,
         fill='toself',
         name='Model Performance',
-        hovertemplate="Category: %{theta}<br>Normalized Score: %{r:.2f} (±%{customdata:.2f})<br>%{text}<extra></extra>",
+        hovertemplate="Category: %{theta}<br>Normalized score: %{r:.2f} (±%{customdata:.2f})<br>%{text}<extra></extra>",
         customdata=errors,
         text=hover_texts,
         line=dict(color='rgb(31, 119, 180)'),
@@ -145,7 +145,7 @@ def create_radar_chart(category_logs: dict[str, list[DashboardLog]], selected_mo
             )
         ),
         showlegend=False,
-        title=f"{selected_model} Performance Across Evaluation Categories (Normalized Per Task)",
+        title=f"Model performance across evaluation categories",
         height=600,
     )
     

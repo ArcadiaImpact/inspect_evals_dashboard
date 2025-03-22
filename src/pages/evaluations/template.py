@@ -1,13 +1,11 @@
 import json
-from typing import Any
-
 import streamlit as st
 from inspect_evals_dashboard_schema import DashboardLog
 
 from src.log_utils.dashboard_log_utils import get_all_metrics
 from src.plots.bar import create_bar_chart
 from src.plots.cutoff_scatter import create_cutoff_scatter
-from src.plots.pairwise import create_pairwise_analysis_table
+from src.plots.pairwise import create_pairwise_analysis_table, create_pairwise_scatter
 from src.plots.plot_utils import highlight_confidence_intervals
 
 
@@ -116,7 +114,7 @@ def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[st
     st.divider()
     st.subheader("Pairwise analysis (unpaired)")
     st.markdown("""
-                Here we compare two models directly by specifying one model as the baseline and the other as the test model across all evaluations in this group. We use their eval score and standard errors to test their difference for statistical significance. We highlight the cells where the confidence interval is in the positive or negative range signaling that the test model is statistically significantly better or worse compared to the baseline model.
+                Here we compare two models directly by specifying one model as the baseline and the other as the test model across all evaluations in this group. We use their eval score and standard errors to test their difference for statistical significance. **We highlight the cells where the confidence interval is in the positive or negative range signaling that the test model is statistically significantly better or worse compared to the baseline model.**
                 """
     )
 
@@ -174,9 +172,70 @@ def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[st
             mime="text/csv",
         )
 
-    # TODO: Add link to Colab notebook
+        fig_pairwise = create_pairwise_scatter(pairwise_analysis_df)
+        st.plotly_chart(fig_pairwise)
+
+    with st.expander("How is the pairwise analysis calculated?"):
+        st.write(
+            r"""
+            Unpaired pairwise analysis (also known as naive or independent analysis) is a statistical method that compares two models without assuming any correlation between their responses to the same set of questions. This approach treats each model's accuracy as a separate, independent variable, leading to a more straightforward but potentially less precise evaluation.
+
+            For each model, we extract:
+
+            * Score ($S_A$, $S_B$): The performance measure assigned to each model.
+            * Standard Error ($SE_A$, $SE_B$): The uncertainty in the score estimates.
+
+            The difference in scores between the models is computed as:
+            """
+        )
+        st.latex(r"\Delta S = S_A - S_B")
+
+        st.write(
+            """
+            Since the models are assumed to be independent, the combined standard error (SE) is given by:
+            """
+        )
+        st.latex(r"SE_{\text{unpaired}} = \sqrt{SE_A^2 + SE_B^2}")
+
+        st.write(
+            """
+            Using this SE, we calculate the 95% Confidence Interval (CI) for the difference in scores:
+            """
+        )
+        st.latex(r"CI = \left(\Delta - 1.96 \times SE_{\text{unpaired}}, \Delta + 1.96 \times SE_{\text{unpaired}}\right)")
+
+        st.write(
+            """
+            Z-score:
+            """ 
+        )
+        st.latex(r"Z = \frac{\Delta S}{SE_{\text{unpaired}}}")
+
+        st.write(
+            """
+            **Interpreting the Confidence Interval**
+            """
+        )
+        st.markdown(r"""
+            The confidence interval ($CI$) provides a range in which the true difference in scores is expected to lie with 95% certainty. The interpretation depends on whether the interval is entirely positive, entirely negative, or includes zero:
+            * Entirely Positive ($CI > 0$): Model A significantly outperforms Model B, as the score difference is consistently positive.
+            * Entirely Negative ($CI < 0$): Model B significantly outperforms Model A, as the score difference is consistently negative.
+            * Includes Zero: There is no statistically significant difference between the two models, meaning that any observed score differences could be due to random variation rather than a meaningful performance gap.
+            """)
+
+        st.write(
+            """
+            **Implications of Unpaired Analysis**
+            """
+        )
+        st.markdown(r"""
+            * Wider Confidence Intervals: Since correlation is ignored, variance is higher, making the confidence intervals larger.
+            * Less Statistical Power: The method does not leverage potential relationships between the two models' responses, leading to less precise conclusions.
+            * Appropriate for Completely Independent Data: If the models were tested on different sets of questions, this would be the correct approach.
+            """)
+
     st.markdown("""
-                Note this is an unpaired analysis, so we don't compare question level scores. In a paired-differences tests, we'd compare how each evaluation question's score changes from one AI model to another, rather than just comparing the overall average scores, which helps us see the true performance difference by filtering out the natural variations in difficulty across different questions. To do a paired-differences test, refer to this [Colab notebook](link).
+                Note this is an unpaired analysis, so we don't compare question level scores. In a paired-differences tests, we'd compare how each evaluation question's score changes from one AI model to another, rather than just comparing the overall average scores, which helps us see the true performance difference by filtering out the natural variations in difficulty across different questions. To do a paired-differences test, refer to this [Colab notebook](https://colab.research.google.com/drive/1dgJEjbjuyYB1FlKQqN2d1wtYQbcE54OK?usp=sharing).
                 """
     )
 

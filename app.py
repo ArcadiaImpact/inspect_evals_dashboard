@@ -35,12 +35,7 @@ def home_content():
         [Inspect Evals](https://github.com/UKGovernmentBEIS/inspect_evals) is a repository of community-contributed LLM evaluations for [Inspect AI](https://github.com/UKGovernmentBEIS/inspect_ai). Inspect Evals was created in collaboration by the [UK AISI](https://www.aisi.gov.uk/), [Arcadia Impact](https://www.arcadiaimpact.org/), and the [Vector Institute](https://vectorinstitute.ai/).
         
         This dashboard showcases how well a diverse set of LLMs perform on the evaluations implemented in Inspect Evals. Its main aim is to provide access to this data for downstream use. Our data store is continuously updated with new results as new models and evaluations are published.
-
-        We aim to serve three key audiences: 
-        1. researchers who predict scaling laws and work on the science of evaluations (including those focused on visualization practices); 
-        2. analysts who process model performance data for decision-makers; 
-        3. technical teams who run internal evaluations against industry benchmarks.
-    """
+        """
     )
 
     config = load_config()
@@ -62,26 +57,6 @@ def home_content():
                 """,
             unsafe_allow_html=True,
         )
-
-    st.markdown(
-        """
-        ### This dashboard lets you:
-        * Explore results across eight categories of evaluations, these are:
-            * Agents
-            * Assistants
-            * Coding
-            * Cybersecurity
-            * Knowledge
-            * Mathematics
-            * Reasoning
-            * Safeguards
-        * Compare model performance through bar charts and temporal scatter plots
-        * Perform pairwise analysis of models across evaluations within categories
-        * Filter results based on specific parameters e.g. model family, model provider
-        * Access raw data and detailed evaluation logs for downstream analysis
-        * Reproduce results using the open-source implementation in the Inspect Evals repository
-    """
-    )
 
     # Load and organize logs by category
     category_logs = {}
@@ -139,17 +114,43 @@ def home_content():
 
     st.markdown(
         """
-        ### Methodology Note
+        ### We aim to serve three key audiences: 
+        1. researchers who predict scaling laws and work on the science of evaluations (including those focused on visualization practices); 
+        2. analysts who process model performance data for decision-makers; 
+        3. technical teams who run internal evaluations against industry benchmarks.
+
+        ### This dashboard lets you:
+        * Explore results across eight categories of evaluations, these are:
+            * Agents
+            * Assistants
+            * Coding
+            * Cybersecurity
+            * Knowledge
+            * Mathematics
+            * Reasoning
+            * Safeguards
+        * Compare model performance through bar charts and temporal scatter plots
+        * Perform pairwise analysis of models across evaluations within categories
+        * Filter results based on specific parameters e.g. model family, model provider
+        * Access raw data and detailed evaluation logs for downstream analysis
+        * Reproduce results using the open-source implementation in the Inspect Evals repository
+    """
+    )
+    
+    st.markdown(
+        """
+        ### Methodology note
         Our evaluations primarily use un-elicited results to ensure fair model comparison, employing basic agents for agentic evaluations unless otherwise specified. While this approach guarantees consistency, we acknowledge it may not demonstrate maximum potential performance.
 
-        ### Data Access & Usage
+        ### Data access & usage
         All evaluation data is freely available for download and analysis. For academic citations, please use:
         
         ```
         @online{inspect_evals_dashboard,
             author       = {Arcadia Impact, AI Safety Engineering Taskforce},
             title        = {Inspect Evals Dashboard},
-            url          = {https://inspect-evals-dashboard.streamlit.app},
+            year         = {2025},
+            url          = {https://inspect-evals-dashboard.streamlit.app}
         }
         ```
     """

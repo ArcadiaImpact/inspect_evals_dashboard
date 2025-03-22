@@ -41,7 +41,6 @@ def create_bar_chart(eval_logs: list[DashboardLog], scorer: str, metric: str) ->
                 error_y=dict(type="data", array=metric_errors, visible=True),
                 name=f"{metric} metric",
                 marker_color="rgba(54, 122, 179, 0.85)",
-                # TODO: Update hovertemplate - show metric name instead of "Mean"
                 # TODO: Handle missing standard error value
                 hovertemplate="Score: %{y:.2f}<br>Standard Error: %{error_y.array:.2f}<br>%{customdata}<extra></extra>",
                 customdata=hover_texts,
