@@ -5,6 +5,7 @@ from inspect_evals_dashboard_schema import DashboardLog
 from src.log_utils.dashboard_log_utils import get_all_metrics
 from src.plots.bar import create_bar_chart
 from src.plots.cutoff_scatter import create_cutoff_scatter
+from src.plots.cost_performance_scatter import create_cost_performance_scatter
 from src.plots.pairwise import create_pairwise_analysis_table, create_pairwise_scatter
 from src.plots.plot_utils import highlight_confidence_intervals
 
@@ -102,6 +103,9 @@ def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[st
 
         fig_cutoff = create_cutoff_scatter(naive_logs, scorer, metric)
         st.plotly_chart(fig_cutoff)
+
+        fig_cost = create_cost_performance_scatter(naive_logs, scorer, metric)
+        st.plotly_chart(fig_cost)
 
         st.download_button(
             label="Download chart data as JSON",
