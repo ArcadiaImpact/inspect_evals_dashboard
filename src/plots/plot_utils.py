@@ -2,7 +2,7 @@ import pandas as pd
 from inspect_evals_dashboard_schema import DashboardLog
 
 
-def create_hover_text(log: DashboardLog, human_baseline: float = None) -> str:
+def create_hover_text(log: DashboardLog, human_baseline: float | None = None) -> str:
     return (
         f"Model: {log.model_metadata.name}<br>"
         f"Epochs: {log.eval.config.epochs}<br>"
@@ -26,7 +26,16 @@ def create_hover_text(log: DashboardLog, human_baseline: float = None) -> str:
 def highlight_confidence_intervals(
     row: pd.Series, ci_column: str = "95% Conf. Interval"
 ) -> list[str]:
-    """Highlight positive and negative confidence intervals in a dataframe row"""
+    """Highlight positive and negative confidence intervals in a dataframe row.
+
+    Args:
+        row (pd.Series): The row to highlight.
+        ci_column (str): The column to highlight.
+
+    Returns:
+        list[str]: The styles for the row.
+
+    """
     styles = [""] * len(row)
     ci_values = row[ci_column]
     ci_column_idx = row.index.get_loc(ci_column)
@@ -34,11 +43,13 @@ def highlight_confidence_intervals(
     if isinstance(ci_values, str):
         try:
             # Extract the two numbers from the string (format like "(6.17%, 93.83%)")
-            lower, upper = [float(x.strip(" %")) for x in ci_values.strip("()").split(",")]
+            lower, upper = [
+                float(x.strip(" %")) for x in ci_values.strip("()").split(",")
+            ]
             if lower > 0 and upper > 0:
                 styles[ci_column_idx] = "background-color: #98BC98"  # Light green
             elif lower < 0 and upper < 0:
                 styles[ci_column_idx] = "background-color: #BC9898"  # Light red
-        except:
+        except Exception:
             pass
     return styles

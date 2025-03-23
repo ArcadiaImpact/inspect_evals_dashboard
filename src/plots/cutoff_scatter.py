@@ -1,9 +1,7 @@
 import pandas as pd
-import plotly.graph_objs as go
+import plotly.graph_objs as go  # type: ignore
 import streamlit as st
-
 from inspect_evals_dashboard_schema import DashboardLog
-
 from src.log_utils.dashboard_log_utils import get_scorer_by_name
 from src.plots.plot_utils import create_hover_text
 
@@ -11,33 +9,30 @@ from src.plots.plot_utils import create_hover_text
 @st.cache_data(hash_funcs={DashboardLog: id})
 def create_cutoff_scatter(
     eval_logs: list[DashboardLog],
-    scorer: str,
-    metric: str,
+    scorer_name: str,
+    metric_name: str,
 ) -> go.Figure:
-    """
-    Create a plotly figure showing model performance over time.
+    """Create a plotly figure showing model performance over time.
 
     Args:
         eval_logs (list[DashboardLog]): List of model evaluation logs
-        metric (str): Metric to plot
+        scorer_name (str): Scorer to use for metric (log.results.scores[].score.name)
+        metric_name (str): Metric to plot
 
     Returns:
         go.Figure: Plotly figure object
+
     """
     # Get human baseline if available, otherwise set to None
-    human_baseline = None
-    if eval_logs and getattr(eval_logs[0].task_metadata, 'human_baseline', None):
-        human_baseline = eval_logs[0].task_metadata.human_baseline.score
+    human_baseline = getattr(eval_logs[0].task_metadata, "human_baseline", None)
+    if eval_logs and human_baseline:
+        human_baseline = human_baseline.score
 
     plot_data = []
     for log in eval_logs:
-        scorer = get_scorer_by_name(log, scorer)
-        metric_value = scorer.metrics[metric].value
-        stderr = (
-            scorer.metrics.get("stderr", 0).value
-            if "stderr" in scorer.metrics
-            else 0
-        )
+        scorer = get_scorer_by_name(log, scorer_name)
+        metric_value = scorer.metrics[metric_name].value
+        stderr = scorer.metrics["stderr"].value if "stderr" in scorer.metrics else 0
         if metric_value:
             plot_data.append(
                 {
@@ -57,10 +52,22 @@ def create_cutoff_scatter(
 
     fig = go.Figure()
 
-    color_palette = ["#74aa9c", "#8e44ad", "#e67e22", "#3498db", "#e74c3c", "#2ecc71", "#f1c40f", "#1abc9c", "#9b59b6", "#d35400"]
+    color_palette = [
+        "#74aa9c",
+        "#8e44ad",
+        "#e67e22",
+        "#3498db",
+        "#e74c3c",
+        "#2ecc71",
+        "#f1c40f",
+        "#1abc9c",
+        "#9b59b6",
+        "#d35400",
+    ]
     providers = df["provider"].unique()
     colors = {
-        provider: color_palette[i % len(color_palette)] for i, provider in enumerate(providers)
+        provider: color_palette[i % len(color_palette)]
+        for i, provider in enumerate(providers)
     }
 
     for provider_name in providers:
@@ -86,14 +93,14 @@ def create_cutoff_scatter(
 
     # Create performance frontier by only keeping points that improve upon previous max
     frontier_points = []
-    current_max = float('-inf')
+    current_max = float("-inf")
     for _, row in best_performers.iterrows():
-        if row['value'] > current_max:
+        if row["value"] > current_max:
             frontier_points.append(row)
-            current_max = row['value']
-    
+            current_max = row["value"]
+
     frontier_df = pd.DataFrame(frontier_points)
-    
+
     if not frontier_df.empty:
         fig.add_trace(
             go.Scatter(
@@ -122,9 +129,9 @@ def create_cutoff_scatter(
 
     # Update layout
     fig.update_layout(
-        title=f"Comparison of {metric} values across models by knowledge cutoff date",
+        title=f"Comparison of {metric_name} values across models by knowledge cutoff date",
         xaxis_title="Knowledge cutoff date",
-        yaxis_title=f"Value of {metric} metric",
+        yaxis_title=f"Value of {metric_name} metric",
         # TODO:Consider setting yaxis_range between some min and max value (test with real data)
         # yaxis=dict(
         #     range=[0, max(df['value'].max() * 1.1, human_baseline or 0)],  # Add 10% padding to the max value

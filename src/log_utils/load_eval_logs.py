@@ -5,19 +5,20 @@ from pathlib import Path
 
 import streamlit as st
 from inspect_evals_dashboard_schema import DashboardLog
-from st_files_connection import FilesConnection
+from src.config import EvaluationConfig
+from st_files_connection import FilesConnection  # type: ignore
 
 
 @st.cache_data
 def load_evaluation_logs(evaluation_paths: list[str]) -> list[DashboardLog]:
-    """
-    Load evaluation logs from S3 or local path based on config.
+    """Load evaluation logs from S3 or local path based on config.
 
     Args:
         evaluation_paths: List of paths (S3 or local) to evaluation log files
 
     Returns:
         List of DashboardLog objects
+
     """
 
     def load_json_from_s3(path: str, conn: FilesConnection) -> dict:
@@ -45,5 +46,5 @@ def load_evaluation_logs(evaluation_paths: list[str]) -> list[DashboardLog]:
     return dashboard_logs
 
 
-def get_log_paths(config: list[dict]) -> list[str]:
+def get_log_paths(config: list[EvaluationConfig]) -> list[str]:
     return list(chain.from_iterable([t.paths for t in config]))
