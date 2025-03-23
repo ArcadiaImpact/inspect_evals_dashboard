@@ -309,5 +309,5 @@ test:
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - test/data/pubmedqa/1.json
-          - test/data/pubmedqa/2.json
+          - tests/data/pubmedqa/1.json
+          - tests/data/pubmedqa/2.json
