@@ -10,7 +10,6 @@ def get_scorer_by_name(log: DashboardLog, scorer_name: str) -> EvalScore:
         return next(score for score in log.results.scores if score.name == scorer_name)
     except StopIteration:
         # Fallback to first scorer if requested one isn't found
-        print("Defaulting to the first scorer")
         return log.results.scores[0]
 
 
