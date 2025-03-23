@@ -4,8 +4,8 @@ import streamlit as st
 from inspect_evals_dashboard_schema import DashboardLog
 from src.log_utils.dashboard_log_utils import get_all_metrics
 from src.plots.bar import create_bar_chart
+from src.plots.cost_scatter import create_cost_scatter
 from src.plots.cutoff_scatter import create_cutoff_scatter
-from src.plots.cost_performance_scatter import create_cost_performance_scatter
 from src.plots.pairwise import create_pairwise_analysis_table, create_pairwise_scatter
 from src.plots.plot_utils import highlight_confidence_intervals
 
@@ -110,7 +110,7 @@ def render_page(
         fig_cutoff = create_cutoff_scatter(family_filtered_logs, scorer, metric)
         st.plotly_chart(fig_cutoff)
 
-        fig_cost = create_cost_performance_scatter(naive_logs, scorer, metric)
+        fig_cost = create_cost_scatter(family_filtered_logs, scorer, metric)
         st.plotly_chart(fig_cost)
 
         st.download_button(
