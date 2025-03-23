@@ -34,7 +34,6 @@ def create_bar_chart(
     if eval_logs and human_baseline:
         human_baseline = human_baseline.score
 
-    # Create hover text with detailed information
     # TODO: Inspect logs link should be clickable
     hover_texts = []
     for log in eval_logs:
@@ -69,7 +68,7 @@ def create_bar_chart(
         )
 
     fig.update_layout(
-        title=f"Comparison of {metric} values across models on {eval_logs[0].task_metadata.name}",
+        title=f"Comparison of {metric} values across models",
         xaxis_title="Models",
         yaxis_title=f"Value of {metric} metric",
     )

@@ -56,13 +56,13 @@ def highlight_confidence_intervals(
 
 
 def get_human_baseline(log: DashboardLog) -> float | None:
-    """Get the human baseline for a log.
+    """Get the human baseline from the logs.
 
     Args:
-        log (DashboardLog): The log to get the human baseline for.
+        log (DashboardLog): The log to get the human baseline from.
 
     Returns:
-        float | None: The human baseline for the log.
+        float | None: The human baseline.
 
     """
     human_baseline = getattr(log.task_metadata, "human_baseline", None)
