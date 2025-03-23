@@ -43,13 +43,15 @@ def create_bar_chart(
     error_y = dict(type="data", array=[metric_errors], visible=True)
 
     # We create hover texts by concatenating plotly patterns with expanded python patterns from create_hover_text().
-    # 
+    #
     # The reason for using two different systems is the following:
     # - plotly data is relatively complex and computed in this function, whereas
     # - create_hover_text() simply lays out constant key-values from nested data
-    hovertemplate = "Score: %{y:.2f}<br>" + \
-        ("Standard Error: %{error_y.array:.2f}<br>" if error_y["array"] else "") + \
-        "%{customdata}<extra></extra>"
+    hovertemplate = (
+        "Score: %{y:.2f}<br>"
+        + ("Standard Error: %{error_y.array:.2f}<br>" if error_y["array"] else "")
+        + "%{customdata}<extra></extra>"
+    )
 
     fig = go.Figure(
         data=[
