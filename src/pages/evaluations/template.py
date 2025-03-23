@@ -107,7 +107,7 @@ def render_page(
         fig_bar = create_bar_chart(family_filtered_logs, scorer, metric)
         st.plotly_chart(fig_bar)
         with st.expander("Inspect Eval logs"):
-            st.markdown(" · ".join([f"<a href='{log.location}'>{log.model_metadata.name}</a>" for log in naive_logs]), unsafe_allow_html=True)
+            st.markdown(" · ".join([f"<a href='{log.location}'>{log.model_metadata.name}</a>" for log in family_filtered_logs]), unsafe_allow_html=True)
 
 
         fig_cutoff = create_cutoff_scatter(family_filtered_logs, scorer, metric)
