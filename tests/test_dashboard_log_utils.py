@@ -1,8 +1,12 @@
 from inspect_ai.log import EvalScore
-
-from src.log_utils.dashboard_log_utils import get_all_metrics, get_scorer_by_name, read_default_values_from_configs
-from src.log_utils.load_eval_logs import get_log_paths, load_evaluation_logs
 from src.config import load_config
+from src.log_utils.dashboard_log_utils import (
+    get_all_metrics,
+    get_scorer_by_name,
+    read_default_values_from_configs,
+)
+from src.log_utils.load_eval_logs import get_log_paths, load_evaluation_logs
+
 
 def _read_eval_logs():
     group_config = load_config().agents
@@ -10,7 +14,7 @@ def _read_eval_logs():
 
 def test_read_default_values_from_configs():
     group_config = load_config().agents
-    
+
     default_values = read_default_values_from_configs(group_config)
     print(default_values)
     assert default_values['inspect_evals/pubmedqa']['default_scorer'] == 'choice'
