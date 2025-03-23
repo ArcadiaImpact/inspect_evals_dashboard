@@ -3,7 +3,11 @@ import plotly.graph_objs as go  # type: ignore
 import streamlit as st
 from inspect_evals_dashboard_schema import DashboardLog
 from src.log_utils.dashboard_log_utils import get_scorer_by_name
-from src.plots.plot_utils import create_hover_text
+from src.plots.plot_utils import (
+    create_hover_text,
+    get_human_baseline,
+    get_provider_color_palette,
+)
 
 
 @st.cache_data(hash_funcs={DashboardLog: id})
@@ -23,10 +27,7 @@ def create_cutoff_scatter(
         go.Figure: Plotly figure object
 
     """
-    # Get human baseline if available, otherwise set to None
-    human_baseline = getattr(eval_logs[0].task_metadata, "human_baseline", None)
-    if eval_logs and human_baseline:
-        human_baseline = human_baseline.score
+    human_baseline = get_human_baseline(eval_logs[0])
 
     plot_data = []
     for log in eval_logs:
@@ -46,29 +47,13 @@ def create_cutoff_scatter(
                 }
             )
 
-    # Convert to pandas DataFrame for easier manipulation
     df = pd.DataFrame(plot_data)
     df = df.sort_values("date")
-
     fig = go.Figure()
 
-    color_palette = [
-        "#74aa9c",
-        "#8e44ad",
-        "#e67e22",
-        "#3498db",
-        "#e74c3c",
-        "#2ecc71",
-        "#f1c40f",
-        "#1abc9c",
-        "#9b59b6",
-        "#d35400",
-    ]
-    providers = df["provider"].unique()
-    colors = {
-        provider: color_palette[i % len(color_palette)]
-        for i, provider in enumerate(providers)
-    }
+    providers = sorted(df["provider"].unique())  # Sort providers alphanumerically
+    # Use a color palette for different providers
+    color_palette = get_provider_color_palette(set(providers))
 
     for provider_name in providers:
         provider_data = df[df["provider"] == provider_name]
@@ -80,7 +65,7 @@ def create_cutoff_scatter(
                 error_y=dict(type="data", array=provider_data["stderr"], visible=True),
                 mode="markers",
                 name=provider_name,
-                marker=dict(size=10, color=colors.get(provider_name, "#666666")),
+                marker=dict(size=10, color=color_palette.get(provider_name, "#666666")),
                 hovertemplate="Score: %{y:.2f}<br>Standard Error: %{error_y.array:.2f}<br>%{customdata}<extra></extra>",
                 customdata=provider_data["hover_text"],
             )
