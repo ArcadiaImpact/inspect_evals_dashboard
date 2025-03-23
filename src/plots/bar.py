@@ -27,7 +27,6 @@ def create_bar_chart(eval_logs: list[DashboardLog], scorer: str, metric: str) ->
         human_baseline = eval_logs[0].task_metadata.human_baseline.score
 
     # Create hover text with detailed information
-    # TODO: Inspect logs link should be clickable
     hover_texts = []
     for log in eval_logs:
         hover_text = create_hover_text(log, human_baseline)
