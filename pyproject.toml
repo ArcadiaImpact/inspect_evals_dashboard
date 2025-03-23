@@ -19,7 +19,7 @@ classifiers = [
     "Natural Language :: English",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 dynamic = ["dependencies"]
 license = { text = "MIT" }
 authors = [

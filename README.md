@@ -44,7 +44,7 @@ A Streamlit-based web application for visualizing results of AI evaluations base
 
 ## Setup and Installation
 
-- Recommended Python version: Python 3.10+
+- Recommended Python version: Python 3.12+
 
 1. Clone this repository:
 
