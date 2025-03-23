@@ -2,7 +2,7 @@ import pandas as pd
 from inspect_evals_dashboard_schema import DashboardLog
 
 
-def create_hover_text(log: DashboardLog, human_baseline: float = None) -> str:
+def create_hover_text(log: DashboardLog, human_baseline: float | None = None) -> str:
     return (
         f"Model: {log.model_metadata.name}<br>"
         f"Epochs: {log.eval.config.epochs}<br>"
@@ -25,7 +25,16 @@ def create_hover_text(log: DashboardLog, human_baseline: float = None) -> str:
 def highlight_confidence_intervals(
     row: pd.Series, ci_column: str = "95% Conf. Interval"
 ) -> list[str]:
-    """Highlight positive and negative confidence intervals in a dataframe row"""
+    """Highlight positive and negative confidence intervals in a dataframe row.
+
+    Args:
+        row (pd.Series): The row to highlight.
+        ci_column (str): The column to highlight.
+
+    Returns:
+        list[str]: The styles for the row.
+
+    """
     styles = [""] * len(row)
     ci_values = row[ci_column]
     ci_column_idx = row.index.get_loc(ci_column)
@@ -33,11 +42,57 @@ def highlight_confidence_intervals(
     if isinstance(ci_values, str):
         try:
             # Extract the two numbers from the string (format like "(6.17%, 93.83%)")
-            lower, upper = [float(x.strip(" %")) for x in ci_values.strip("()").split(",")]
+            lower, upper = [
+                float(x.strip(" %")) for x in ci_values.strip("()").split(",")
+            ]
             if lower > 0 and upper > 0:
                 styles[ci_column_idx] = "background-color: #98BC98"  # Light green
             elif lower < 0 and upper < 0:
                 styles[ci_column_idx] = "background-color: #BC9898"  # Light red
-        except:
+        except Exception:
             pass
     return styles
+
+
+def get_human_baseline(log: DashboardLog) -> float | None:
+    """Get the human baseline from the logs.
+
+    Args:
+        log (DashboardLog): The log to get the human baseline from.
+
+    Returns:
+        float | None: The human baseline.
+
+    """
+    human_baseline = getattr(log.task_metadata, "human_baseline", None)
+    if human_baseline:
+        return human_baseline.score
+    return None
+
+
+def get_provider_color_palette(providers: set[str]) -> dict[str, str]:
+    """Get a color palette for providers.
+
+    Args:
+        providers (set[str]): The providers to get the color palette for.
+
+    Returns:
+        dict[str, str]: The color palette for the providers.
+
+    """
+    color_palette = [
+        "#74aa9c",
+        "#8e44ad",
+        "#e67e22",
+        "#3498db",
+        "#e74c3c",
+        "#2ecc71",
+        "#f1c40f",
+        "#1abc9c",
+        "#9b59b6",
+        "#d35400",
+    ]
+    return {
+        provider: color_palette[i % len(color_palette)]
+        for i, provider in enumerate(sorted(providers))
+    }

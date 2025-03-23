@@ -1,20 +1,22 @@
 import json
+
 import streamlit as st
 from inspect_evals_dashboard_schema import DashboardLog
-
 from src.log_utils.dashboard_log_utils import get_all_metrics
 from src.plots.bar import create_bar_chart
+from src.plots.cost_scatter import create_cost_scatter
 from src.plots.cutoff_scatter import create_cutoff_scatter
 from src.plots.pairwise import create_pairwise_analysis_table, create_pairwise_scatter
 from src.plots.plot_utils import highlight_confidence_intervals
 
 
-def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[str, str]]):
+def render_page(
+    eval_logs: list[DashboardLog], default_values: dict[str, dict[str, str]]
+):
     st.subheader("Naive cross-model comparison")
     st.markdown("""
                 Graphs in this section compare how different AI models perform on the same task. We call this a "naive" comparison because it uses simple averages to compare models, which doesn't tell us if one model is statistically significantly better than another. For more reliable comparisons, check out the next section. To get more accurate scores, we evaluate each sample in a dataset multiple times using the epochs feature in Inspect AI.
-                """
-    )
+                """)
 
     col1, col2, col3, col4 = st.columns(4)
 
@@ -29,45 +31,51 @@ def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[st
             key="cross_model_comparison_task_name",
         )
 
-    naive_logs: list[DashboardLog] = [log for log in eval_logs if log.eval.task == naive_task_name]
+    task_filtered_logs: list[DashboardLog] = [
+        log for log in eval_logs if log.eval.task == naive_task_name
+    ]
 
     with col2:
         model_providers = st.multiselect(
             "Model providers",
-            sorted(set(log.model_metadata.provider for log in naive_logs)),
+            sorted(set(log.model_metadata.provider for log in task_filtered_logs)),
             default=None,
             help="Name of the model developer companies",
             label_visibility="visible",
             key="cross_model_comparison_model_provider",
         )
 
-    naive_logs: list[DashboardLog] = [
+    provider_filtered_logs: list[DashboardLog] = [
         log
-        for log in naive_logs
+        for log in task_filtered_logs
         if log.model_metadata.provider in model_providers or not model_providers
     ]
 
     with col3:
         model_families = st.multiselect(
             "Model families",
-            sorted(set(log.model_metadata.family for log in naive_logs)),
+            sorted(set(log.model_metadata.family for log in provider_filtered_logs)),
             default=None,
             help="Name of the model families",
             label_visibility="visible",
             key="cross_model_comparison_model_family",
         )
 
-    naive_logs: list[DashboardLog] = [
+    family_filtered_logs: list[DashboardLog] = [
         log
-        for log in naive_logs
+        for log in provider_filtered_logs
         if log.model_metadata.family in model_families or not model_families
     ]
 
     # Get available metrics from filtered logs
-    task_metrics: list[str] = sorted(set().union(*[get_all_metrics(log) for log in naive_logs]))
-    
+    task_metrics: list[str] = sorted(
+        set().union(*[get_all_metrics(log) for log in family_filtered_logs])
+    )
+
     try:
-        metric_index: int = task_metrics.index(default_values[naive_task_name]["default_metric"])
+        metric_index: int = task_metrics.index(
+            default_values[naive_task_name]["default_metric"]
+        )
     except Exception:
         metric_index = 0
 
@@ -81,9 +89,9 @@ def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[st
             key="cross_model_comparison_metric",
         )
 
-    if naive_logs:
+    if family_filtered_logs:
         # Display evaluation details from the first log entry
-        eval_details = naive_logs[0]
+        eval_details = family_filtered_logs[0]
         st.text("")  # Add a blank line for spacing
         st.markdown("##### Evaluation details:")
         st.markdown(f"""
@@ -91,24 +99,28 @@ def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[st
                     - **Description:** {eval_details.eval_metadata.description}
                     - **ArXiv:** {eval_details.eval_metadata.arxiv}
                     - **Task path in Inspect Evals:** [{eval_details.eval_metadata.path}](https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/{eval_details.eval_metadata.path})
-                    """
-        )
+                    """)
         st.text("")  # Add a blank line for spacing
 
         scorer = default_values[naive_task_name]["default_scorer"]
-        
-        fig_bar = create_bar_chart(naive_logs, scorer, metric)
+
+        fig_bar = create_bar_chart(family_filtered_logs, scorer, metric)
         st.plotly_chart(fig_bar)
         with st.expander("Inspect Eval logs"):
             st.markdown(" · ".join([f"<a href='{log.location}'>{log.model_metadata.name}</a>" for log in naive_logs]), unsafe_allow_html=True)
 
 
-        fig_cutoff = create_cutoff_scatter(naive_logs, scorer, metric)
+        fig_cutoff = create_cutoff_scatter(family_filtered_logs, scorer, metric)
         st.plotly_chart(fig_cutoff)
+
+        fig_cost = create_cost_scatter(family_filtered_logs, scorer, metric)
+        st.plotly_chart(fig_cost)
 
         st.download_button(
             label="Download chart data as JSON",
-            data=json.dumps([log.model_dump(mode="json") for log in naive_logs]),
+            data=json.dumps(
+                [log.model_dump(mode="json") for log in family_filtered_logs]
+            ),
             file_name="eval_logs.json",
             mime="application/json",
         )
@@ -118,8 +130,7 @@ def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[st
     st.subheader("Pairwise analysis (unpaired)")
     st.markdown("""
                 Here we compare two models directly by specifying one model as the baseline and the other as the test model across all evaluations in this group. We use their eval score and standard errors to test their difference for statistical significance. **We highlight the cells where the confidence interval is in the positive or negative range signaling that the test model is statistically significantly better or worse compared to the baseline model.**
-                """
-    )
+                """)
 
     col5, col6, col7 = st.columns(3)
 
@@ -145,7 +156,9 @@ def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[st
             key="pairwise_analysis_baseline_name",
         )
 
-    pairwise_logs = [log for log in eval_logs if log.eval.model in [model_name, baseline_name]]
+    pairwise_logs = [
+        log for log in eval_logs if log.eval.model in [model_name, baseline_name]
+    ]
 
     # Get available metrics from filtered logs
     task_metrics = sorted(set().union(*[get_all_metrics(log) for log in pairwise_logs]))
@@ -166,7 +179,9 @@ def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[st
             pairwise_logs, model_name, baseline_name, pairwise_metric
         )
 
-        st.dataframe(pairwise_analysis_df.style.apply(highlight_confidence_intervals, axis=1))
+        st.dataframe(
+            pairwise_analysis_df.style.apply(highlight_confidence_intervals, axis=1)
+        )
 
         st.download_button(
             label="Download table as CSV",
@@ -205,12 +220,14 @@ def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[st
             Using this SE, we calculate the 95% Confidence Interval (CI) for the difference in scores:
             """
         )
-        st.latex(r"CI = \left(\Delta - 1.96 \times SE_{\text{unpaired}}, \Delta + 1.96 \times SE_{\text{unpaired}}\right)")
+        st.latex(
+            r"CI = \left(\Delta - 1.96 \times SE_{\text{unpaired}}, \Delta + 1.96 \times SE_{\text{unpaired}}\right)"
+        )
 
         st.write(
             """
             Z-score:
-            """ 
+            """
         )
         st.latex(r"Z = \frac{\Delta S}{SE_{\text{unpaired}}}")
 
@@ -239,8 +256,7 @@ def render_page(eval_logs: list[DashboardLog], default_values: dict[str, dict[st
 
     st.markdown("""
                 Note this is an unpaired analysis, so we don't compare question level scores. In a paired-differences tests, we'd compare how each evaluation question's score changes from one AI model to another, rather than just comparing the overall average scores, which helps us see the true performance difference by filtering out the natural variations in difficulty across different questions. To do a paired-differences test, refer to this [Colab notebook](https://colab.research.google.com/drive/1dgJEjbjuyYB1FlKQqN2d1wtYQbcE54OK?usp=sharing).
-                """
-    )
+                """)
 
 
 @st.cache_data
