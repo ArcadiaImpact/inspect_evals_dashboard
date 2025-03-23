@@ -1,0 +1,201 @@
+{
+    "cost_estimates": {
+        "per_model_estimates": {
+            "openai/gpt-4o-mini": {
+                "input_cost": 0.0000543,
+                "output_cost": 0.0000024
+            }
+        },
+        "total": 0.000056699999999999996
+    },
+    "eval": {
+        "config": {
+            "approval": null,
+            "epochs": 1,
+            "epochs_reducer": [
+                "mean"
+            ],
+            "fail_on_error": true,
+            "limit": 1,
+            "log_buffer": null,
+            "log_images": true,
+            "log_samples": true,
+            "max_samples": null,
+            "max_sandboxes": null,
+            "max_subprocesses": null,
+            "max_tasks": null,
+            "message_limit": null,
+            "sample_id": null,
+            "sandbox_cleanup": true,
+            "score_display": true,
+            "time_limit": null,
+            "token_limit": null
+        },
+        "created": "2025-02-20T16:28:45+11:00",
+        "dataset": {
+            "location": "bigbio/pubmed_qa",
+            "name": "bigbio/pubmed_qa",
+            "sample_ids": [
+                "12377809"
+            ],
+            "samples": 500,
+            "shuffled": false
+        },
+        "metadata": null,
+        "metrics": null,
+        "model": "openai/gpt-4o-mini",
+        "model_args": {},
+        "model_base_url": null,
+        "packages": {
+            "inspect_ai": "0.3.63.dev24+g8d91e230"
+        },
+        "revision": {
+            "commit": "1097897",
+            "origin": "git@github.com:ArcadiaImpact/inspect_evals_scoring.git",
+            "type": "git"
+        },
+        "run_id": "5v2f39e3xeFMeNf7Gc3LUk1",
+        "sandbox": null,
+        "scorers": [
+            {
+                "metadata": {},
+                "metrics": [
+                    {
+                        "name": "inspect_ai/accuracy",
+                        "options": {}
+                    },
+                    {
+                        "name": "inspect_ai/stderr",
+                        "options": {}
+                    }
+                ],
+                "name": "choice",
+                "options": {}
+            }
+        ],
+        "solver": null,
+        "solver_args": null,
+        "tags": null,
+        "task": "inspect_evals/pubmedqa",
+        "task_args": {},
+        "task_attribs": {},
+        "task_file": null,
+        "task_id": "PoSn4ucrCeTqixTgAXiuko",
+        "task_version": 0
+    },
+    "eval_metadata": {
+        "arxiv": "https://arxiv.org/abs/1909.06146",
+        "contributors": [
+            "MattFisher"
+        ],
+        "description": "Biomedical question answering (QA) dataset collected from PubMed abstracts.\n",
+        "group": "Knowledge",
+        "path": "src/inspect_evals/pubmedqa",
+        "tasks": [],
+        "title": "PubMedQA: A Dataset for Biomedical Research Question Answering"
+    },
+    "location": "s3://inspect-evals-test-050451361377/eval_set_logs/2025-02-20T05-28-05+00-00-0b95/2025-02-20T16-28-45+11-00_pubmedqa_PoSn4ucrCeTqixTgAXiuko.eval",
+    "model_metadata": {
+        "api_cached_input_mtok_price_usd": 0.075,
+        "api_endpoint": "gpt-4o-mini-2024-07-18",
+        "api_input_mtok_price_usd": 0.15,
+        "api_output_mtok_price_usd": 0.6,
+        "api_provider": "OpenAI",
+        "attributes": {
+            "accessibility": "closed-source",
+            "context_window_size_tokens": 128000,
+            "country_of_origin": "USA"
+        },
+        "family": "gpt-4",
+        "knowledge_cutoff_date": "2023-10-01",
+        "name": "gpt-4o-mini",
+        "provider": "OpenAI",
+        "release_date": "2024-06-18",
+        "training_flops": "Unknown"
+    },
+    "plan": {
+        "config": {
+            "best_of": null,
+            "cache_prompt": null,
+            "frequency_penalty": null,
+            "internal_tools": null,
+            "logit_bias": null,
+            "logprobs": null,
+            "max_connections": null,
+            "max_retries": null,
+            "max_tokens": null,
+            "max_tool_output": null,
+            "num_choices": null,
+            "parallel_tool_calls": null,
+            "presence_penalty": null,
+            "reasoning_effort": null,
+            "reasoning_history": null,
+            "seed": null,
+            "stop_seqs": null,
+            "system_message": null,
+            "temperature": null,
+            "timeout": null,
+            "top_k": null,
+            "top_logprobs": null,
+            "top_p": null
+        },
+        "finish": null,
+        "name": "plan",
+        "steps": [
+            {
+                "params": {
+                    "template": "Answer the following multiple choice question about medical knowledge given the context.\nThe entire content of your response should be of the following format: 'ANSWER: $LETTER'\n(without quotes) where LETTER is one of {letters}.\n\n{question}\n\n{choices}"
+                },
+                "solver": "multiple_choice"
+            }
+        ]
+    },
+    "reductions": [],
+    "results": {
+        "completed_samples": 1,
+        "metadata": null,
+        "scores": [
+            {
+                "metadata": null,
+                "metrics": {
+                    "accuracy": {
+                        "metadata": null,
+                        "name": "accuracy",
+                        "params": {},
+                        "value": 0.4
+                    },
+                    "stderr": {
+                        "metadata": null,
+                        "name": "stderr",
+                        "params": {},
+                        "value": 0.2
+                    }
+                },
+                "name": "choice",
+                "params": {},
+                "reducer": null,
+                "scorer": "choice"
+            }
+        ],
+        "total_samples": 1
+    },
+    "schema_version": "1.0",
+    "stats": {
+        "completed_at": "2025-02-20T16:28:47+11:00",
+        "model_usage": {
+            "openai/gpt-4o-mini": {
+                "input_tokens": 362,
+                "input_tokens_cache_read": null,
+                "input_tokens_cache_write": null,
+                "output_tokens": 4,
+                "total_tokens": 366
+            }
+        },
+        "started_at": "2025-02-20T16:28:46+11:00"
+    },
+    "task_metadata": {
+        "baselines": null,
+        "dataset_samples": 500,
+        "name": "pubmedqa"
+    }
+}
