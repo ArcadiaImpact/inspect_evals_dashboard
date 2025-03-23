@@ -65,8 +65,9 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install .[dev]
       - name: Test with pytest
-        shell: bash
         run: python -m pytest -rA -v --color=yes --junit-xml=test-results.xml
+        env:
+          AWS_S3_BUCKET: test-bucket
       - if: always()
         uses: pmeier/pytest-results-action@v0.6.0
         with:
