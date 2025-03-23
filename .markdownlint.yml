@@ -1,0 +1,9 @@
+# markdownlint config
+# https://github.com/DavidAnson/markdownlint
+
+default: true
+
+ol-prefix:
+  style: one_or_ordered
+
+line-length: false

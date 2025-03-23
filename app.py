@@ -5,7 +5,9 @@ from src.plots.radar import create_radar_chart
 
 
 def home_content():
-    st.set_page_config(page_title="Inspect Evals Dashboard", page_icon="🤖", layout="centered")
+    st.set_page_config(
+        page_title="Inspect Evals Dashboard", page_icon="🤖", layout="centered"
+    )
 
     # Global styles
     st.markdown(
@@ -33,7 +35,7 @@ def home_content():
         **A comprehensive suite for assessing various capabilities of LLMs**
 
         [Inspect Evals](https://github.com/UKGovernmentBEIS/inspect_evals) is a repository of community-contributed LLM evaluations for [Inspect AI](https://github.com/UKGovernmentBEIS/inspect_ai). Inspect Evals was created in collaboration by the [UK AISI](https://www.aisi.gov.uk/), [Arcadia Impact](https://www.arcadiaimpact.org/), and the [Vector Institute](https://vectorinstitute.ai/).
-        
+
         This dashboard showcases how well a diverse set of LLMs perform on the evaluations implemented in Inspect Evals. Its main aim is to provide access to this data for downstream use. Our data store is continuously updated with new results as new models and evaluations are published.
         """
     )
@@ -72,7 +74,9 @@ def home_content():
     ]:
         category_config = getattr(config, category)
         if category_config:
-            category_logs[category] = load_evaluation_logs(get_log_paths(category_config))
+            category_logs[category] = load_evaluation_logs(
+                get_log_paths(category_config)
+            )
 
     if category_logs:
         # Create and display the radar chart
@@ -100,24 +104,24 @@ def home_content():
             st.write(
                 """
                      Each category's score is calculated by:
-                     
+
                      1. Normalizing each task's score relative to all models' performance on that task (0 = worst performance, 1 = best performance)
                      2. Averaging these normalized scores across all tasks within each category
-                     
+
                      For example, a score of 0.8 in the "Coding" category means the model performs at 80% of the best performance achieved by any model on coding tasks.
-                     
+
                      The error bars show the uncertainty in the model's performance across tasks within each category.
-                     
+
                      This visualization helps identity which categories the model excels in compared to other models, regardless of the absolute scale of different tasks.
                      """
             )
 
     st.markdown(
         """
-        ### We aim to serve three key audiences: 
-        1. researchers who predict scaling laws and work on the science of evaluations (including those focused on visualization practices); 
-        2. analysts who process model performance data for decision-makers; 
-        3. technical teams who run internal evaluations against industry benchmarks.
+        ### We aim to serve three key audiences:
+        1. Researchers who predict scaling laws and work on the science of evaluations (including those focused on visualization practices);
+        2. Analysts who process model performance data for decision-makers;
+        3. Technical teams who run internal evaluations against industry benchmarks.
 
         ### This dashboard lets you:
         * Explore results across eight categories of evaluations, these are:
@@ -136,7 +140,7 @@ def home_content():
         * Reproduce results using the open-source implementation in the Inspect Evals repository
     """
     )
-    
+
     st.markdown(
         """
         ### Methodology note
@@ -144,7 +148,7 @@ def home_content():
 
         ### Data access & usage
         All evaluation data is freely available for download and analysis. For academic citations, please use:
-        
+
         ```
         @online{inspect_evals_dashboard,
             author       = {Arcadia Impact, AI Safety Engineering Taskforce},
@@ -161,15 +165,25 @@ home = st.Page(home_content, title="Home", icon="🏠", default=True)
 docs = st.Page("src/pages/docs.py", title="Documentation", icon="📚")
 changelog = st.Page("src/pages/changelog.py", title="Changelog", icon="📝")
 evals_agents = st.Page("src/pages/evaluations/agents.py", title="Agents", icon="🤖")
-evals_assistants = st.Page("src/pages/evaluations/assistants.py", title="Assistants", icon="💬")
+evals_assistants = st.Page(
+    "src/pages/evaluations/assistants.py", title="Assistants", icon="💬"
+)
 evals_coding = st.Page("src/pages/evaluations/coding.py", title="Coding", icon="💻")
 evals_cybersecurity = st.Page(
     "src/pages/evaluations/cybersecurity.py", title="Cybersecurity", icon="🔒"
 )
-evals_knowledge = st.Page("src/pages/evaluations/knowledge.py", title="Knowledge", icon="🎓")
-evals_mathematics = st.Page("src/pages/evaluations/mathematics.py", title="Mathematics", icon="➗")
-evals_reasoning = st.Page("src/pages/evaluations/reasoning.py", title="Reasoning", icon="🧩")
-evals_safeguards = st.Page("src/pages/evaluations/safeguards.py", title="Safeguards", icon="🛡️")
+evals_knowledge = st.Page(
+    "src/pages/evaluations/knowledge.py", title="Knowledge", icon="🎓"
+)
+evals_mathematics = st.Page(
+    "src/pages/evaluations/mathematics.py", title="Mathematics", icon="➗"
+)
+evals_reasoning = st.Page(
+    "src/pages/evaluations/reasoning.py", title="Reasoning", icon="🧩"
+)
+evals_safeguards = st.Page(
+    "src/pages/evaluations/safeguards.py", title="Safeguards", icon="🛡️"
+)
 
 pg = st.navigation(
     {

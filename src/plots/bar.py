@@ -1,30 +1,38 @@
-import plotly.graph_objs as go
+import plotly.graph_objs as go  # type: ignore
 import streamlit as st
-
 from inspect_evals_dashboard_schema import DashboardLog
-
 from src.log_utils.dashboard_log_utils import get_scorer_by_name
 from src.plots.plot_utils import create_hover_text
 
 
 @st.cache_data(hash_funcs={DashboardLog: id})
-def create_bar_chart(eval_logs: list[DashboardLog], scorer: str, metric: str) -> go.Figure:
+def create_bar_chart(
+    eval_logs: list[DashboardLog], scorer: str, metric: str
+) -> go.Figure:
     # Extract data from filtered logs
     models = [log.model_metadata.name for log in eval_logs]
 
     metric_values = [
-        next(v.value for k, v in get_scorer_by_name(log, scorer).metrics.items() if k == metric)
+        next(
+            v.value
+            for k, v in get_scorer_by_name(log, scorer).metrics.items()
+            if k == metric
+        )
         for log in eval_logs
     ]
     metric_errors = [
-        next(v.value for k, v in get_scorer_by_name(log, scorer).metrics.items() if k == "stderr")
+        next(
+            v.value
+            for k, v in get_scorer_by_name(log, scorer).metrics.items()
+            if k == "stderr"
+        )
         for log in eval_logs
     ]
 
-    # Baseline value - get human_baseline from the first model that has it
-    human_baseline = None
-    if eval_logs and getattr(eval_logs[0].task_metadata, 'human_baseline', None):
-        human_baseline = eval_logs[0].task_metadata.human_baseline.score
+    # Get human baseline if available, otherwise set to None
+    human_baseline = getattr(eval_logs[0].task_metadata, "human_baseline", None)
+    if eval_logs and human_baseline:
+        human_baseline = human_baseline.score
 
     # Create hover text with detailed information
     # TODO: Inspect logs link should be clickable
@@ -63,7 +71,7 @@ def create_bar_chart(eval_logs: list[DashboardLog], scorer: str, metric: str) ->
     fig.update_layout(
         title=f"Comparison of {metric} values across models on {eval_logs[0].task_metadata.name}",
         xaxis_title="Models",
-        yaxis_title=f"Value of {metric} metric"
+        yaxis_title=f"Value of {metric} metric",
     )
 
     return fig

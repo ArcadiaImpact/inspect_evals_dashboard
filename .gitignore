@@ -176,3 +176,6 @@ logs/
 
 # Streamlit secrets
 .streamlit/secrets.toml
+
+# VSCode
+.vscode/
