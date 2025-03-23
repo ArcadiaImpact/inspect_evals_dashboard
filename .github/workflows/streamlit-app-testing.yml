@@ -67,6 +67,10 @@ jobs:
       - name: Test with pytest
         run: python -m pytest -rA -v --color=yes --junit-xml=test-results.xml
         env:
+          STREAMLIT_ENV: test
+          AWS_ACCESS_KEY_ID: test-key
+          AWS_SECRET_ACCESS_KEY: test-secret
+          AWS_DEFAULT_REGION: test-region
           AWS_S3_BUCKET: test-bucket
       - if: always()
         uses: pmeier/pytest-results-action@v0.6.0
