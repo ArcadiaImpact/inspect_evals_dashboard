@@ -1,4 +1,3 @@
-
 from src.config import load_config
 from src.log_utils.load_eval_logs import get_log_paths
 
@@ -11,7 +10,7 @@ def test_get_log_paths():
     log_paths = get_log_paths(group_config)
 
     assert len(log_paths) > 0
-    assert log_paths[0].startswith('tests/data/')
+    assert log_paths[0].startswith("tests/data/")
 
 
 def test_load_evaluation_logs():

@@ -13,7 +13,11 @@ def test_human_baseline():
 
     log = eval_logs[0]
     assert get_human_baseline(log) is None
-    setattr(log.task_metadata, "human_baseline", HumanBaseline(metric="whatever", score=42, source="http://example.com/"))
+    setattr(
+        log.task_metadata,
+        "human_baseline",
+        HumanBaseline(metric="whatever", score=42, source="http://example.com/"),
+    )
     assert get_human_baseline(log) == 42
 
 

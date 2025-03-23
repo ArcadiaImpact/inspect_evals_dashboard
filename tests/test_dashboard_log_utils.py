@@ -14,8 +14,8 @@ def test_read_default_values_from_configs():
 
     default_values = read_default_values_from_configs(group_config)
 
-    assert default_values['inspect_evals/pubmedqa']['default_scorer'] == 'choice'
-    assert default_values['inspect_evals/pubmedqa']['default_metric'] == 'accuracy'
+    assert default_values["inspect_evals/pubmedqa"]["default_scorer"] == "choice"
+    assert default_values["inspect_evals/pubmedqa"]["default_metric"] == "accuracy"
 
 
 def test_get_all_metrics():
@@ -34,7 +34,8 @@ def test_get_scorer_by_name():
     # If the logic becomes more complex we might need to generate proper data here
     log.results.scores.append(EvalScore(name="another_choice", scorer="some_data"))
 
-
     assert get_scorer_by_name(log, "another_choice").name == "another_choice"
     assert get_scorer_by_name(log, "choice").name == "choice"
-    assert get_scorer_by_name(log, "not-existing").name == "choice"  # should default to the first one
+    assert (
+        get_scorer_by_name(log, "not-existing").name == "choice"
+    )  # should default to the first one
