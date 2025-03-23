@@ -87,7 +87,7 @@ def create_cost_performance_scatter(
     fig.update_layout(
         title=f"Model {metric} vs. Estimated Cost",
         xaxis_title="Estimated Cost (USD)",
-        yaxis_title=f"{metric.capitalize()} score",
+        yaxis_title=metric.capitalize(),
         xaxis=dict(
             tickformat="$,.4f"  # Format as currency
         ),
