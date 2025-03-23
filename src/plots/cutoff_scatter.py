@@ -72,7 +72,7 @@ def create_cutoff_scatter(
         )
 
     # Add line connecting highest performing models
-    # Group by date and find max value for each dateÒ
+    # Group by date and find max value for each date
     best_performers = df.loc[df.groupby("date")["value"].idxmax()]
     best_performers = best_performers.sort_values("date")
 
