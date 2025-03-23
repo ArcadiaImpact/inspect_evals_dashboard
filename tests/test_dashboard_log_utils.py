@@ -5,12 +5,8 @@ from src.log_utils.dashboard_log_utils import (
     get_scorer_by_name,
     read_default_values_from_configs,
 )
-from src.log_utils.load_eval_logs import get_log_paths, load_evaluation_logs
 
-
-def _read_eval_logs():
-    group_config = load_config().agents
-    return load_evaluation_logs(get_log_paths(group_config))
+from . import read_test_eval_logs
 
 def test_read_default_values_from_configs():
     group_config = load_config().agents
@@ -22,7 +18,7 @@ def test_read_default_values_from_configs():
 
 
 def test_get_all_metrics():
-    eval_logs = _read_eval_logs()
+    eval_logs = read_test_eval_logs()
     log = eval_logs[0]
 
     all_metrics = get_all_metrics(log)
@@ -30,7 +26,7 @@ def test_get_all_metrics():
 
 
 def test_get_scorer_by_name():
-    eval_logs = _read_eval_logs()
+    eval_logs = read_test_eval_logs()
     log = eval_logs[0]
 
     # Append a fake score with some fake data to test the name-getting logic

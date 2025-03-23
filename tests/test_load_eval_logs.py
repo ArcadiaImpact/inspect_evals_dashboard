@@ -2,6 +2,7 @@
 from src.config import load_config
 from src.log_utils.load_eval_logs import get_log_paths, load_evaluation_logs
 
+from . import read_test_eval_logs
 
 def test_get_log_paths():
     group_config = load_config().agents
@@ -13,8 +14,7 @@ def test_get_log_paths():
 
 
 def test_load_evaluation_logs():
-    group_config = load_config().agents
-    eval_logs = load_evaluation_logs(get_log_paths(group_config))
+    eval_logs = read_test_eval_logs()
 
     assert len(eval_logs) > 0
 
