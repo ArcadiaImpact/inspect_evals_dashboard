@@ -1,8 +1,9 @@
 
 from src.config import load_config
-from src.log_utils.load_eval_logs import get_log_paths, load_evaluation_logs
+from src.log_utils.load_eval_logs import get_log_paths
 
 from . import read_test_eval_logs
+
 
 def test_get_log_paths():
     group_config = load_config().agents

@@ -1,10 +1,12 @@
-from inspect_ai.log import EvalScore
-from src.config import load_config
-from src.plots.plot_utils import create_hover_text, get_human_baseline, get_provider_color_palette
-
 from inspect_evals.metadata import HumanBaseline
+from src.plots.plot_utils import (
+    create_hover_text,
+    get_human_baseline,
+    get_provider_color_palette,
+)
 
 from . import read_test_eval_logs
+
 
 def test_human_baseline():
     eval_logs = read_test_eval_logs()

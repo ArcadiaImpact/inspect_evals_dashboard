@@ -8,6 +8,7 @@ from src.log_utils.dashboard_log_utils import (
 
 from . import read_test_eval_logs
 
+
 def test_read_default_values_from_configs():
     group_config = load_config().agents
 
