@@ -16,7 +16,7 @@ def test_read_default_values_from_configs():
     group_config = load_config().agents
 
     default_values = read_default_values_from_configs(group_config)
-    print(default_values)
+
     assert default_values['inspect_evals/pubmedqa']['default_scorer'] == 'choice'
     assert default_values['inspect_evals/pubmedqa']['default_metric'] == 'accuracy'
 
