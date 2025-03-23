@@ -22,12 +22,18 @@ def create_bar_chart(
     ]
     metric_errors = [
         next(
-            v.value
-            for k, v in get_scorer_by_name(log, scorer).metrics.items()
-            if k == "stderr"
+            (
+                v.value
+                for k, v in get_scorer_by_name(log, scorer).metrics.items()
+                if k == "stderr"
+            ),
+            0,  # Default to 0 if stderr metric is not found
         )
         for log in eval_logs
     ]
+
+    # Hide error bars if all errors are 0
+    show_error_bars = any(error != 0 for error in metric_errors)
 
     # Get human baseline if available, otherwise set to None
     human_baseline = getattr(eval_logs[0].task_metadata, "human_baseline", None)
@@ -45,7 +51,7 @@ def create_bar_chart(
             go.Bar(
                 x=models,
                 y=metric_values,
-                error_y=dict(type="data", array=metric_errors, visible=True),
+                error_y=dict(type="data", array=metric_errors, visible=show_error_bars),
                 name=f"{metric} metric",
                 marker_color="rgba(54, 122, 179, 0.85)",
                 # TODO: Handle missing standard error value

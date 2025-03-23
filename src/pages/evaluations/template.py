@@ -129,7 +129,7 @@ def render_page(
                 Here we compare two models directly by specifying one model as the baseline and the other as the test model across all evaluations in this group. We use their eval score and standard errors to test their difference for statistical significance. **We highlight the cells where the confidence interval is in the positive or negative range signaling that the test model is statistically significantly better or worse compared to the baseline model.**
                 """)
 
-    col5, col6, col7 = st.columns(3)
+    col5, col6 = st.columns(2)
 
     with col5:
         model_name = st.selectbox(
@@ -157,23 +157,10 @@ def render_page(
         log for log in eval_logs if log.eval.model in [model_name, baseline_name]
     ]
 
-    # Get available metrics from filtered logs
-    task_metrics = sorted(set().union(*[get_all_metrics(log) for log in pairwise_logs]))
-
-    with col7:
-        pairwise_metric = st.selectbox(
-            "Metric",
-            sorted(task_metrics),
-            index=0,
-            help="Evaluation metric to use for pairwise analysis",
-            label_visibility="visible",
-            key="pairwise_analysis_metric",
-        )
-
     if pairwise_logs:
         st.text("")  # Add a blank line for spacing
         pairwise_analysis_df = create_pairwise_analysis_table(
-            pairwise_logs, model_name, baseline_name, pairwise_metric
+            pairwise_logs, model_name, baseline_name, default_values
         )
 
         st.dataframe(
