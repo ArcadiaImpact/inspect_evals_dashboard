@@ -218,23 +218,14 @@ dev:
         default_scorer: vul_exploit_scorer
         default_metric: accuracy
         paths:
-          - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/anthropic+claude-3-7-sonnet-20250219/2025-03-21-02-08-00-1eeb12e2/2025-03-21T05-07-40+00-00_cyse2-vulnerability-exploit_es5rykBhvBh7LQEkD9odr2.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/anthropic+claude-3-7-sonnet-20250219/2025-03-21-02-08-05-29ccb3c5/2025-03-21T10-56-10+00-00_cyse2-vulnerability-exploit_ffd6EHnLjPqUDRKSFVtj8z.eval.dashboard.json
-          - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/grok+grok-2-1212/2025-03-21-02-08-00-1eeb12e2/2025-03-21T02-55-43+00-00_cyse2-vulnerability-exploit_3bne2adFSr955MuvyPryyn.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/grok+grok-2-1212/2025-03-21-02-08-05-29ccb3c5/2025-03-21T03-10-58+00-00_cyse2-vulnerability-exploit_BaXqmhGJo2JiDyXbQBdbzx.eval.dashboard.json
-          - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/mistral+mistral-large-latest/2025-03-21-02-08-00-1eeb12e2/2025-03-21T05-07-40+00-00_cyse2-vulnerability-exploit_DhGNnJVdkQe8Tajdaw92hk.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/mistral+mistral-large-latest/2025-03-21-02-08-05-29ccb3c5/2025-03-21T03-10-58+00-00_cyse2-vulnerability-exploit_aALAYGE9AFZfLxHetikj84.eval.dashboard.json
-          - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/mistral+mistral-small-latest/2025-03-21-02-08-00-1eeb12e2/2025-03-21T05-07-40+00-00_cyse2-vulnerability-exploit_eCFE3u2o6AQqJxwckoCudK.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/mistral+mistral-small-latest/2025-03-21-02-08-05-29ccb3c5/2025-03-21T10-56-10+00-00_cyse2-vulnerability-exploit_FeZkiNkpbo9KZDzMHdeDFc.eval.dashboard.json
-          - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/openai+gpt-4o-mini/2025-03-21-02-08-00-1eeb12e2/2025-03-21T12-21-31+00-00_cyse2-vulnerability-exploit_YsncuMa4ehJiQqXqfbLT63.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/openai+gpt-4o-mini/2025-03-21-02-08-05-29ccb3c5/2025-03-22T01-52-35+00-00_cyse2-vulnerability-exploit_XMk7LCPBeRRsKEzrfykRhX.eval.dashboard.json
-          - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/openai+gpt-4o/2025-03-21-02-08-00-1eeb12e2/2025-03-21T10-55-12+00-00_cyse2-vulnerability-exploit_6h3cVKygL5KTVpRUbVWsSe.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/openai+gpt-4o/2025-03-21-02-08-05-29ccb3c5/2025-03-21T04-35-59+00-00_cyse2-vulnerability-exploit_YjTQHqYdQ3s5JZ26GJLHfT.eval.dashboard.json
-          - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/openrouter+deepseek+deepseek-chat/2025-03-21-02-08-00-1eeb12e2/2025-03-21T02-55-43+00-00_cyse2-vulnerability-exploit_7MDTnmx2B9T2qAXJgH8c36.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/openrouter+deepseek+deepseek-chat/2025-03-21-02-08-05-29ccb3c5/2025-03-21T03-10-58+00-00_cyse2-vulnerability-exploit_SHMaBhxQTwJWNMjBwcGXam.eval.dashboard.json
-          - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-21-02-08-00-1eeb12e2/2025-03-21T05-07-40+00-00_cyse2-vulnerability-exploit_SCSk8u8zyaCaYbxbacWPQq.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-21-02-08-05-29ccb3c5/2025-03-21T10-56-10+00-00_cyse2-vulnerability-exploit_L7vkTkgeKaTANuv5LVRFJT.eval.dashboard.json
-          - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-21-02-08-00-1eeb12e2/2025-03-21T12-02-58+00-00_cyse2-vulnerability-exploit_TPEibiypdu9YbqHzptNnCV.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-21-02-08-05-29ccb3c5/2025-03-21T03-10-58+00-00_cyse2-vulnerability-exploit_LusC322dG3ZczjzMH7T6nv.eval.dashboard.json
       - name: cyse2_interpreter_abuse
         default_scorer: model_graded_qa
