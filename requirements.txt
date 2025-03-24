@@ -1,9 +1,10 @@
+boto3>=1.37.18
 inspect_ai>=0.3.75
-streamlit>=1.42.0
-plotly>=6.0.0
+inspect_evals @ git+https://github.com/UKGovernmentBEIS/inspect_evals
+inspect_evals_dashboard_schema @ git+https://github.com/ArcadiaImpact/inspect_evals_dashboard_schema
 orjson>=3.10.15
+plotly>=6.0.0
 pyyaml>=6.0.1
 s3fs>=2024.12.0
 st-files-connection>=0.1.0
-inspect_evals @ git+https://github.com/UKGovernmentBEIS/inspect_evals
-inspect_evals_dashboard_schema @ git+https://github.com/ArcadiaImpact/inspect_evals_dashboard_schema
+streamlit>=1.42.0
