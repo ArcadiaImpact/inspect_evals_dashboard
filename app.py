@@ -187,7 +187,6 @@ evals_safeguards = st.Page(
 
 pg = st.navigation(
     {
-        "Navigation": [home, docs, changelog],
         "Evaluations": [
             evals_agents,
             evals_assistants,
@@ -198,6 +197,7 @@ pg = st.navigation(
             evals_reasoning,
             evals_safeguards,
         ],
+        "Navigation": [home, docs, changelog],
     }
 )
 pg.run()
