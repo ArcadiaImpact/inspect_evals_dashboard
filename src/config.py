@@ -50,6 +50,7 @@ class EnvironmentConfig(BaseModel):
     cybersecurity: list[EvaluationConfig] = []
     knowledge: list[EvaluationConfig] = []
     mathematics: list[EvaluationConfig] = []
+    multimodal: list[EvaluationConfig] = []
     reasoning: list[EvaluationConfig] = []
     safeguards: list[EvaluationConfig] = []
 

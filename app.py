@@ -178,6 +178,9 @@ evals_knowledge = st.Page(
 evals_mathematics = st.Page(
     "src/pages/evaluations/mathematics.py", title="Mathematics", icon="➗"
 )
+evals_multimodal = st.Page(
+    "src/pages/evaluations/multimodal.py", title="Multimodal", icon="👁️"
+)
 evals_reasoning = st.Page(
     "src/pages/evaluations/reasoning.py", title="Reasoning", icon="🧩"
 )
@@ -194,6 +197,7 @@ pg = st.navigation(
             evals_cybersecurity,
             evals_knowledge,
             evals_mathematics,
+            evals_multimodal,
             evals_reasoning,
             evals_safeguards,
         ],
