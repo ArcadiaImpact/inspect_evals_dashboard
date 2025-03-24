@@ -85,7 +85,7 @@ def test_duplicate_entries(monkeypatch):
             group_config = getattr(config, field)
             for eval_config in group_config:
                 # We are currently using paths like /dev/pubmedqa/1.json as placeholders
-                # FIXME remove the `if '/dev/pubmedqa/' not in path` part once we have a proper config
+                # TODO: remove the `if '/dev/pubmedqa/' not in path` part once we have a proper config
                 model_names = [
                     guess_model_name_from_path(path)
                     for path in eval_config.paths
