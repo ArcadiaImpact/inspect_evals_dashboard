@@ -20,7 +20,7 @@ def render_page(
 ):
     st.subheader("Naive cross-model comparison")
     st.markdown("""
-                Graphs in this section compare how different AI models perform on the same task. We call this a "naive" comparison because it uses simple averages to compare models, which doesn't tell us if one model is statistically significantly better than another. For more reliable comparisons, check out the next section. To get more accurate scores, we evaluate each sample in a dataset multiple times using the epochs feature in Inspect AI.
+                Graphs in this section compare how different AI models perform on the same task. We call this a "naive" comparison because it uses simple averages to compare models, without determining if one model is statistically significantly better than another. To get more accurate scores, we evaluate each sample in a dataset multiple times using the epochs feature in Inspect AI. For more reliable statistical comparisons between models, check out the pairwise analysis in the next section.
                 """)
 
     col1, col2, col3, col4 = st.columns(4)
@@ -244,13 +244,13 @@ def render_page(
             """)
 
     st.markdown("""
-                Note this is an unpaired analysis, so we don't compare question level scores. In a paired-differences tests, we'd compare how each evaluation question's score changes from one AI model to another, rather than just comparing the overall average scores, which helps us see the true performance difference by filtering out the natural variations in difficulty across different questions. To do a paired-differences test, refer to this [Colab notebook](https://colab.research.google.com/drive/1dgJEjbjuyYB1FlKQqN2d1wtYQbcE54OK?usp=sharing).
+                **Note:** this is an unpaired analysis, which compares only overall average scores between models without examining performance on individual questions. A more precise approach would be a paired-differences test, which examines how each model performs on identical questions. This method reveals true performance differences by accounting for varying question difficulty. Paired analysis helps distinguish whether one model is genuinely better or if differences are simply due to which questions were easier for each model. To conduct your own paired-differences test, refer to this [Colab notebook](https://colab.research.google.com/drive/1dgJEjbjuyYB1FlKQqN2d1wtYQbcE54OK?usp=sharing).
                 """)
 
     st.divider()
     st.subheader("Download evaluation logs")
     st.markdown("""
-                Select the evaluation tasks and model names you want to download. When clicking the button below, it will generate temporary links valid for 1 hour to the evaluation logs in the AWS S3 bucket. The zip file contains the [EvalLog object](https://inspect.aisi.org.uk/eval-logs.html) from Inspect AI in `.eval` binary format.
+                Select the evaluation task(s) and model name(s) you want to download. Clicking the button below will generate temporary links to the evaluation logs in the AWS S3 bucket that are valid for 1 hour. The zip file contains the [EvalLog object](https://inspect.aisi.org.uk/eval-logs.html) from Inspect AI in `.eval` binary format.
                 """)
 
     col1, col2 = st.columns(2)

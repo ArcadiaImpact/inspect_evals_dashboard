@@ -112,16 +112,16 @@ def home_content():
 
                      The error bars show the uncertainty in the model's performance across tasks within each category.
 
-                     This visualization helps identity which categories the model excels in compared to other models, regardless of the absolute scale of different tasks.
+                     This visualization helps identify which categories the model excels in compared to other models, regardless of the absolute scale of different tasks.
                      """
             )
 
     st.markdown(
         """
         ### We aim to serve three key audiences:
-        1. Researchers who predict scaling laws and work on the science of evaluations (including those focused on visualization practices);
-        2. Analysts who process model performance data for decision-makers;
-        3. Technical teams who run internal evaluations against industry benchmarks.
+        1. Researchers who predict scaling laws and work on the science of evaluations (including those focused on visualization practices)
+        2. Analysts who process model performance data for decision-makers
+        3. Technical teams who run internal evaluations against industry benchmarks
 
         ### This dashboard lets you:
         * Explore results across eight categories of evaluations, these are:
@@ -178,6 +178,9 @@ evals_knowledge = st.Page(
 evals_mathematics = st.Page(
     "src/pages/evaluations/mathematics.py", title="Mathematics", icon="➗"
 )
+evals_multimodal = st.Page(
+    "src/pages/evaluations/multimodal.py", title="Multimodal", icon="👁️"
+)
 evals_reasoning = st.Page(
     "src/pages/evaluations/reasoning.py", title="Reasoning", icon="🧩"
 )
@@ -194,6 +197,7 @@ pg = st.navigation(
             evals_cybersecurity,
             evals_knowledge,
             evals_mathematics,
+            evals_multimodal,
             evals_reasoning,
             evals_safeguards,
         ],

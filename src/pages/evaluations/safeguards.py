@@ -8,7 +8,7 @@ from src.pages.evaluations.template import render_page
 st.title("Safeguards Evaluations")
 
 st.markdown("""
-            Safeguards evaluations assess the vulnerability to misuse by measuring responses to explicitly harmful requests and testing knowledge retention in sensitive domains like biosecurity and cybersecurity.
+            Safeguards evaluations assess AI systems' resistance to potential misuse by measuring responses to explicitly harmful requests and testing knowledge retention in sensitive domains like biosecurity and cybersecurity.
             """)
 
 group_config: list[EvaluationConfig] = load_config().safeguards

@@ -8,7 +8,7 @@ from src.pages.evaluations.template import render_page
 st.title("Mathematics Evaluations")
 
 st.markdown("""
-            Mathematics evaluations test problem-solving skills ranging from basic grade school word problems to advanced competition-level mathematics, evaluate multilingual mathematical understanding across diverse languages, and measure the ability to reason about mathematics when presented in visual contexts, while also testing how these capabilities transfer across different formats, languages, and presentation modalities.
+            Mathematics evaluations test a range of problem-solving skills, from basic grade school word problems to advanced competition-level mathematics. These assessments evaluate multilingual mathematical understanding across diverse languages and measure reasoning abilities when mathematics is presented in visual contexts. Additionally, they examine how these capabilities transfer across different formats, languages, and presentation modalities.
             """)
 
 group_config: list[EvaluationConfig] = load_config().mathematics

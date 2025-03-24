@@ -8,7 +8,7 @@ from src.pages.evaluations.template import render_page
 st.title("Agentic Evaluations")
 
 st.markdown("""
-            Agentic capabilities enable autonomous goal pursuit and decision-making without constant human guidance, while agentic AI evaluations measure how effectively these systems can decompose tasks, navigate environments, select tools, maintain goal alignment, and recover from failures through multi-step challenges requiring planning, reasoning, and adaptation.
+            Agentic capabilities enable AI systems to pursue goals and make decisions autonomously without constant human guidance. Agentic evaluations measure how effectively these systems perform in multi-step challenges that require planning, reasoning, and adaptation. These evaluations assess the AI's ability to decompose tasks, navigate environments, select appropriate tools, maintain alignment with goals, and recover from failures.
             """)
 
 group_config: list[EvaluationConfig] = load_config().agents
