@@ -289,7 +289,7 @@ dev:
           - s3://$AWS_S3_BUCKET/logs/stage/gsm8k/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_8sm4vz6Mi3VW6sSm3HVLck.eval.dashboard.json
     multimodal:
       - name: mmmu_open
-        default_scorer: choice
+        default_scorer: model_graded_fact
         default_metric: accuracy
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/mmmu_open/mistral+mistral-small-latest/2025-03-20-12-46-24-0bf3abcc/2025-03-20T13-29-43+00-00_mmmu-open_LD7kaNaLBGbhPgfLNCGVDJ.eval.dashboard.json
