@@ -176,7 +176,6 @@ st.markdown(
         url          = {https://inspect-evals-dashboard.streamlit.app}
     }
     ```
-    
     ---
 
     ## **6. Frequently Asked Questions (FAQ)**
