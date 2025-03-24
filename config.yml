@@ -237,7 +237,7 @@ dev:
           - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-21-02-08-00-1eeb12e2/2025-03-21T12-02-58+00-00_cyse2-vulnerability-exploit_TPEibiypdu9YbqHzptNnCV.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-21-02-08-05-29ccb3c5/2025-03-21T03-10-58+00-00_cyse2-vulnerability-exploit_LusC322dG3ZczjzMH7T6nv.eval.dashboard.json
       - name: cyse2_interpreter_abuse
-        default_scorer: choice
+        default_scorer: model_graded_qa
         default_metric: accuracy
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/cyse2_interpreter_abuse/anthropic+claude-3-7-sonnet-20250219/2025-03-21-02-07-56-c293333d/2025-03-21T02-10-15+00-00_cyse2-interpreter-abuse_E7k8gvuMUUAeSymqoeEdt8.eval.dashboard.json
