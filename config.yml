@@ -251,7 +251,7 @@ dev:
           - s3://$AWS_S3_BUCKET/logs/stage/cyse2_interpreter_abuse/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-21-02-07-56-c293333d/2025-03-21T02-10-15+00-00_cyse2-interpreter-abuse_2MGdWcmYHYFRjtieK85iMy.eval.dashboard.json
     knowledge:
       - name: commonsense_qa
-        default_scorer: choice
+        default_scorer: multiple_choice
         default_metric: accuracy
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/commonsense_qa/anthropic+claude-3-7-sonnet-20250219/2025-03-19-03-51-07-1110860b/2025-03-19T04-59-54+00-00_commonsense-qa_hc2EKqNRpRLzZ7hFnsPiTQ.eval.dashboard.json
