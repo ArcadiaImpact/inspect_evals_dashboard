@@ -278,8 +278,8 @@ dev:
           - s3://$AWS_S3_BUCKET/logs/stage/hellaswag/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-51-21-467ef46a/2025-03-19T11-23-05+00-00_hellaswag_mr2625xZk54gFhkAjFoC82.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/hellaswag/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-03-51-21-467ef46a/2025-03-19T11-23-05+00-00_hellaswag_TEAke8jfAHbzSNxS7gRVei.eval.dashboard.json
       - name: ifeval
-        default_scorer: choice
-        default_metric: accuracy
+        default_scorer: instruction_following
+        default_metric: final_acc
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/ifeval/mistral+mistral-large-latest/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_VsbAnMKvWMFfKjccq8XCTS.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/ifeval/mistral+mistral-small-latest/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_X6XwXzRjL3NuDGeNYcdSnw.eval.dashboard.json

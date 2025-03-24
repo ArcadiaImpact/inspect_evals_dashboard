@@ -1,4 +1,5 @@
 import pandas as pd
+from inspect_ai.log import EvalScore
 from inspect_evals_dashboard_schema import DashboardLog
 
 
@@ -16,7 +17,6 @@ def create_hover_text(log: DashboardLog, human_baseline: float | None = None) ->
         f"Context window size: {log.model_metadata.attributes['context_window_size_tokens']}<br>"
         f"API provider: {log.model_metadata.api_provider}<br>"
         f"API endpoint: {log.model_metadata.api_endpoint}<br>"
-        f"Inspect Logs: <a href='{log.location}'>Link to logs</a><br>"
         f"Cost estimate: {log.cost_estimates['total']:.4f} USD<br>"
         f"Run timestamp: {log.eval.created}<br>"
         f"Human baseline: {human_baseline if human_baseline else 'N/A'}<br>"
@@ -97,3 +97,17 @@ def get_provider_color_palette(providers: set[str]) -> dict[str, str]:
         provider: color_palette[i % len(color_palette)]
         for i, provider in enumerate(sorted(providers))
     }
+
+
+def get_metric_value_from_score(score: EvalScore, metric_name: str) -> float:
+    """Get a metric value from a score.
+
+    Args:
+        score (EvalScore): The score to get the metric from.
+        metric_name (str): The name of the metric to get.
+
+    Returns:
+        float: The metric value.
+
+    """
+    return score.metrics[metric_name].value if metric_name in score.metrics else 0

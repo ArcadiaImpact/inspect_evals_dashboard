@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go  # type: ignore
 import streamlit as st
 from inspect_evals_dashboard_schema import DashboardLog
+from src.plots.plot_utils import get_metric_value_from_score
 
 
 @st.cache_data(hash_funcs={DashboardLog: id})
@@ -10,8 +11,7 @@ def create_pairwise_analysis_table(
     eval_logs: list[DashboardLog],
     model_name: str,
     baseline_name: str,
-    metric_name: str,
-    score_name: str | None = None,
+    default_values: dict[str, dict[str, str]],
 ):
     rows = []
 
@@ -29,40 +29,49 @@ def create_pairwise_analysis_table(
         )
 
         if model_log and baseline_log:
-            # Find the correct score objects by name if score name is provided
-            if score_name:
-                model_score = next(
-                    (
-                        score
-                        for score in model_log.results.scores
-                        if score.name == score_name
-                    ),
-                    None,
-                )
-                baseline_score = next(
-                    (
-                        score
-                        for score in baseline_log.results.scores
-                        if score.name == score_name
-                    ),
-                    None,
-                )
-            else:
-                # Use the first score object if no score name is provided
-                model_score = model_log.results.scores[0]
-                baseline_score = baseline_log.results.scores[0]
+            # Get the default scorer and metric for this task
+            task_defaults = default_values.get(task, {})
+            scorer_name = task_defaults.get("default_scorer")
+            metric_name = task_defaults.get("default_metric")
+
+            if not scorer_name or not metric_name:
+                continue
+
+            # Find the correct score objects by scorer name
+            model_score = next(
+                (
+                    score
+                    for score in model_log.results.scores
+                    if score.name == scorer_name
+                ),
+                None,
+            )
+            baseline_score = next(
+                (
+                    score
+                    for score in baseline_log.results.scores
+                    if score.name == scorer_name
+                ),
+                None,
+            )
 
             if not model_score or not baseline_score:
-                break
+                continue
 
             # Extract values using the specified metric name
-            model_acc = model_score.metrics[metric_name].value
-            model_se = model_score.metrics["stderr"].value
-            baseline_acc = baseline_score.metrics[metric_name].value
-            baseline_se = baseline_score.metrics["stderr"].value
+            model_score_value = get_metric_value_from_score(model_score, metric_name)
+            baseline_score_value = get_metric_value_from_score(
+                baseline_score, metric_name
+            )
+            model_se = get_metric_value_from_score(model_score, "stderr")
+            baseline_se = get_metric_value_from_score(baseline_score, "stderr")
+
+            # Skip if either standard error is 0
+            if model_se == 0 or baseline_se == 0:
+                continue
 
             # Calculate difference
-            diff = model_acc - baseline_acc
+            diff = model_score_value - baseline_score_value
 
             # Using the formula: SE_unpaired = sqrt(SE_A^2 + SE_B^2)
             combined_se = np.sqrt(model_se**2 + baseline_se**2)
