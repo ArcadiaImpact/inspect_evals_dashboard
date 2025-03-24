@@ -1,4 +1,5 @@
 import pandas as pd
+from inspect_ai.log import EvalScore
 from inspect_evals_dashboard_schema import DashboardLog
 
 
@@ -97,3 +98,17 @@ def get_provider_color_palette(providers: set[str]) -> dict[str, str]:
         provider: color_palette[i % len(color_palette)]
         for i, provider in enumerate(sorted(providers))
     }
+
+
+def get_metric_value_from_score(score: EvalScore, metric_name: str) -> float:
+    """Get a metric value from a score.
+
+    Args:
+        score (EvalScore): The score to get the metric from.
+        metric_name (str): The name of the metric to get.
+
+    Returns:
+        float: The metric value.
+
+    """
+    return score.metrics[metric_name].value if metric_name in score.metrics else 0

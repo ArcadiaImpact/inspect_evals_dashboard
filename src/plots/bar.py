@@ -2,7 +2,7 @@ import plotly.graph_objs as go  # type: ignore
 import streamlit as st
 from inspect_evals_dashboard_schema import DashboardLog
 from src.log_utils.dashboard_log_utils import get_scorer_by_name
-from src.plots.plot_utils import create_hover_text
+from src.plots.plot_utils import create_hover_text, get_human_baseline
 
 
 @st.cache_data(hash_funcs={DashboardLog: id})
@@ -22,34 +22,31 @@ def create_bar_chart(
     ]
     metric_errors = [
         next(
-            v.value
-            for k, v in get_scorer_by_name(log, scorer).metrics.items()
-            if k == "stderr"
+            (
+                v.value
+                for k, v in get_scorer_by_name(log, scorer).metrics.items()
+                if k == "stderr"
+            ),
+            0,  # Default to 0 if stderr metric is not found
         )
         for log in eval_logs
     ]
 
-    # Get human baseline if available, otherwise set to None
-    human_baseline = getattr(eval_logs[0].task_metadata, "human_baseline", None)
-    if eval_logs and human_baseline:
-        human_baseline = human_baseline.score
+    human_baseline = get_human_baseline(eval_logs[0])
 
     # TODO: Inspect logs link should be clickable
     hover_texts = []
     for log in eval_logs:
         hover_text = create_hover_text(log, human_baseline)
         hover_texts.append(hover_text)
+    
+    # Hide error bars if all errors are 0
+    show_error_bars = any(error != 0 for error in metric_errors)
+    error_y = dict(type="data", array=metric_errors, visible=show_error_bars)
 
-    error_y = dict(type="data", array=[metric_errors], visible=True)
-
-    # We create hover texts by concatenating plotly patterns with expanded python patterns from create_hover_text().
-    #
-    # The reason for using two different systems is the following:
-    # - plotly data is relatively complex and computed in this function, whereas
-    # - create_hover_text() simply lays out constant key-values from nested data
     hovertemplate = (
         "Score: %{y:.2f}<br>"
-        + ("Standard Error: %{error_y.array:.2f}<br>" if error_y["array"] else "")
+        + ("Standard Error: %{error_y.array:.2f}<br>" if error_y["array"] else "Not computed")
         + "%{customdata}<extra></extra>"
     )
 
