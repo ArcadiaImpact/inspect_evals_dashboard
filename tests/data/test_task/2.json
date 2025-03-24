@@ -1,0 +1,195 @@
+{
+  "cost_estimates": {
+    "per_model_estimates": {
+      "test_provider_2/test_model_2": {
+        "input_cost": 1,
+        "output_cost": 1
+      }
+    },
+    "total": 2
+  },
+  "eval": {
+    "config": {
+      "approval": null,
+      "epochs": 1,
+      "epochs_reducer": ["mean"],
+      "fail_on_error": true,
+      "limit": 1,
+      "log_buffer": null,
+      "log_images": true,
+      "log_samples": true,
+      "max_samples": null,
+      "max_sandboxes": null,
+      "max_subprocesses": null,
+      "max_tasks": null,
+      "message_limit": null,
+      "sample_id": null,
+      "sandbox_cleanup": true,
+      "score_display": true,
+      "time_limit": null,
+      "token_limit": null
+    },
+    "created": "2025-01-01T00:00:00+00:00",
+    "dataset": {
+      "location": "hf/test_dataset_2",
+      "name": "hf/test_dataset_2",
+      "sample_ids": ["1", "2", "3"],
+      "samples": 3,
+      "shuffled": false
+    },
+    "metadata": null,
+    "metrics": null,
+    "model": "test_provider_2/test_model_2",
+    "model_args": {},
+    "model_base_url": null,
+    "packages": {
+      "inspect_ai": "0.0.0"
+    },
+    "revision": {
+      "commit": "1234567",
+      "origin": "git@github.com:test/test_repo.git",
+      "type": "git"
+    },
+    "run_id": "123",
+    "sandbox": null,
+    "scorers": [
+      {
+        "metadata": {},
+        "metrics": [
+          {
+            "name": "inspect_ai/accuracy",
+            "options": {}
+          },
+          {
+            "name": "inspect_ai/stderr",
+            "options": {}
+          }
+        ],
+        "name": "choice",
+        "options": {}
+      }
+    ],
+    "solver": null,
+    "solver_args": null,
+    "tags": null,
+    "task": "inspect_evals/test_task_2",
+    "task_args": {},
+    "task_attribs": {},
+    "task_file": null,
+    "task_id": "124",
+    "task_version": 0
+  },
+  "eval_metadata": {
+    "arxiv": "https://arxiv.org/abs/1111.11111",
+    "contributors": ["Jane Doe"],
+    "description": "Test task for testing the inspect_evals framework.",
+    "group": "Test group 2",
+    "path": "src/inspect_evals/test_task_2",
+    "tasks": [],
+    "title": "Test Task 2"
+  },
+  "location": "s3://test-bucket/test-eval-log-2.eval.zip",
+  "model_metadata": {
+    "api_cached_input_mtok_price_usd": 1,
+    "api_endpoint": "test-model-2",
+    "api_input_mtok_price_usd": 1,
+    "api_output_mtok_price_usd": 1,
+    "api_provider": "test-provider-2",
+    "attributes": {
+      "accessibility": "closed-source",
+      "context_window_size_tokens": 123,
+      "country_of_origin": "USA"
+    },
+    "family": "test-model-family-2",
+    "knowledge_cutoff_date": "2024-01-01",
+    "name": "test-model-2",
+    "provider": "test-provider-2",
+    "release_date": "2025-01-01",
+    "training_flops": "Unknown"
+  },
+  "plan": {
+    "config": {
+      "best_of": null,
+      "cache_prompt": null,
+      "frequency_penalty": null,
+      "internal_tools": null,
+      "logit_bias": null,
+      "logprobs": null,
+      "max_connections": null,
+      "max_retries": null,
+      "max_tokens": null,
+      "max_tool_output": null,
+      "num_choices": null,
+      "parallel_tool_calls": null,
+      "presence_penalty": null,
+      "reasoning_effort": null,
+      "reasoning_history": null,
+      "seed": null,
+      "stop_seqs": null,
+      "system_message": null,
+      "temperature": null,
+      "timeout": null,
+      "top_k": null,
+      "top_logprobs": null,
+      "top_p": null
+    },
+    "finish": null,
+    "name": "plan",
+    "steps": [
+      {
+        "params": {
+          "template": "Answer the following multiple choice question"
+        },
+        "solver": "multiple_choice"
+      }
+    ]
+  },
+  "reductions": [],
+  "results": {
+    "completed_samples": 3,
+    "metadata": null,
+    "scores": [
+      {
+        "metadata": null,
+        "metrics": {
+          "accuracy": {
+            "metadata": null,
+            "name": "accuracy",
+            "params": {},
+            "value": 0.2
+          },
+          "stderr": {
+            "metadata": null,
+            "name": "stderr",
+            "params": {},
+            "value": 0.1
+          }
+        },
+        "name": "choice",
+        "params": {},
+        "reducer": null,
+        "scorer": "choice"
+      }
+    ],
+    "total_samples": 1
+  },
+  "schema_version": "1.0",
+  "stats": {
+    "completed_at": "2025-01-01T00:00:00+00:00",
+    "model_usage": {
+      "test_provider_2/test_model_2": {
+        "input_tokens": 100,
+        "input_tokens_cache_read": null,
+        "input_tokens_cache_write": null,
+        "output_tokens": 100,
+        "total_tokens": 200
+      }
+    },
+    "started_at": "2025-01-01T00:00:00+00:00"
+  },
+  "task_metadata": {
+    "human_baseline": null,
+    "dataset_samples": 3,
+    "name": "test_task_2"
+  }
+}

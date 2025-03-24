@@ -19,6 +19,6 @@ def test_load_evaluation_logs():
     assert len(eval_logs) > 0
 
     log = eval_logs[0]
-    assert log.task_metadata.name == "pubmedqa"
+    assert log.task_metadata.name == "test_task"
     assert log.cost_estimates["total"] > 0
     assert log.eval is not None

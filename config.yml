@@ -305,9 +305,9 @@ dev:
 test:
   evaluations:
     agents:
-      - name: pubmedqa
+      - name: test_task
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - tests/data/pubmedqa/1.json
-          - tests/data/pubmedqa/2.json
+          - tests/data/test_task/1.json
+          - tests/data/test_task/2.json

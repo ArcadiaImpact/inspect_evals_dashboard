@@ -12,10 +12,11 @@ from . import read_test_eval_logs
 def test_read_default_values_from_configs():
     group_config = load_config().agents
 
+    print("WAT", group_config)
     default_values = read_default_values_from_configs(group_config)
 
-    assert default_values["inspect_evals/pubmedqa"]["default_scorer"] == "choice"
-    assert default_values["inspect_evals/pubmedqa"]["default_metric"] == "accuracy"
+    assert default_values["inspect_evals/test_task"]["default_scorer"] == "choice"
+    assert default_values["inspect_evals/test_task"]["default_metric"] == "accuracy"
 
 
 def test_get_all_metrics():
