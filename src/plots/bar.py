@@ -39,14 +39,18 @@ def create_bar_chart(
     for log in eval_logs:
         hover_text = create_hover_text(log, human_baseline)
         hover_texts.append(hover_text)
-    
+
     # Hide error bars if all errors are 0
     show_error_bars = any(error != 0 for error in metric_errors)
     error_y = dict(type="data", array=metric_errors, visible=show_error_bars)
 
     hovertemplate = (
         "Score: %{y:.2f}<br>"
-        + ("Standard Error: %{error_y.array:.2f}<br>" if error_y["array"] else "Not computed")
+        + (
+            "Standard Error: %{error_y.array:.2f}<br>"
+            if error_y["array"]
+            else "Not computed"
+        )
         + "%{customdata}<extra></extra>"
     )
 
