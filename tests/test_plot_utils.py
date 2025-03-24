@@ -5,12 +5,8 @@ from src.plots.plot_utils import (
     get_provider_color_palette,
 )
 
-from . import read_test_eval_logs
 
-
-def test_human_baseline():
-    eval_logs = read_test_eval_logs()
-
+def test_human_baseline(eval_logs):
     log = eval_logs[0]
     assert get_human_baseline(log) is None
     setattr(
@@ -29,9 +25,7 @@ def test_get_provider_color_palette():
     assert palette["A"].startswith("#")
 
 
-def test_create_hover_text():
-    eval_logs = read_test_eval_logs()
-
+def test_create_hover_text(eval_logs):
     hover_text = create_hover_text(eval_logs[0])
 
     assert "Model:" in hover_text

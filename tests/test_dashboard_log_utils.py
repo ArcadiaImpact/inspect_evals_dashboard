@@ -6,8 +6,6 @@ from src.log_utils.dashboard_log_utils import (
     read_default_values_from_configs,
 )
 
-from . import read_test_eval_logs
-
 
 def test_read_default_values_from_configs():
     group_config = load_config().agents
@@ -18,16 +16,14 @@ def test_read_default_values_from_configs():
     assert default_values["inspect_evals/test_task"]["default_metric"] == "accuracy"
 
 
-def test_get_all_metrics():
-    eval_logs = read_test_eval_logs()
+def test_get_all_metrics(eval_logs):
     log = eval_logs[0]
 
     all_metrics = get_all_metrics(log)
     assert all_metrics == {"accuracy"}
 
 
-def test_get_scorer_by_name():
-    eval_logs = read_test_eval_logs()
+def test_get_scorer_by_name(eval_logs):
     log = eval_logs[0]
 
     # Append a fake score with some fake data to test the name-getting logic
