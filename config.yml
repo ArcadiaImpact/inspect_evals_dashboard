@@ -215,7 +215,7 @@ dev:
           - s3://$AWS_S3_BUCKET/logs/stage/cybench/openrouter+deepseek+deepseek-chat/2025-03-21-02-07-44-c64b7513/2025-03-22T06-28-42+00-00_cybench_dXmqoLvymm4sYQV6AEFxaL.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/cybench/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-21-02-07-44-c64b7513/2025-03-21T02-41-00+00-00_cybench_5xiMCRagFvWTDGa4HRYYxC.eval.dashboard.json
       - name: cyse2_vulnerability_exploit
-        default_scorer: choice
+        default_scorer: vul_exploit_scorer
         default_metric: accuracy
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/cyse2_vulnerability_exploit/anthropic+claude-3-7-sonnet-20250219/2025-03-21-02-08-00-1eeb12e2/2025-03-21T05-07-40+00-00_cyse2-vulnerability-exploit_es5rykBhvBh7LQEkD9odr2.eval.dashboard.json
