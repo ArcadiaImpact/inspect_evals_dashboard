@@ -1,7 +1,12 @@
 import json
 
+import pandas as pd
 import streamlit as st
 from inspect_evals_dashboard_schema import DashboardLog
+from src.log_utils.aws_s3_utils import (
+    create_presigned_url,
+    parse_s3_url_for_presigned_url,
+)
 from src.log_utils.dashboard_log_utils import get_all_metrics
 from src.plots.bar import create_bar_chart
 from src.plots.cost_scatter import create_cost_scatter
@@ -241,6 +246,62 @@ def render_page(
     st.markdown("""
                 Note this is an unpaired analysis, so we don't compare question level scores. In a paired-differences tests, we'd compare how each evaluation question's score changes from one AI model to another, rather than just comparing the overall average scores, which helps us see the true performance difference by filtering out the natural variations in difficulty across different questions. To do a paired-differences test, refer to this [Colab notebook](https://colab.research.google.com/drive/1dgJEjbjuyYB1FlKQqN2d1wtYQbcE54OK?usp=sharing).
                 """)
+
+    st.divider()
+    st.subheader("Download evaluation logs")
+    st.markdown("""
+                Select the evaluation tasks and model names you want to download. When clicking the button below, it will generate temporary links valid for 1 hour to the evaluation logs in the AWS S3 bucket. The zip file contains the [EvalLog object](https://inspect.aisi.org.uk/eval-logs.html) from Inspect AI in `.eval` binary format.
+                """)
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        tasks_to_download = st.multiselect(
+            "Evaluation/task",
+            sorted(set(log.eval.task for log in eval_logs)),
+            default=[],
+            format_func=lambda option: option.removeprefix("inspect_evals/"),
+            help="Name of the evaluation and the task",
+            label_visibility="visible",
+            key="download_task_name",
+        )
+
+    task_filtered_logs_to_download: list[DashboardLog] = [
+        log for log in eval_logs if log.eval.task in tasks_to_download
+    ]
+
+    with col2:
+        models_to_download = st.multiselect(
+            "Model names",
+            sorted(set(log.eval.model for log in task_filtered_logs_to_download)),
+            default=[],
+            format_func=lambda option: option.split("/")[-1],
+            help="Name of the model",
+            label_visibility="visible",
+            key="download_model_name",
+        )
+
+    model_filtered_logs_to_download: list[DashboardLog] = [
+        log
+        for log in task_filtered_logs_to_download
+        if log.eval.model in models_to_download
+    ]
+
+    if st.button("Generate links to logs"):
+        responses = []
+        for log in model_filtered_logs_to_download:
+            bucket_name, object_name = parse_s3_url_for_presigned_url(log.location)
+            response = create_presigned_url(bucket_name, object_name, expiration=3600)
+            if response:
+                responses.append(
+                    {
+                        "Task name": log.eval.task.removeprefix("inspect_evals/"),
+                        "Model name": log.model_metadata.name,
+                        "Download link": f"[:material/download:]({response})",
+                    }
+                )
+
+        st.table(pd.DataFrame(responses))
 
 
 @st.cache_data

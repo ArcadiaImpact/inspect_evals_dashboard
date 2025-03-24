@@ -34,7 +34,7 @@ def create_bar_chart(
 
     human_baseline = get_human_baseline(eval_logs[0])
 
-    # TODO: Inspect logs link should be clickable
+    # Create hover text with detailed information
     hover_texts = []
     for log in eval_logs:
         hover_text = create_hover_text(log, human_baseline)

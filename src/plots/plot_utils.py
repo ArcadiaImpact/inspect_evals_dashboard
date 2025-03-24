@@ -17,7 +17,6 @@ def create_hover_text(log: DashboardLog, human_baseline: float | None = None) ->
         f"Context window size: {log.model_metadata.attributes['context_window_size_tokens']}<br>"
         f"API provider: {log.model_metadata.api_provider}<br>"
         f"API endpoint: {log.model_metadata.api_endpoint}<br>"
-        f"Inspect Logs: <a href='{log.location}'>Link to logs</a><br>"
         f"Cost estimate: {log.cost_estimates['total']:.4f} USD<br>"
         f"Run timestamp: {log.eval.created}<br>"
         f"Human baseline: {human_baseline if human_baseline else 'N/A'}<br>"
