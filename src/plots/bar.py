@@ -42,14 +42,13 @@ def create_bar_chart(
 
     # Hide error bars if all errors are 0
     show_error_bars = any(error != 0 for error in metric_errors)
-    error_y = dict(type="data", array=metric_errors, visible=show_error_bars)
 
     hovertemplate = (
         "Score: %{y:.2f}<br>"
         + (
-            "Standard Error: %{error_y.array:.2f}<br>"
-            if error_y["array"]
-            else "Not computed"
+            "Standard Error: %{error_y.array:.4f}<br>"
+            if show_error_bars
+            else "Standard Error: N/A<br>"
         )
         + "%{customdata}<extra></extra>"
     )
@@ -59,10 +58,9 @@ def create_bar_chart(
             go.Bar(
                 x=models,
                 y=metric_values,
-                error_y=error_y,
+                error_y=dict(type="data", array=metric_errors, visible=show_error_bars),
                 name=f"{metric} metric",
                 marker_color="rgba(54, 122, 179, 0.85)",
-                # TODO: Handle missing standard error value
                 hovertemplate=hovertemplate,
                 customdata=hover_texts,
             )
