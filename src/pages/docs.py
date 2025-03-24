@@ -4,7 +4,7 @@ st.title("Documentation")
 
 st.markdown(
     """
-    This page provides a **comprehensive guide** to our AI evaluation methodologies, metrics, implementation details, and best practices.
+    This page provides a **comprehensive guide** to our evaluation methodologies, metrics, implementation details, and best practices.
 
     ## **Contents**
 
@@ -13,36 +13,32 @@ st.markdown(
     - [Purpose of the Dashboard](#purpose-of-the-dashboard)
     - [Who Should Use This Dashboard?](#who-should-use-this-dashboard)
 
-    ### **2. Key Concepts**
-    - [Glossary](#glossary)
-        - [Basic Concepts](#basic-concepts)
-        - [Inspect AI Concepts](#inspect-ai-concepts)
-
-    ### **3. Metrics and Scoring**
+    ### **2. Glossary**
+    - [Basic Concepts](#basic-concepts)
+    - [Inspect AI Concepts](#inspect-ai-concepts)
     - [Performance Metrics](#performance-metrics)
     - [Statistical Analysis](#statistical-analysis)
-    - [Score Interpretation](#score-interpretation)
 
-    ### **4. Implementation Details**
+    ### **3. Implementation Details**
     - [Evaluation Pipeline](#evaluation-pipeline)
     - [Model Metadata](#model-metadata)
 
-    ### **5. Visualization and Interpretation**
+    ### **4. Visualization and Interpretation**
     - [Understanding the Dashboard](#understanding-the-dashboard)
         - [Pairwise Analysis](#pairwise-analysis)
             - [Significance-Based Color Coding](#significance-based-color-coding)
+    - [Score Interpretation](#score-interpretation)
+
+    ### **5. Data Access & Contribution**
+    - [How to Download and Use the Data](#how-to-download-and-use-the-data)
+    - [How to Contribute to the Dashboard](#how-to-contribute-to-the-dashboard)
+    - [How to Cite the Dashboard](#how-to-cite-the-dashboard)
 
     ### **6. Frequently Asked Questions (FAQ)**
     - [How do I interpret confidence intervals?](#how-do-i-interpret-confidence-intervals)
     - [What if a model's score is not statistically significant?](#what-if-a-models-score-is-not-statistically-significant)
     - [How are models selected for evaluation?](#how-are-models-selected-for-evaluation)
     - [How to reproduce the results?](#how-to-reproduce-the-results)
-
-    ### **7. Data Access & Contribution**
-    - [How to Download and Use the Data](#how-to-download-and-use-the-data)
-    - [How Did We Calculate the Number of Epochs?](#how-did-we-calculate-the-number-of-epochs)
-    - [How to Contribute to the Dashboard](#how-to-contribute-to-the-dashboard)
-    - [How to Cite the Dashboard](#how-to-cite-the-dashboard)
 
     ---
 
@@ -68,9 +64,8 @@ st.markdown(
 
     ---
 
-    ## **2. Key Concepts**
-    ### **Glossary**
-    #### **Basic Concepts**
+    ## **2. Glossary**
+    ### **Basic Concepts**
     - **Evaluation/Task**: A specific benchmark used to assess model performance on a particular capability (e.g., reasoning, knowledge retrieval).
     - **Model**: An AI system being evaluated (e.g., Claude 3.5 Sonnet, GPT-4o, Llama 3.1 70B).
     - **Model Provider**: The company that developed the AI model (e.g., Anthropic, OpenAI, Meta).
@@ -81,7 +76,7 @@ st.markdown(
     - **Q&A Evaluations**: Assessments that measure an AI system's ability to accurately answer questions across various domains, typically evaluating factual knowledge, reasoning, and information retrieval capabilities.
     - **Agentic Evaluations**: Assessments that measure how well an AI system can act as an agent to accomplish tasks, evaluate plans, make decisions, or perform multi-step processes that require understanding user goals and executing appropriate actions.
 
-    #### **Inspect AI Concepts**
+    ### **Inspect AI Concepts**
     - **Inspect AI**: A Python library for evaluating and improving AI models.
     - **Inspect Evals**: A collection of evaluations that are used to assess the performance of AI models written in the Inspect AI framework.
     - **Run**: A single instance of a model executing an evaluation.
@@ -89,9 +84,6 @@ st.markdown(
     - **Scorer**: The component responsible for computing metrics from model outputs.
     - **Epochs**: Multiple evaluations of the same sample to get more accurate scores (reduce variance).
 
-    ---
-
-    ## **3. Metrics and Scoring**
     ### **Performance Metrics**
     - **Metric**: A quantitative measure used to evaluate model performance (e.g., accuracy, F1 score).
     - **Score**: The value of a specific metric for a model on a particular task.
@@ -109,19 +101,9 @@ st.markdown(
     - **Unpaired Pairwise Analysis**: A simpler comparison that looks at the overall scores of two models without checking how they performed on each specific question. Like comparing two students' final exam grades without looking at how they did on individual questions.
     - **Paired Pairwise Analysis**: A more detailed comparison that examines how two models performed on exactly the same questions or problems. This is like comparing how two students answered each individual question on a test, which gives a clearer picture of which one truly performed better by accounting for the varying difficulty of different questions.
 
-    ### **Score Interpretation**
-    #### **Bar and Scatter Plots**
-    - **Wide Standard Error (SE) bars**: More uncertainty in the score.
-    - **Narrow SE bars**: More confidence in the score.
-
-    #### **Unpaired/Paired Pairwise Analysis**
-    - **CI range entirely positive**: Model significantly outperforms Baseline.
-    - **CI range entirely negative**: Baseline significantly outperforms Model.
-    - **CI range includes zero**: No statistically significant difference.
-
     ---
 
-    ## **4. Implementation Details**
+    ## **3. Implementation Details**
     ### **Evaluation Pipeline**
 
     We use the open source implementations from [Inspect Evals](https://github.com/UKGovernmentBEIS/inspect_evals) to produce the results visualized in the dashboard. This provides a standardized framework for consistent evaluation across different models and capabilities.
@@ -143,7 +125,7 @@ st.markdown(
 
     ---
 
-    ## **5. Visualization and Interpretation**
+    ## **4. Visualization and Interpretation**
     ### **Understanding the Dashboard**
     - **Bar Chart**: Displays model performance scores across different models for direct comparison.
     - **Scatter Plot**: Shows model performance scores plotted against knowledge cutoff dates to visualize progress over time.
@@ -164,24 +146,20 @@ st.markdown(
     - **Red**: Statistically significant decline.
     - **Gray**: No significant difference.
 
-    ---
+    ### **Score Interpretation**
 
-    ## **6. Frequently Asked Questions (FAQ)**
-    ### **How do I interpret confidence intervals?**
-    Confidence intervals show the uncertainty in a model’s score. If a CI excludes zero, the score difference is significant.
+    #### **Bar and Scatter Plots**
+    - **Wide Standard Error (SE) bars**: More uncertainty in the score.
+    - **Narrow SE bars**: More confidence in the score.
 
-    ### **What if a model’s score is not statistically significant?**
-    It suggests that the observed difference might be due to random variation rather than a real performance gap.
-
-    ### **How often are the models updated?**
-    We aim to make results available for the latest models within a week of their release.
-
-    ### **What's the best way to ask questions?**
-    We recommend raising an issue on the [Inspect Evals Dashboard GitHub repository](https://github.com/ArcadiaImpact/inspect_evals_dashboard/issues).
+    #### **Unpaired/Paired Pairwise Analysis**
+    - **CI range entirely positive**: Model significantly outperforms Baseline.
+    - **CI range entirely negative**: Baseline significantly outperforms Model.
+    - **CI range includes zero**: No statistically significant difference.
 
     ---
 
-    ## **7. Data Access & Contribution**
+    ## **5. Data Access & Contribution**
     ### **How to Download and Use the Data**
     You can download the data from the specific charts via the download button under each chart. You can also directly access the Inspect AI EvalLog files and the view bundles from the S3 bucket by clicking on the S3 link in the expander at the bottom of the page.
 
@@ -198,5 +176,20 @@ st.markdown(
         url          = {https://inspect-evals-dashboard.streamlit.app}
     }
     ```
+    
+    ---
+
+    ## **6. Frequently Asked Questions (FAQ)**
+    ### **How do I interpret confidence intervals?**
+    Confidence intervals show the uncertainty in a model’s score. If a CI excludes zero, the score difference is significant.
+
+    ### **What if a model’s score is not statistically significant?**
+    It suggests that the observed difference might be due to random variation rather than a real performance gap.
+
+    ### **How often are the models updated?**
+    We aim to make results available for the latest models within a week of their release.
+
+    ### **What's the best way to ask questions or provide feedback?**
+    We recommend raising an issue on the [Inspect Evals Dashboard GitHub repository](https://github.com/ArcadiaImpact/inspect_evals_dashboard/issues).
     """
 )
