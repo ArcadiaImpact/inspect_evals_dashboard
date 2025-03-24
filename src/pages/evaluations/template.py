@@ -244,7 +244,7 @@ def render_page(
             """)
 
     st.markdown("""
-                This is an unpaired analysis, which compares only overall average scores between models without examining performance on individual questions. A more precise approach would be a paired-differences test, which examines how each model performs on identical questions. This method reveals true performance differences by accounting for varying question difficulty. Paired analysis helps distinguish whether one model is genuinely better or if differences are simply due to which questions were easier for each model. To conduct your own paired-differences test, refer to this [Colab notebook](https://colab.research.google.com/drive/1dgJEjbjuyYB1FlKQqN2d1wtYQbcE54OK?usp=sharing).
+                **Note:** this is an unpaired analysis, which compares only overall average scores between models without examining performance on individual questions. A more precise approach would be a paired-differences test, which examines how each model performs on identical questions. This method reveals true performance differences by accounting for varying question difficulty. Paired analysis helps distinguish whether one model is genuinely better or if differences are simply due to which questions were easier for each model. To conduct your own paired-differences test, refer to this [Colab notebook](https://colab.research.google.com/drive/1dgJEjbjuyYB1FlKQqN2d1wtYQbcE54OK?usp=sharing).
                 """)
 
     st.divider()
