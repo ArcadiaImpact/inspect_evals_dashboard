@@ -76,6 +76,8 @@ def test_duplicate_entries(monkeypatch):
     # get the function without @st.cache_data decorator
     noncached_load_config = load_config.__wrapped__
     monkeypatch.setenv("AWS_S3_BUCKET", "__test-bucket")
+    with open("config.yml") as cfg:
+        print("Full config", cfg.read())
 
     for env in ["prod", "stage", "dev"]:
         monkeypatch.setenv("STREAMLIT_ENV", env)
