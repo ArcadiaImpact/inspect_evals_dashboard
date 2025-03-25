@@ -1,13 +1,48 @@
+import os
+
+import sentry_sdk
 import streamlit as st
 from src.config import load_config
 from src.log_utils.load_eval_logs import get_log_paths, load_evaluation_logs
 from src.plots.radar import create_radar_chart
+
+SENTRY_DSN = os.environ.get("SENTRY_DSN")
+if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        # Add data like request headers and IP for users,
+        # see https://docs.sentry.io/platforms/python/data-management/data-collected/ for more info
+        send_default_pii=True,
+    )
+
+
+# There is no official sentry/streamlit integration
+# But people found some workarounds in the discussion:
+# https://github.com/streamlit/streamlit/issues/3426
+#
+# This code might stop working in a future version
+@st.cache_data()
+def sentry_patch_streamlit():
+    """Streamlit catches all exceptions, this monkey patch send exceptions to Sentry."""
+    import sys
+
+    script_runner = sys.modules["streamlit.runtime.scriptrunner.exec_code"]
+    original_func = script_runner.handle_uncaught_app_exception
+
+    def sentry_patched_func(ex):
+        sentry_sdk.capture_exception(ex)
+        original_func(ex)
+
+    script_runner.handle_uncaught_app_exception = sentry_patched_func
 
 
 def home_content():
     st.set_page_config(
         page_title="Inspect Evals Dashboard", page_icon="🤖", layout="centered"
     )
+
+    if SENTRY_DSN:
+        sentry_patch_streamlit()
 
     # Global styles
     st.markdown(
