@@ -72,7 +72,7 @@
     "solver": null,
     "solver_args": null,
     "tags": null,
-    "task": "inspect_evals/test_task_2",
+    "task": "inspect_evals/test_task",
     "task_args": {},
     "task_attribs": {},
     "task_file": null,
@@ -84,7 +84,7 @@
     "contributors": ["Jane Doe"],
     "description": "Test task for testing the inspect_evals framework.",
     "group": "Test group 2",
-    "path": "src/inspect_evals/test_task_2",
+    "path": "src/inspect_evals/test_task",
     "tasks": [],
     "title": "Test Task 2"
   },
@@ -190,6 +190,6 @@
   "task_metadata": {
     "human_baseline": null,
     "dataset_samples": 3,
-    "name": "test_task_2"
+    "name": "test_task"
   }
 }

@@ -25,7 +25,7 @@ def test_get_all_metrics(eval_logs):
 
 def test_get_scorer_by_name(eval_logs):
     # deep copy because we are appending some data next
-    log = eval_logs[0].copy(deep=True)
+    log = eval_logs[0].model_copy(deep=True)
 
     # Append a fake score with some fake data to test the name-getting logic
     # If the logic becomes more complex we might need to generate proper data here
