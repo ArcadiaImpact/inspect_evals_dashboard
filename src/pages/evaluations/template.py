@@ -139,9 +139,9 @@ def render_page(
     with col5:
         model_name = st.selectbox(
             "Model name",
-            sorted(set(log.eval.model for log in eval_logs)),
+            sorted(set(log.eval.model for log in eval_logs), key=get_model_name),
             index=0,
-            format_func=lambda option: option.split("/")[-1],
+            format_func=get_model_name,
             help="Name of the model to compare against",
             label_visibility="visible",
             key="pairwise_analysis_model_name",
@@ -150,9 +150,9 @@ def render_page(
     with col6:
         baseline_name = st.selectbox(
             "Baseline model name",
-            sorted(set(log.eval.model for log in eval_logs)),
+            sorted(set(log.eval.model for log in eval_logs), key=get_model_name),
             index=1,
-            format_func=lambda option: option.split("/")[-1],
+            format_func=get_model_name,
             help="Name of the baseline model to compare against",
             label_visibility="visible",
             key="pairwise_analysis_baseline_name",
@@ -168,19 +168,25 @@ def render_page(
             pairwise_logs, model_name, baseline_name, default_values
         )
 
-        st.dataframe(
-            pairwise_analysis_df.style.apply(highlight_confidence_intervals, axis=1)
-        )
+        if not pairwise_analysis_df.empty:
+            st.dataframe(
+                pairwise_analysis_df.style.apply(highlight_confidence_intervals, axis=1)
+            )
 
-        st.download_button(
-            label="Download table as CSV",
-            data=convert_df_to_csv(pairwise_analysis_df),
-            file_name="pairwise_analysis.csv",
-            mime="text/csv",
-        )
+            st.download_button(
+                label="Download table as CSV",
+                data=convert_df_to_csv(pairwise_analysis_df),
+                file_name="pairwise_analysis.csv",
+                mime="text/csv",
+            )
 
-        fig_pairwise = create_pairwise_scatter(pairwise_analysis_df)
-        st.plotly_chart(fig_pairwise)
+            fig_pairwise = create_pairwise_scatter(pairwise_analysis_df)
+            st.plotly_chart(fig_pairwise)
+        else:
+            st.warning(
+                "These models have not been evaluated on overlapping tasks. No pairwise analysis data available. Select different models to see pairwise analysis.",
+                icon="⚠️",
+            )
 
     with st.expander("How is the pairwise analysis calculated?"):
         st.write(
@@ -273,9 +279,12 @@ def render_page(
     with col2:
         models_to_download = st.multiselect(
             "Model names",
-            sorted(set(log.eval.model for log in task_filtered_logs_to_download)),
+            sorted(
+                set(log.eval.model for log in task_filtered_logs_to_download),
+                key=get_model_name,
+            ),
             default=[],
-            format_func=lambda option: option.split("/")[-1],
+            format_func=get_model_name,
             help="Name of the model",
             label_visibility="visible",
             key="download_model_name",
@@ -308,3 +317,16 @@ def render_page(
 def convert_df_to_csv(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode("utf-8")
+
+
+def get_model_name(path: str) -> str:
+    """Extract the model name from a full path <provider_name>/<model_name>.
+
+    Args:
+        path: Full path containing <provider_name>/<model_name>
+
+    Returns:
+        The last part of the path after the last '/'
+
+    """
+    return path.split("/")[-1]

@@ -45,6 +45,13 @@ prod:
         paths:
           - s3://$AWS_S3_BUCKET/dev/pubmedqa/1.json
           - s3://$AWS_S3_BUCKET/dev/pubmedqa/2.json
+    multimodal:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths:
+          - s3://$AWS_S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$AWS_S3_BUCKET/dev/pubmedqa/2.json
     reasoning:
       - name: bbh
         default_scorer: choice
@@ -98,6 +105,13 @@ stage:
           - s3://$AWS_S3_BUCKET/dev/pubmedqa/1.json
           - s3://$AWS_S3_BUCKET/dev/pubmedqa/2.json
     mathematics:
+      - name: pubmedqa
+        default_scorer: choice
+        default_metric: accuracy
+        paths:
+          - s3://$AWS_S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$AWS_S3_BUCKET/dev/pubmedqa/2.json
+    multimodal:
       - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
