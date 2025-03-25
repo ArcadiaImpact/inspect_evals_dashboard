@@ -53,12 +53,12 @@ prod:
           - s3://$AWS_S3_BUCKET/dev/pubmedqa/1.json
           - s3://$AWS_S3_BUCKET/dev/pubmedqa/2.json
     reasoning:
-      - name: bbh
+      - name: pubmedqa
         default_scorer: choice
         default_metric: accuracy
         paths:
-          - s3://$AWS_S3_BUCKET/dev/bbh/openai+gpt-4o-mini/2025-03-17-11-33-27-39fce29d/2025-03-17T11-43-40+00-00_bbh_dAXjNXrPiyyHakCT44WNpt.eval.dashboard.json
-          - s3://$AWS_S3_BUCKET/dev/bbh/openai+gpt-4o/2025-03-17-06-12-09-e31f0b6b/2025-03-17T06-21-45+00-00_bbh_mntaTStbNrSDdvBqGAD7yQ.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/dev/pubmedqa/1.json
+          - s3://$AWS_S3_BUCKET/dev/pubmedqa/2.json
     safeguards:
       - name: pubmedqa
         default_scorer: choice
@@ -293,15 +293,21 @@ stage:
           - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_nrZLj6qBMkLc4gGHwGbXsH.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_RFo28uu7WAzHiJ9PoLUD6p.eval.dashboard.json
     safeguards:
-      - name: pubmedqa
-        default_scorer: choice
-        default_metric: accuracy
+      # Temporarily using ifeval for safeguards until agentharm is available
+      - name: ifeval
+        default_scorer: instruction_following
+        default_metric: final_acc
         paths:
-          - s3://$AWS_S3_BUCKET/dev/pubmedqa/1.json
-          - s3://$AWS_S3_BUCKET/dev/pubmedqa/2.json
-          - s3://$AWS_S3_BUCKET/dev/pubmedqa/3.json
-          - s3://$AWS_S3_BUCKET/dev/pubmedqa/4.json
-          - s3://$AWS_S3_BUCKET/dev/pubmedqa/5.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/mistral+mistral-large-latest/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_VsbAnMKvWMFfKjccq8XCTS.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/mistral+mistral-small-latest/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_X6XwXzRjL3NuDGeNYcdSnw.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openai+gpt-4o-mini/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_YGD59MLTLmdYsPo6ToU6Tw.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openai+gpt-4o/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_R7LEM3A5aV75oDc36PsP7m.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openai+o1-mini/2025-03-20-04-37-39-6cd4c920/2025-03-20T04-40-47+00-00_ifeval_b7vtnkLEx7iGCEExw7otM8.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openai+o3-mini/2025-03-20-04-37-39-6cd4c920/2025-03-20T04-40-47+00-00_ifeval_3U6NBwWFQ5KFLk4J3j2sL4.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+deepseek+deepseek-chat/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_i5sTjSQ4JhVqo7tv7Qomw5.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+deepseek+deepseek-r1/2025-03-20-04-37-39-6cd4c920/2025-03-20T23-24-31+11-00_ifeval_TJzhamQrcm5kUeZ7TFEWey.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_nrZLj6qBMkLc4gGHwGbXsH.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_RFo28uu7WAzHiJ9PoLUD6p.eval.dashboard.json
 
 dev:
   evaluations:
@@ -529,15 +535,21 @@ dev:
           - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_nrZLj6qBMkLc4gGHwGbXsH.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_RFo28uu7WAzHiJ9PoLUD6p.eval.dashboard.json
     safeguards:
-      - name: pubmedqa
-        default_scorer: choice
-        default_metric: accuracy
+      # Temporarily using ifeval for safeguards until agentharm is available
+      - name: ifeval
+        default_scorer: instruction_following
+        default_metric: final_acc
         paths:
-          - s3://$AWS_S3_BUCKET/dev/pubmedqa/1.json
-          - s3://$AWS_S3_BUCKET/dev/pubmedqa/2.json
-          - s3://$AWS_S3_BUCKET/dev/pubmedqa/3.json
-          - s3://$AWS_S3_BUCKET/dev/pubmedqa/4.json
-          - s3://$AWS_S3_BUCKET/dev/pubmedqa/5.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/mistral+mistral-large-latest/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_VsbAnMKvWMFfKjccq8XCTS.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/mistral+mistral-small-latest/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_X6XwXzRjL3NuDGeNYcdSnw.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openai+gpt-4o-mini/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_YGD59MLTLmdYsPo6ToU6Tw.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openai+gpt-4o/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_R7LEM3A5aV75oDc36PsP7m.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openai+o1-mini/2025-03-20-04-37-39-6cd4c920/2025-03-20T04-40-47+00-00_ifeval_b7vtnkLEx7iGCEExw7otM8.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openai+o3-mini/2025-03-20-04-37-39-6cd4c920/2025-03-20T04-40-47+00-00_ifeval_3U6NBwWFQ5KFLk4J3j2sL4.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+deepseek+deepseek-chat/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_i5sTjSQ4JhVqo7tv7Qomw5.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+deepseek+deepseek-r1/2025-03-20-04-37-39-6cd4c920/2025-03-20T23-24-31+11-00_ifeval_TJzhamQrcm5kUeZ7TFEWey.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_nrZLj6qBMkLc4gGHwGbXsH.eval.dashboard.json
+          - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_RFo28uu7WAzHiJ9PoLUD6p.eval.dashboard.json
 
 test:
   evaluations:
