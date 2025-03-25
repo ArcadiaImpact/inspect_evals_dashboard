@@ -14,4 +14,4 @@ check:
 
 .PHONY: test
 test:
-	pytest
+	STREAMLIT_ENV=test pytest

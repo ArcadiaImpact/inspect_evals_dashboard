@@ -1,6 +1,5 @@
 # NOTE: evaluations.group[int].name must be equal to inspect_evals/<task_name>
 # NOTE: default_scorer and default_metric are used in the bar and scatter plots
-# TODO: Add test to check for duplicate models in paths
 prod:
   evaluations:
     agents:

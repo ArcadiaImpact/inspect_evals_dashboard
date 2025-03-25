@@ -26,7 +26,20 @@ def test_get_provider_color_palette():
 
 
 def test_create_hover_text(eval_logs):
-    hover_text = create_hover_text(eval_logs[0])
-
-    assert "Model:" in hover_text
-    assert "Human baseline:" in hover_text
+    assert create_hover_text(eval_logs[0]) == (
+        "Model: test-model<br>"
+        "Epochs: 1<br>"
+        "Model provider: test-provider<br>"
+        "Model family: test-model-family<br>"
+        "Knowledge cutoff date: 2024-01-01<br>"
+        "Release date: 2025-01-01<br>"
+        "Training flops: Unknown<br>"
+        "Accessibility: closed-source<br>"
+        "Country of origin: USA<br>"
+        "Context window size: 123<br>"
+        "API provider: test-provider<br>"
+        "API endpoint: test-model<br>"
+        "Cost estimate: 0.0002 USD<br>"
+        "Run timestamp: 2025-01-01T00:00:00+00:00<br>"
+        "Human baseline: N/A<br>"
+    )

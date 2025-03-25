@@ -11,7 +11,10 @@ def test_get_log_paths():
     log_paths = get_log_paths(group_config)
 
     assert len(log_paths) > 0
-    assert log_paths[0].startswith("tests/data/")
+    assert log_paths == [
+        "tests/data/test_task/1.json",
+        "tests/data/test_task/2.json",
+    ]
 
 
 def test_load_evaluation_logs(eval_logs):
@@ -19,5 +22,4 @@ def test_load_evaluation_logs(eval_logs):
 
     with open("tests/data/test_task/1.json") as f:
         data = json.load(f)
-        d = DashboardLog(**data)
-        assert d == eval_logs[0]
+        assert DashboardLog(**data) == eval_logs[0]
