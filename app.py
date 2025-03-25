@@ -69,6 +69,7 @@ def home_content():
         "cybersecurity",
         "knowledge",
         "mathematics",
+        "multimodal",
         "reasoning",
         "safeguards",
     ]:
@@ -131,6 +132,7 @@ def home_content():
             * Cybersecurity
             * Knowledge
             * Mathematics
+            * Multimodal
             * Reasoning
             * Safeguards
         * Compare model performance through bar charts and temporal scatter plots

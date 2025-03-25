@@ -25,6 +25,7 @@ A Streamlit-based web application for visualizing results of AI evaluations base
 │   │   │   ├── cybersecurity.py
 │   │   │   ├── knowledge.py
 │   │   │   ├── mathematics.py
+│   │   │   ├── multimodal.py
 │   │   │   ├── reasoning.py
 │   │   │   ├── safeguards.py
 │   │   │   └── template.py
@@ -63,6 +64,10 @@ source venv/bin/activate  # On Windows, use: venv\Scripts\activate
 1. Install required packages:
 
 ```bash
+# For running the app
+pip install .
+
+# For development
 pip install .[dev]
 ```
 
