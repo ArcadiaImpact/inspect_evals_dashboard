@@ -92,5 +92,5 @@ def test_duplicate_entries(monkeypatch):
                     if "/dev/pubmedqa/" not in path
                 ]
                 assert len(model_names) == len(set(model_names)), (
-                    f"Duplicate models in {field}→{eval_config.name} paths"
+                    f"Duplicate models in {env}→{field}→{eval_config.name} paths"
                 )
