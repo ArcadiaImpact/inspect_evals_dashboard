@@ -33,6 +33,6 @@ def test_get_scorer_by_name(eval_logs):
 
     assert get_scorer_by_name(log, "another_choice").name == "another_choice"
     assert get_scorer_by_name(log, "choice").name == "choice"
-    assert (
-        get_scorer_by_name(log, "not-existing").name == "choice"
-    )  # should default to the first one
+
+    # when requesting a non-existintent scorer, it should default to the first scorer on the list
+    assert get_scorer_by_name(log, "not-existing").name == "choice"
