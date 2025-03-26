@@ -203,18 +203,30 @@ def create_config(paths_list, original_config=None):
 
                 config[env]["evaluations"][category].append(eval_config)
 
-            # If no evaluations were added for this category, add placeholder
+            # If no evaluations were added for this category but it exists in original config, take the whole section
             if not category_has_evals:
-                placeholder = {
-                    "name": "pubmedqa",
-                    "default_scorer": "choice",
-                    "default_metric": "accuracy",
-                    "paths": [
-                        f"s3://$AWS_S3_BUCKET/{env}/pubmedqa/{i}.json"
-                        for i in range(1, 6)
-                    ],
-                }
-                config[env]["evaluations"][category].append(placeholder)
+                if (
+                    original_config
+                    and env in original_config
+                    and "evaluations" in original_config[env]
+                    and category in original_config[env]["evaluations"]
+                ):
+                    # Use all evaluations from original config for this category
+                    config[env]["evaluations"][category] = original_config[env][
+                        "evaluations"
+                    ][category]
+                else:
+                    # If not in original config, add placeholder
+                    placeholder = {
+                        "name": "pubmedqa",
+                        "default_scorer": "choice",
+                        "default_metric": "accuracy",
+                        "paths": [
+                            f"s3://$AWS_S3_BUCKET/{env}/pubmedqa/{i}.json"
+                            for i in range(1, 6)
+                        ],
+                    }
+                    config[env]["evaluations"][category].append(placeholder)
 
     # Check for inconsistencies
     check_inconsistencies(config)
@@ -231,7 +243,7 @@ def check_inconsistencies(config):
     for env, env_config in config.items():
         for category, evals in env_config["evaluations"].items():
             for eval_config in evals:
-                for path in eval_config["paths"]:
+                for path in eval_config.get("paths", []):
                     path_key = (
                         path.split("s3://$AWS_S3_BUCKET/")[1]
                         if "s3://$AWS_S3_BUCKET/" in path
@@ -239,8 +251,8 @@ def check_inconsistencies(config):
                     )
 
                     settings = {
-                        "default_scorer": eval_config["default_scorer"],
-                        "default_metric": eval_config["default_metric"],
+                        "default_scorer": eval_config.get("default_scorer", "choice"),
+                        "default_metric": eval_config.get("default_metric", "accuracy"),
                     }
 
                     if path_key in path_settings:
