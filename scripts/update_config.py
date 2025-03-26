@@ -93,8 +93,8 @@ def extract_model(path):
 
 def extract_timestamp(path):
     """Extract timestamp from path for sorting by recency."""
-    # First try to match the ISO timestamp format in the filename
-    match = re.search(r"(\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2})", path)
+    # We support both T and - as a separator
+    match = re.search(r"(\d{4}-\d{2}-\d{2}[T-]\d{2}-\d{2}-\d{2})", path)
     if match:
         return match.group(1)
 
