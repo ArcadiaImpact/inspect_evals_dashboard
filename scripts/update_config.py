@@ -194,9 +194,9 @@ def extract_default_metrics(path, env_name, original_config=None, eval_name=None
         # Filter out stderr metrics
         non_stderr_metrics = {k: v for k, v in metrics.items() if k != "stderr"}
         if non_stderr_metrics:
-            if len(non_stderr_metrics) > 0:
+            if len(non_stderr_metrics) > 1:
                 print(
-                    f"WARNING: Multiple metrics found in {path} for the scorer {first_scorer}: {', '.join(scorer_names)}. Using the first one."
+                    f"WARNING: Multiple metrics found in {path} for the scorer {first_scorer}, using the first one. Metrics: {', '.join(non_stderr_metrics)}"
                 )
             first_metric = next(iter(non_stderr_metrics))
             return first_scorer, first_metric
