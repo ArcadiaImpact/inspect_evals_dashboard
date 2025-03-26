@@ -305,6 +305,27 @@ def check_inconsistencies(config):
             print(f"  - {inconsistency}")
 
 
+def extract_comments(file_path):
+    """Extract comments from the top of the original file."""
+    comments = []
+    if not os.path.exists(file_path):
+        return comments
+
+    with open(file_path, "r") as f:
+        for line in f:
+            if line.strip().startswith("#"):
+                comments.append(line.rstrip())
+            elif not line.strip():
+                # Keep empty lines between comments
+                if comments and comments[-1]:
+                    comments.append("")
+            else:
+                # Stop once we hit non-comment, non-empty line
+                break
+
+    return comments
+
+
 def main():
     parser = argparse.ArgumentParser(description="Generate YAML config for dashboard.")
     parser.add_argument(
@@ -315,7 +336,12 @@ def main():
 
     # Load original config if provided
     original_config = None
+    comments = []
     if args.input:
+        # Extract comments from the top of the file
+        comments = extract_comments(args.input)
+
+        # Load the YAML content
         with open(args.input, "r") as f:
             original_config = yaml.safe_load(f)
 
@@ -327,6 +353,10 @@ def main():
 
     # Convert to YAML
     yaml_config = yaml.dump(config, sort_keys=False, default_flow_style=False)
+
+    # Prepend comments
+    if comments:
+        yaml_config = "\n".join(comments) + "\n" + yaml_config
 
     # Output
     if args.output:
