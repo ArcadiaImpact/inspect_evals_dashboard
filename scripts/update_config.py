@@ -104,12 +104,13 @@ def extract_timestamp(path):
 
 def extract_environment(path):
     if "logs/stage/" in path:
-        return "stage"
+        # Stage logs count as both stage and dev
+        return ["stage", "dev"]
     elif "logs/prod/" in path:
-        return "prod"
+        return ["prod"]
     elif "logs/dev/" in path:
-        return "dev"
-    return "dev"  # Default to dev if not found
+        return ["dev"]
+    return ["dev"]  # Default to dev if not found
 
 
 def get_default_metrics_from_config(original_config, eval_name, env="staging"):
@@ -151,18 +152,21 @@ def create_config(paths_list, original_config=None):
     # Group paths by environment and evaluation name
     env_eval_paths = defaultdict(lambda: defaultdict(list))
     for path in paths_list:
-        env = extract_environment(path)
+        envs = extract_environment(path)
         eval_name = extract_eval_name(path)
         if eval_name:
-            env_eval_paths[env][eval_name].append(path)
+            for env in envs:
+                env_eval_paths[env][eval_name].append(path)
 
     # Create YAML config
     config = {}
 
     # Process environments in the specified order
     for env in ENV_ORDER:
-        # Skip environments that don't have any paths
-        if env not in env_eval_paths and not original_config:
+        # Skip environments that don't have any paths and aren't in original config
+        if env not in env_eval_paths and (
+            not original_config or env not in original_config
+        ):
             continue
 
         config[env] = {"evaluations": {}}
