@@ -1,3 +1,4 @@
+import plotly.io as pio  # type: ignore
 import streamlit as st
 from src.config import load_config
 from src.log_utils.load_eval_logs import get_log_paths, load_evaluation_logs
@@ -8,6 +9,10 @@ def home_content():
     st.set_page_config(
         page_title="Inspect Evals Dashboard", page_icon="🤖", layout="centered"
     )
+
+    template = pio.templates[pio.templates.default]
+    template.layout.hoverlabel.align = "left"
+    pio.templates.default = template
 
     # Global styles
     st.markdown(
