@@ -31,26 +31,23 @@ MAPPING = {
     "safeguards": ["agentharm"],
 }
 
+ENV_ORDER = ["prod", "stage", "dev", "test"]
 
-def parse_paths(paths_file=None):
-    if paths_file:
-        with open(paths_file, "r") as f:
-            paths = f.readlines()
-        paths = [path.strip() for path in paths if path.strip()]
-    else:
-        # Get paths directly from S3
-        s3 = boto3.client("s3")
-        paginator = s3.get_paginator("list_objects_v2")
-        bucket = os.environ.get("AWS_S3_BUCKET", "inspect-evals-dashboard")
-        result = []
 
-        for page in paginator.paginate(Bucket=bucket, Prefix="logs/stage/"):
-            if "Contents" in page:
-                for obj in page["Contents"]:
-                    if obj["Key"].endswith("dashboard.json"):
-                        result.append(obj["Key"])
+def parse_paths():
+    # Get paths directly from S3
+    s3 = boto3.client("s3")
+    paginator = s3.get_paginator("list_objects_v2")
+    bucket = os.environ.get("AWS_S3_BUCKET", "inspect-evals-dashboard")
+    result = []
 
-        paths = result
+    for page in paginator.paginate(Bucket=bucket, Prefix="logs/stage/"):
+        if "Contents" in page:
+            for obj in page["Contents"]:
+                if obj["Key"].endswith("dashboard.json"):
+                    result.append(obj["Key"])
+
+    paths = result
 
     # Group paths by evaluation-model combination and get the most recent ones
     eval_model_paths = defaultdict(list)
@@ -115,16 +112,42 @@ def extract_environment(path):
     return "dev"  # Default to dev if not found
 
 
-def extract_default_metrics(path):
-    # This is a stub - in reality, you would download and parse the JSON file
-    # For GSM8K, typically use "match" scorer
+def get_default_metrics_from_config(original_config, eval_name, env="staging"):
+    """Search through original config to find default metrics for a given evaluation."""
+    if not original_config or not env or env not in original_config:
+        return None, None
+
+    # Look through all categories in the config
+    if "evaluations" in original_config[env]:
+        for category, evals_list in original_config[env]["evaluations"].items():
+            for eval_config in evals_list:
+                if eval_config.get("name") == eval_name:
+                    return (
+                        eval_config.get("default_scorer", "choice"),
+                        eval_config.get("default_metric", "accuracy"),
+                    )
+    return None, None
+
+
+def extract_default_metrics(path, original_config=None, eval_name=None):
+    """Extract default metrics from original config if available, or use fallback values."""
+    # First try to get values from original config
+    if original_config and eval_name:
+        # Try all environments in order
+        for env in ENV_ORDER:
+            default_scorer, default_metric = get_default_metrics_from_config(
+                original_config, eval_name, env
+            )
+            if default_scorer and default_metric:
+                return default_scorer, default_metric
+
+    # Fallback to static logic
     if "gsm8k" in path.lower():
         return "match", "accuracy"
-    # For most other evaluations, use "choice" scorer
     return "choice", "accuracy"
 
 
-def create_config(paths_list):
+def create_config(paths_list, original_config=None):
     # Group paths by environment and evaluation name
     env_eval_paths = defaultdict(lambda: defaultdict(list))
     for path in paths_list:
@@ -133,43 +156,48 @@ def create_config(paths_list):
         if eval_name:
             env_eval_paths[env][eval_name].append(path)
 
-    # Create YAML config maintaining order
+    # Create YAML config
     config = {}
 
-    # Create sections for each environment
-    for env in sorted(env_eval_paths.keys()):
+    # Process environments in the specified order
+    for env in ENV_ORDER:
+        # Skip environments that don't have any paths
+        if env not in env_eval_paths and not original_config:
+            continue
+
         config[env] = {"evaluations": {}}
 
-        # Create sections for each category in the mapping
-        for category, evals in MAPPING.items():
+        for category in sorted(MAPPING.keys()):
             config[env]["evaluations"][category] = []
 
             # Track if we've added any evaluations for this category
             category_has_evals = False
 
+            # Sort evaluations lexicographically within each category
+            evals_in_category = sorted(
+                [e for e in MAPPING[category] if e in env_eval_paths[env]]
+            )
+
             # Add each evaluation in this category
-            for eval_name in evals:
-                eval_name_normalized = eval_name.lower().replace("-", "_")
+            for eval_name in evals_in_category:
+                category_has_evals = True
 
-                if eval_name_normalized in env_eval_paths[env]:
-                    category_has_evals = True
+                # Get default scorer and metric from original config or fallback
+                default_scorer, default_metric = extract_default_metrics(
+                    env_eval_paths[env][eval_name][0], original_config, eval_name
+                )
 
-                    # Get default scorer and metric from the file
-                    default_scorer, default_metric = extract_default_metrics(
-                        env_eval_paths[env][eval_name_normalized][0]
-                    )
+                eval_config = {
+                    "name": eval_name,
+                    "default_scorer": default_scorer,
+                    "default_metric": default_metric,
+                    "paths": [
+                        f"s3://$AWS_S3_BUCKET/{path}"
+                        for path in sorted(env_eval_paths[env][eval_name])
+                    ],
+                }
 
-                    eval_config = {
-                        "name": eval_name_normalized,
-                        "default_scorer": default_scorer,
-                        "default_metric": default_metric,
-                        "paths": [
-                            f"s3://$AWS_S3_BUCKET/{path}"
-                            for path in env_eval_paths[env][eval_name_normalized]
-                        ],
-                    }
-
-                    config[env]["evaluations"][category].append(eval_config)
+                config[env]["evaluations"][category].append(eval_config)
 
             # If no evaluations were added for this category, add placeholder
             if not category_has_evals:
@@ -190,10 +218,6 @@ def create_config(paths_list):
     return config
 
 
-# Check for inconsistencies in the config:
-# Same logs in different parts of the config having different settings
-# Inconsistencies with MAPPING
-# Missing default_choice, default_metric
 def check_inconsistencies(config):
     # Create a dictionary to track all paths and their settings
     path_settings = {}
@@ -258,14 +282,23 @@ def check_inconsistencies(config):
 
 def main():
     parser = argparse.ArgumentParser(description="Generate YAML config for dashboard.")
+    parser.add_argument(
+        "--input", help="Original YAML config file to get default metrics from"
+    )
     parser.add_argument("--output", help="Output file for YAML config (optional)")
     args = parser.parse_args()
 
-    # Parse paths  from S3
+    # Load original config if provided
+    original_config = None
+    if args.input:
+        with open(args.input, "r") as f:
+            original_config = yaml.safe_load(f)
+
+    # Parse paths from file or S3
     paths_list = parse_paths()
 
     # Generate config
-    config = create_config(paths_list)
+    config = create_config(paths_list, original_config)
 
     # Convert to YAML
     yaml_config = yaml.dump(config, sort_keys=False, default_flow_style=False)
