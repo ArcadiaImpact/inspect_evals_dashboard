@@ -1,7 +1,9 @@
 import os
 
+import plotly.io as pio  # type: ignore
 import sentry_sdk
 import streamlit as st
+
 from src.config import load_config
 from src.log_utils.load_eval_logs import get_log_paths, load_evaluation_logs
 from src.plots.radar import create_radar_chart
@@ -43,6 +45,10 @@ def home_content():
 
     if SENTRY_DSN:
         sentry_patch_streamlit()
+
+    template = pio.templates[pio.templates.default]
+    template.layout.hoverlabel.align = "left"  # make tooltips consistently aligned
+    pio.templates.default = template
 
     # Global styles
     st.markdown(
