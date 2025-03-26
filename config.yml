@@ -71,7 +71,7 @@ stage:
   evaluations:
     agents:
       - name: cybench
-        default_scorer: choice
+        default_scorer: includes
         default_metric: accuracy
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/cybench/anthropic+claude-3-7-sonnet-20250219/2025-03-21-02-07-44-c64b7513/2025-03-21T02-41-00+00-00_cybench_ZPheSRr2hMSwyTBfd4HxeE.eval.dashboard.json
@@ -111,7 +111,7 @@ stage:
           - s3://$AWS_S3_BUCKET/logs/stage/piqa/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-22-12-25-46-5c6a0194/2025-03-22T12-34-17+00-00_piqa_HWLsTLRHQkfrNaMNAkwHN9.eval.dashboard.json
     coding:
       - name: cybench
-        default_scorer: choice
+        default_scorer: includes
         default_metric: accuracy
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/cybench/anthropic+claude-3-7-sonnet-20250219/2025-03-21-02-07-44-c64b7513/2025-03-21T02-41-00+00-00_cybench_ZPheSRr2hMSwyTBfd4HxeE.eval.dashboard.json
@@ -123,7 +123,7 @@ stage:
           - s3://$AWS_S3_BUCKET/logs/stage/cybench/openrouter+deepseek+deepseek-chat/2025-03-21-02-07-44-c64b7513/2025-03-22T06-28-42+00-00_cybench_dXmqoLvymm4sYQV6AEFxaL.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/cybench/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-21-02-07-44-c64b7513/2025-03-21T02-41-00+00-00_cybench_5xiMCRagFvWTDGa4HRYYxC.eval.dashboard.json
       - name: humaneval
-        default_scorer: choice
+        default_scorer: verify
         default_metric: accuracy
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/humaneval/mistral+mistral-large-latest/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_c74dFq7SpCSUsTqpFiW7TU.eval.dashboard.json
@@ -134,7 +134,7 @@ stage:
           - s3://$AWS_S3_BUCKET/logs/stage/humaneval/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_5suLhYY2kEmshRTfR6w23f.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/humaneval/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_BXSpiy7578RdRrgfPkAKcj.eval.dashboard.json
       - name: mbpp
-        default_scorer: choice
+        default_scorer: verify
         default_metric: accuracy
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/mbpp/anthropic+claude-3-7-sonnet-20250219/2025-03-22-12-10-14-84fa272c/2025-03-22T12-15-17+00-00_mbpp_GUCjLXdSN7qv93DDx44Lrp.eval.dashboard.json
@@ -151,7 +151,7 @@ stage:
           - s3://$AWS_S3_BUCKET/logs/stage/mbpp/openrouter+qwen+qwen-2.5-coder-32b-instruct/2025-03-22-12-10-14-84fa272c/2025-03-22T12-15-17+00-00_mbpp_fCL3ba3aNDCAb4VQATgmjT.eval.dashboard.json
     cybersecurity:
       - name: cybench
-        default_scorer: choice
+        default_scorer: includes
         default_metric: accuracy
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/cybench/anthropic+claude-3-7-sonnet-20250219/2025-03-21-02-07-44-c64b7513/2025-03-21T02-41-00+00-00_cybench_ZPheSRr2hMSwyTBfd4HxeE.eval.dashboard.json
@@ -199,7 +199,7 @@ stage:
           - s3://$AWS_S3_BUCKET/logs/stage/cyse2_interpreter_abuse/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-21-02-07-56-c293333d/2025-03-21T02-10-15+00-00_cyse2-interpreter-abuse_2MGdWcmYHYFRjtieK85iMy.eval.dashboard.json
     knowledge:
       - name: commonsense_qa
-        default_scorer: multiple_choice
+        default_scorer: choice
         default_metric: accuracy
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/commonsense_qa/anthropic+claude-3-7-sonnet-20250219/2025-03-19-03-51-07-1110860b/2025-03-19T04-59-54+00-00_commonsense-qa_hc2EKqNRpRLzZ7hFnsPiTQ.eval.dashboard.json
@@ -313,7 +313,7 @@ dev:
   evaluations:
     agents:
       - name: cybench
-        default_scorer: choice
+        default_scorer: includes
         default_metric: accuracy
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/cybench/anthropic+claude-3-7-sonnet-20250219/2025-03-21-02-07-44-c64b7513/2025-03-21T02-41-00+00-00_cybench_ZPheSRr2hMSwyTBfd4HxeE.eval.dashboard.json
@@ -353,7 +353,7 @@ dev:
           - s3://$AWS_S3_BUCKET/logs/stage/piqa/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-22-12-25-46-5c6a0194/2025-03-22T12-34-17+00-00_piqa_HWLsTLRHQkfrNaMNAkwHN9.eval.dashboard.json
     coding:
       - name: cybench
-        default_scorer: choice
+        default_scorer: includes
         default_metric: accuracy
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/cybench/anthropic+claude-3-7-sonnet-20250219/2025-03-21-02-07-44-c64b7513/2025-03-21T02-41-00+00-00_cybench_ZPheSRr2hMSwyTBfd4HxeE.eval.dashboard.json
@@ -365,7 +365,7 @@ dev:
           - s3://$AWS_S3_BUCKET/logs/stage/cybench/openrouter+deepseek+deepseek-chat/2025-03-21-02-07-44-c64b7513/2025-03-22T06-28-42+00-00_cybench_dXmqoLvymm4sYQV6AEFxaL.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/cybench/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-21-02-07-44-c64b7513/2025-03-21T02-41-00+00-00_cybench_5xiMCRagFvWTDGa4HRYYxC.eval.dashboard.json
       - name: humaneval
-        default_scorer: choice
+        default_scorer: verify
         default_metric: accuracy
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/humaneval/mistral+mistral-large-latest/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_c74dFq7SpCSUsTqpFiW7TU.eval.dashboard.json
@@ -376,7 +376,7 @@ dev:
           - s3://$AWS_S3_BUCKET/logs/stage/humaneval/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_5suLhYY2kEmshRTfR6w23f.eval.dashboard.json
           - s3://$AWS_S3_BUCKET/logs/stage/humaneval/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_BXSpiy7578RdRrgfPkAKcj.eval.dashboard.json
       - name: mbpp
-        default_scorer: choice
+        default_scorer: verify
         default_metric: accuracy
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/mbpp/anthropic+claude-3-7-sonnet-20250219/2025-03-22-12-10-14-84fa272c/2025-03-22T12-15-17+00-00_mbpp_GUCjLXdSN7qv93DDx44Lrp.eval.dashboard.json
@@ -393,7 +393,7 @@ dev:
           - s3://$AWS_S3_BUCKET/logs/stage/mbpp/openrouter+qwen+qwen-2.5-coder-32b-instruct/2025-03-22-12-10-14-84fa272c/2025-03-22T12-15-17+00-00_mbpp_fCL3ba3aNDCAb4VQATgmjT.eval.dashboard.json
     cybersecurity:
       - name: cybench
-        default_scorer: choice
+        default_scorer: includes
         default_metric: accuracy
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/cybench/anthropic+claude-3-7-sonnet-20250219/2025-03-21-02-07-44-c64b7513/2025-03-21T02-41-00+00-00_cybench_ZPheSRr2hMSwyTBfd4HxeE.eval.dashboard.json
@@ -441,7 +441,7 @@ dev:
           - s3://$AWS_S3_BUCKET/logs/stage/cyse2_interpreter_abuse/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-21-02-07-56-c293333d/2025-03-21T02-10-15+00-00_cyse2-interpreter-abuse_2MGdWcmYHYFRjtieK85iMy.eval.dashboard.json
     knowledge:
       - name: commonsense_qa
-        default_scorer: multiple_choice
+        default_scorer: choice
         default_metric: accuracy
         paths:
           - s3://$AWS_S3_BUCKET/logs/stage/commonsense_qa/anthropic+claude-3-7-sonnet-20250219/2025-03-19-03-51-07-1110860b/2025-03-19T04-59-54+00-00_commonsense-qa_hc2EKqNRpRLzZ7hFnsPiTQ.eval.dashboard.json

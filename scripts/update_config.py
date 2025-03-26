@@ -1,4 +1,5 @@
 import argparse
+import json
 import os
 import re
 from collections import defaultdict
@@ -38,7 +39,7 @@ def parse_paths():
     # Get paths directly from S3
     s3 = boto3.client("s3")
     paginator = s3.get_paginator("list_objects_v2")
-    bucket = os.environ.get("AWS_S3_BUCKET", "inspect-evals-dashboard")
+    bucket = os.environ["AWS_S3_BUCKET"]
     result = []
 
     for page in paginator.paginate(Bucket=bucket, Prefix="logs/stage/"):
@@ -130,21 +131,72 @@ def get_default_metrics_from_config(original_config, eval_name, env="staging"):
     return None, None
 
 
-def extract_default_metrics(path, original_config=None, eval_name=None):
-    """Extract default metrics from original config if available, or use fallback values."""
-    # First try to get values from original config
-    if original_config and eval_name:
-        # Try all environments in order
-        for env in ENV_ORDER:
-            default_scorer, default_metric = get_default_metrics_from_config(
-                original_config, eval_name, env
-            )
-            if default_scorer and default_metric:
-                return default_scorer, default_metric
+def get_scores_from_file(path):
+    """Download and extract scores from the dashboard file."""
+    try:
+        s3 = boto3.client("s3")
+        bucket = os.environ.get("AWS_S3_BUCKET", "inspect-evals-dashboard")
+        response = s3.get_object(Bucket=bucket, Key=path)
+        data = json.loads(response["Body"].read().decode("utf-8"))
 
-    # Fallback to static logic
-    if "gsm8k" in path.lower():
-        return "match", "accuracy"
+        if "results" in data and "scores" in data["results"]:
+            return data["results"]["scores"]
+    except Exception:
+        raise
+
+    return []
+
+
+def extract_default_metrics(path, env_name, original_config=None, eval_name=None):
+    """Extract default metrics from dashboard file and validate against original config."""
+    # Get values from the original config for the specific environment
+    config_scorer = None
+    config_metric = None
+    if original_config and eval_name and env_name:
+        config_scorer, config_metric = get_default_metrics_from_config(
+            original_config, eval_name, env_name
+        )
+
+    # Get scores from the dashboard file
+    scores = get_scores_from_file(path)
+
+    # If we have config values, check if they exist in the file
+    if config_scorer and config_metric:
+        # Find the scorer in the file
+        scorer_matches = [s for s in scores if s["name"] == config_scorer]
+        if scorer_matches:
+            # Check if the metric exists for this scorer
+            metrics = scorer_matches[0].get("metrics", {})
+            if config_metric in metrics:
+                # Both scorer and metric found in file - use them
+                return config_scorer, config_metric
+            else:
+                raise Exception(
+                    f"Metric '{config_metric}' from config not found in file for scorer '{config_scorer}'"
+                )
+
+        else:
+            raise Exception(
+                f"Scorer '{config_scorer}' from config not found in file {path}"
+            )
+
+    # If config values don't exist or weren't found in the file, use the first ones from the file
+    if scores:
+        if len(scores) > 1:
+            scorer_names = [score["name"] for score in scores]
+            print(
+                f"WARNING: Multiple scorers found in {path}: {', '.join(scorer_names)}. Using the first one."
+            )
+
+        first_scorer = scores[0]["name"]
+        metrics = scores[0].get("metrics", {})
+
+        # Filter out stderr metrics
+        non_stderr_metrics = {k: v for k, v in metrics.items() if k != "stderr"}
+        if non_stderr_metrics:
+            first_metric = next(iter(non_stderr_metrics))
+            return first_scorer, first_metric
+
     return "choice", "accuracy"
 
 
@@ -193,7 +245,7 @@ def create_config(paths_list, original_config=None):
 
                 # Get default scorer and metric from original config or fallback
                 default_scorer, default_metric = extract_default_metrics(
-                    env_eval_paths[env][eval_name][0], original_config, eval_name
+                    env_eval_paths[env][eval_name][0], env, original_config, eval_name
                 )
 
                 eval_config = {
@@ -303,6 +355,8 @@ def check_inconsistencies(config):
         print("WARNING: The following inconsistencies were found:")
         for inconsistency in inconsistencies:
             print(f"  - {inconsistency}")
+
+        raise Exception("Inconsistencies found, not writing the config")
 
 
 def extract_comments(file_path):
