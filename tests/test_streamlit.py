@@ -31,7 +31,7 @@ def pytest_generate_tests(metafunc):
 
     https://docs.pytest.org/en/7.1.x/how-to/parametrize.html#pytest-generate-tests
 
-    This generates list of file paths for each page in the pages folder, which will
+    This generates a list of file paths for each page in the pages folder, which will
     automatically be used if a test function has an argument called "file_path".
 
     Each file path will be the absolute path to each file, but the test ids will be
