@@ -163,6 +163,11 @@ def create_config(paths_list, original_config=None):
 
     # Process environments in the specified order
     for env in ENV_ORDER:
+        # For 'test' environment, take directly from original config if available
+        if env == "test" and original_config and "test" in original_config:
+            config["test"] = original_config["test"]
+            continue
+
         # Skip environments that don't have any paths and aren't in original config
         if env not in env_eval_paths and (
             not original_config or env not in original_config
@@ -266,6 +271,10 @@ def check_inconsistencies(config):
 
     # Check for inconsistencies with MAPPING
     for env, env_config in config.items():
+        # Skip test environment and non-dictionary configs
+        if env == "test":
+            continue
+
         for category, evals in env_config["evaluations"].items():
             if category in MAPPING:
                 for eval_config in evals:
