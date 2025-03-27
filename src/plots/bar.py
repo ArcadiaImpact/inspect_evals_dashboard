@@ -1,3 +1,5 @@
+from operator import itemgetter
+
 import plotly.graph_objs as go  # type: ignore
 import streamlit as st
 from inspect_evals_dashboard_schema import DashboardLog
@@ -31,6 +33,14 @@ def create_bar_chart(
         )
         for log in eval_logs
     ]
+
+    # Zip and sort models, metric_values, metric_errors together by the value in metric_values (in reverse order)
+    # Then unpack them back in 3 separate lists
+    models, metric_values, metric_errors = zip(
+        *sorted(
+            zip(models, metric_values, metric_errors), key=itemgetter(1), reverse=True
+        )
+    )
 
     human_baseline = get_human_baseline(eval_logs[0])
 
