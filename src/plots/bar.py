@@ -36,10 +36,15 @@ def create_bar_chart(
 
     # Zip and sort models, metric_values, metric_errors together by the value in metric_values (in reverse order)
     # Then unpack them back in 3 separate lists
-    models, metric_values, metric_errors = zip(
-        *sorted(
-            zip(models, metric_values, metric_errors), key=itemgetter(1), reverse=True
-        )
+    models, metric_values, metric_errors = map(
+        list,
+        zip(
+            *sorted(
+                zip(models, metric_values, metric_errors),
+                key=itemgetter(1),
+                reverse=True,
+            )
+        ),
     )
 
     human_baseline = get_human_baseline(eval_logs[0])
