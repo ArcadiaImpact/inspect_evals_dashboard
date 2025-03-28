@@ -8,7 +8,7 @@ from src.pages.evaluations.template import render_page
 st.title("Cybersecurity Evaluations")
 
 st.markdown("""
-            Cybersecurity evaluations test practical security skills through realistic hacking challenges and capture-the-flag competitions. They can also measure fundamental cybersecurity knowledge using structured questionnaires and multiple-choice assessments. Some evaluations specifically examine potentially dangerous capabilities like vulnerability exploitation and prompt injection resistance, while others focus on incident analysis and response skills.
+            Testing practical security skills through realistic hacking challenges and capture-the-flag competitions. Also measuring fundamental cybersecurity knowledge using structured questionnaires and multiple-choice assessments. Some evaluations examine potentially dangerous capabilities like vulnerability exploitation and prompt injection resistance, while others focus on incident analysis and response skills.
             """)
 
 group_config: list[EvaluationConfig] = load_config().cybersecurity
