@@ -26,7 +26,16 @@ st.markdown(
     <style>
     .stMainBlockContainer.block-container {
         max-width: 1024px;
-        padding-top: 20px;
+        padding-top: 16px;
+    }
+
+    .stMainBlockContainer.block-container h1,
+    .stMainBlockContainer.block-container h2,
+    .stMainBlockContainer.block-container h3,
+    .stMainBlockContainer.block-container h4,
+    .stMainBlockContainer.block-container h5,
+    .stMainBlockContainer.block-container h6 {
+      padding-bottom: 6px;
     }
 
     .flex-center-container {
