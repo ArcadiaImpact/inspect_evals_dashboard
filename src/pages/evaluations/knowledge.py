@@ -8,7 +8,7 @@ from src.pages.evaluations.template import render_page
 st.title("Knowledge Evaluations")
 
 st.markdown("""
-            Assessing intellectual capabilities across multiple dimensions. Measuring breadth of factual knowledge in diverse domains (sciences, humanities, law), depth of understanding in specialized fields, and reasoning abilities on complex problems. Rather than just measuring simple fact retrieval, these benchmarks evaluate how AI systems apply knowledge  and integrate understanding across different domains and tasks.
+            Knowledge evaluations assess how systems apply knowledge, reason through problems, avoid misconceptions, and integrate understanding across domains, rather than just testing fact retrieval.
             """)
 
 group_config: list[EvaluationConfig] = load_config().knowledge
