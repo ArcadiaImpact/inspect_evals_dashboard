@@ -32,6 +32,8 @@ MAPPING = {
     "safeguards": ["agentharm"],
 }
 
+DASHBOARD_LOG_FILE_SUFFIX = ".dashboard.json"
+
 ENV_ORDER = ["prod", "stage", "dev", "test"]
 
 BUCKET_NAME = os.environ.get("AWS_S3_BUCKET", "inspect-evals-dashboard")
@@ -46,7 +48,7 @@ def parse_paths():
     for page in paginator.paginate(Bucket=BUCKET_NAME, Prefix="logs/stage/"):
         if "Contents" in page:
             for obj in page["Contents"]:
-                if obj["Key"].endswith("dashboard.json"):
+                if obj["Key"].endswith(DASHBOARD_LOG_FILE_SUFFIX):
                     result.append(obj["Key"])
 
     paths = result
