@@ -45,10 +45,6 @@ def home_content():
     if SENTRY_DSN:
         sentry_patch_streamlit()
 
-    template = pio.templates[pio.templates.default]
-    template.layout.hoverlabel.align = "left"  # make tooltips consistently aligned
-    pio.templates.default = template
-
     # Global styles
     st.markdown(
         """
@@ -201,6 +197,17 @@ def home_content():
         ```
     """
     )
+
+
+# Initially pio.templates.default is a name of one of the preset templates
+# We pull that template, update it and then set the object as default (rather than the name)
+#
+# To make sure this code works correctly and isn't executed twice we check
+# if the default template is a string (i.e. a name, and not an object yet)
+if isinstance(pio.templates.default, str):
+    template = pio.templates[pio.templates.default]
+    template.layout.hoverlabel.align = "left"  # make tooltips consistently aligned
+    pio.templates.default = template
 
 
 home = st.Page(home_content, title="Home", icon="🏠", default=True)
