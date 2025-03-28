@@ -8,7 +8,7 @@ from src.pages.evaluations.template import render_page
 st.title("Reasoning Evaluations")
 
 st.markdown("""
-            Asessing comprehension, logical inference, common sense understanding, instruction following, and information processing from various contexts and modalities. These benchmarks test how effectively AI systems can handle challenges involving mathematics, spatial reasoning, physical understanding, and extended context information.
+            Reasoning evaluations assess comprehension, logical inference, common sense understanding, instruction following, and information processing across contexts and modalities. They test AI systems' effectiveness in handling mathematics, spatial reasoning, physical understanding, and extended context challenges.
             """)
 
 group_config: list[EvaluationConfig] = load_config().reasoning
