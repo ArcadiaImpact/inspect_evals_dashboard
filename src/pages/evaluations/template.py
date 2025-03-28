@@ -131,8 +131,7 @@ def render_page(
     st.divider()
     st.subheader("Pairwise analysis (unpaired)")
     st.markdown("""
-                Here we compare two models directly by specifying one model as the baseline and the other as the test model across all evaluations in this group. We use their eval score and standard errors to test their difference for statistical significance. **We highlight the cells where the confidence interval is in the positive or negative range signaling that the test model is statistically significantly better or worse compared to the baseline model.**
-                """)
+We compare two models by setting one as the baseline and the other as the test model across all evaluations. Using their scores and standard errors, we test for statistical significance and **highlight cells where the confidence interval indicates the test model is significantly better or worse than the baseline.**                """)
 
     col5, col6 = st.columns(2)
 
