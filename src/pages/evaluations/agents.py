@@ -8,7 +8,7 @@ from src.pages.evaluations.template import render_page
 st.title("Agentic Evaluations")
 
 st.markdown("""
-            Pursuing goals and making decisions autonomously without constant human guidance. Agentic evaluations measure how effectively these systems perform in multi-step challenges that require planning, reasoning, and adaptation. These evaluations assess the AI's ability to decompose tasks, navigate environments, select appropriate tools, maintain alignment with goals, and recover from failures.
+            Agentic evaluations measure how effectively AI systems perform in multi-step challenges that require planning, reasoning, and adaptation. They assess the AI's ability to decompose tasks, navigate environments, select appropriate tools, maintain alignment with goals, and recover from failures.
             """)
 
 group_config: list[EvaluationConfig] = load_config().agents
