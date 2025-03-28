@@ -8,7 +8,7 @@ from src.pages.evaluations.template import render_page
 st.title("Multimodal Evaluations")
 
 st.markdown("""
-            Multimodal evaluations test an AI system's ability to process, understand, and generate content across multiple types of data simultaneously. These assessments move beyond text-only testing by incorporating diverse inputs and outputs including images, text, audio, video, and structured data. The evaluations focus on cross-modal understanding, multimodal reasoning, real-world task performance, and robustness across different information types. This comprehensive testing is crucial as AI systems increasingly need to operate like humans in environments where information comes in multiple forms rather than single data streams.
+            Multimodal evaluations assess AI systems' abilities to process, understand, and generate content across multiple data types simultaneously (images, text, audio, video, and structured data).
             """)
 
 group_config: list[EvaluationConfig] = load_config().multimodal

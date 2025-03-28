@@ -8,7 +8,7 @@ from src.pages.evaluations.template import render_page
 st.title("Coding Evaluations")
 
 st.markdown("""
-            Coding evaluations measure how effectively AI systems generate, modify, and understand code across programming languages. These evaluations test multiple dimensions including functional correctness, problem-solving ability, code quality, language breadth, contextual understanding, security awareness, and documentation. Assessment methods include challenge datasets, unit tests, human expert review, and automated code analysis.
+            Coding evaluations assess AI systems' ability to generate, modify, and understand code across programming languages. These evaluations test multiple dimensions including functional correctness, problem-solving ability, code quality, language breadth, contextual understanding, security awareness, and documentation.
             """)
 
 group_config: list[EvaluationConfig] = load_config().coding
