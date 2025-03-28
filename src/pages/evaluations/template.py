@@ -18,9 +18,10 @@ from src.plots.plot_utils import highlight_confidence_intervals
 def render_page(
     eval_logs: list[DashboardLog], default_values: dict[str, dict[str, str]]
 ):
-    st.subheader("Naive cross-model comparison")
     st.markdown("""
-                Graphs in this section compare how different AI models perform on the same task. We call this a "naive" comparison because it uses simple averages to compare models, without determining if one model is statistically significantly better than another. To get more accurate scores, we evaluate each sample in a dataset multiple times using the epochs feature in Inspect AI. For more reliable statistical comparisons between models, check out the pairwise analysis in the next section.
+                ### Naive cross-model comparison
+                Uses simple averages to compare models, without determining if one model is statistically significantly better than another. For more accurate scores, we evaluate each sample in a dataset multiple times using the epochs feature in Inspect AI.
+
                 """)
 
     col1, col2, col3, col4 = st.columns(4)
@@ -97,15 +98,19 @@ def render_page(
     if family_filtered_logs:
         # Display evaluation details from the first log entry
         eval_details = family_filtered_logs[0]
-        st.text("")  # Add a blank line for spacing
-        st.markdown("##### Evaluation details:")
-        st.markdown(f"""
-                    - **Name:** {eval_details.eval_metadata.title}
-                    - **Description:** {eval_details.eval_metadata.description}
-                    - **ArXiv:** {eval_details.eval_metadata.arxiv}
-                    - **Task path in Inspect Evals:** [{eval_details.eval_metadata.path}](https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/{eval_details.eval_metadata.path})
-                    """)
-        st.text("")  # Add a blank line for spacing
+
+        # Use simple html to make the overall layout tighter
+        st.markdown(
+            f"""
+            <div>
+                <h5 style="padding-bottom: 5px;">{eval_details.eval_metadata.title}</h5>
+                {eval_details.eval_metadata.description}<br>
+                <a href="https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/{eval_details.eval_metadata.path}">ArXiv</a> ·
+                <a href="https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/{eval_details.eval_metadata.path}">Github</a>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
         scorer = default_values[naive_task_name]["default_scorer"]
 
