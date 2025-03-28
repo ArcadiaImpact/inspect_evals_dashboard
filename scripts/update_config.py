@@ -34,15 +34,16 @@ MAPPING = {
 
 ENV_ORDER = ["prod", "stage", "dev", "test"]
 
+BUCKET_NAME = os.environ.get("AWS_S3_BUCKET", "inspect-evals-dashboard")
+
 
 def parse_paths():
     # Get paths directly from S3
     s3 = boto3.client("s3")
     paginator = s3.get_paginator("list_objects_v2")
-    bucket = os.environ["AWS_S3_BUCKET"]
     result = []
 
-    for page in paginator.paginate(Bucket=bucket, Prefix="logs/stage/"):
+    for page in paginator.paginate(Bucket=BUCKET_NAME, Prefix="logs/stage/"):
         if "Contents" in page:
             for obj in page["Contents"]:
                 if obj["Key"].endswith("dashboard.json"):
@@ -135,13 +136,13 @@ def get_scores_from_file(path):
     """Download and extract scores from the dashboard file."""
     try:
         s3 = boto3.client("s3")
-        bucket = os.environ.get("AWS_S3_BUCKET", "inspect-evals-dashboard")
-        response = s3.get_object(Bucket=bucket, Key=path)
+        response = s3.get_object(Bucket=BUCKET_NAME, Key=path)
         data = json.loads(response["Body"].read().decode("utf-8"))
 
         if "results" in data and "scores" in data["results"]:
             return data["results"]["scores"]
     except Exception:
+        print("ERROR: failed to get scores from the file")
         raise
 
     return []
@@ -281,17 +282,7 @@ def create_config(paths_list, original_config=None):
                         "evaluations"
                     ][category]
                 else:
-                    # If not in original config, add placeholder
-                    placeholder = {
-                        "name": "pubmedqa",
-                        "default_scorer": "choice",
-                        "default_metric": "accuracy",
-                        "paths": [
-                            f"s3://$AWS_S3_BUCKET/{env}/pubmedqa/{i}.json"
-                            for i in range(1, 6)
-                        ],
-                    }
-                    config[env]["evaluations"][category].append(placeholder)
+                    raise Exception(f'No evaluations for category "{category}"')
 
     # Check for inconsistencies
     check_inconsistencies(config)
@@ -338,12 +329,14 @@ def check_inconsistencies(config):
         for category, evals in env_config["evaluations"].items():
             if category in MAPPING:
                 for eval_config in evals:
-                    if eval_config["name"] != "pubmedqa":  # Skip placeholders
-                        eval_name = eval_config["name"]
-                        if eval_name not in MAPPING[category]:
-                            inconsistencies.append(
-                                f"Inconsistency with MAPPING: {eval_name} in category {category} not in MAPPING"
-                            )
+                    eval_name = eval_config["name"]
+
+                    # pubmedqa is an eval we were using as a placeholder
+                    # TODO: remove the `and eval_name != 'pubmedqa'` when the project ships
+                    if eval_name not in MAPPING[category] and eval_name != "pubmedqa":
+                        inconsistencies.append(
+                            f"Inconsistency with MAPPING: {eval_name} in category {category} not in MAPPING"
+                        )
 
     # Check for missing default_choice, default_metric
     for env, env_config in config.items():
