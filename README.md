@@ -1,5 +1,13 @@
 # Inspect Evaluations Dashboard
 
+🚧 Welcome to the Inspect Evals Dashboard (Beta) 🚧
+
+This project is currently in beta, and we're actively seeking feedback from the community to guide our next steps. Whether you spot a bug, have suggestions for new features, or want to help us improve the user experience - we want to hear from you!
+
+👉 Create an issue to share feedback or report bugs: [GitHub Issues](https://github.com/ArcadiaImpact/inspect_evals_dashboard/issues)
+
+---
+
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://inspect-evals-dashboard.streamlit.app/)
 
 A Streamlit-based web application for visualizing results of AI evaluations based on open source implementations from the [`inspect_evals`](https://github.com/UKGovernmentBEIS/inspect_evals) library.
