@@ -344,7 +344,7 @@ prod:
       - s3://$AWS_S3_BUCKET/logs/prod/hellaswag/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-03-51-21-467ef46a/2025-03-19T11-23-05+00-00_hellaswag_TEAke8jfAHbzSNxS7gRVei.eval.dashboard.json
     - name: ifeval
       default_scorer: instruction_following
-      default_metric: prompt_strict_acc
+      default_metric: final_acc
       paths:
       - s3://$AWS_S3_BUCKET/logs/prod/ifeval/anthropic+claude-3-7-sonnet-20250219/2025-03-28-00-39-44-d0256b57/2025-03-28T01-47-03+00-00_ifeval_eXu35ai7RzW4TMkutkjtH2.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/prod/ifeval/google+gemini-2.0-flash-001/2025-03-28-00-39-44-d0256b57/2025-03-28T01-47-03+00-00_ifeval_9pFC3aNUGpLfXb7frMP6ZH.eval.dashboard.json

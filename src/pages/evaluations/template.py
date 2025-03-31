@@ -21,7 +21,6 @@ def render_page(
     st.markdown("""
                 ### Naive cross-model comparison
                 Uses simple averages to compare models, without determining if one model is statistically significantly better than another. For more accurate scores, we evaluate each sample in a dataset multiple times using the epochs feature in Inspect AI.
-
                 """)
 
     col1, col2, col3, col4 = st.columns(4)
@@ -78,6 +77,7 @@ def render_page(
         set().union(*[get_all_metrics(log) for log in family_filtered_logs])
     )
 
+    # Display the default metric if it exists, otherwise display the first metric
     try:
         metric_index: int = task_metrics.index(
             default_values[naive_task_name]["default_metric"]
@@ -105,7 +105,7 @@ def render_page(
             <div>
                 <h5 style="padding-bottom: 5px;">{eval_details.eval_metadata.title}</h5>
                 {eval_details.eval_metadata.description}<br>
-                <a href="https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/{eval_details.eval_metadata.path}">ArXiv</a> ·
+                <a href="{eval_details.eval_metadata.arxiv}">ArXiv</a> ·
                 <a href="https://github.com/UKGovernmentBEIS/inspect_evals/tree/main/{eval_details.eval_metadata.path}">Github</a>
             </div>
             """,
@@ -125,10 +125,8 @@ def render_page(
 
         st.download_button(
             label="Download chart data as JSON",
-            data=json.dumps(
-                [log.model_dump(mode="json") for log in family_filtered_logs]
-            ),
-            file_name="eval_logs.json",
+            data=convert_logs_to_json_string(family_filtered_logs),
+            file_name="dashboard_logs.json",
             mime="application/json",
         )
 
@@ -136,7 +134,8 @@ def render_page(
     st.divider()
     st.subheader("Pairwise analysis (unpaired)")
     st.markdown("""
-We compare two models by setting one as the baseline and the other as the test model across all evaluations. Using their scores and standard errors, we test for statistical significance and **highlight cells where the confidence interval indicates the test model is significantly better or worse than the baseline.**                """)
+                We compare two models by setting one as the baseline and the other as the test model across all evaluations in this category. Using their scores and standard errors, we test for statistical significance and **highlight cells where the confidence interval indicates the test model is significantly better or worse than the baseline.**
+                """)
 
     col5, col6 = st.columns(2)
 
@@ -317,9 +316,13 @@ We compare two models by setting one as the baseline and the other as the test m
         st.table(pd.DataFrame(responses))
 
 
+@st.cache_data(hash_funcs={DashboardLog: id})
+def convert_logs_to_json_string(logs: list[DashboardLog]) -> str:
+    return json.dumps([log.model_dump(mode="json") for log in logs])
+
+
 @st.cache_data
 def convert_df_to_csv(df):
-    # IMPORTANT: Cache the conversion to prevent computation on every rerun
     return df.to_csv().encode("utf-8")
 
 

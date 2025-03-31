@@ -58,11 +58,9 @@ def create_cost_scatter(
     df = pd.DataFrame(plot_data)
     fig = go.Figure()
 
-    providers = sorted(df["provider"].unique())  # Sort providers alphanumerically
-    # Use a color palette for different providers
+    providers = sorted(df["provider"].unique())
     color_palette = get_provider_color_palette(set(providers))
 
-    # Add scatter points for each provider
     for provider_name in providers:
         provider_data = df[df["provider"] == provider_name]
 
@@ -79,7 +77,6 @@ def create_cost_scatter(
             )
         )
 
-    # Add human baseline if it exists
     if human_baseline is not None:
         fig.add_trace(
             go.Scatter(
@@ -92,7 +89,6 @@ def create_cost_scatter(
             )
         )
 
-    # Update layout
     fig.update_layout(
         title=f"Comparison of {metric_name} vs. estimated cost of running the evaluation",
         xaxis_title="Estimated cost (USD)",
