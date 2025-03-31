@@ -1,0 +1,11 @@
+[browser]
+gatherUsageStats = false
+
+[client]
+toolbarMode = "viewer"
+
+[logger]
+level = "warning"
+
+[theme]
+base = "light"
