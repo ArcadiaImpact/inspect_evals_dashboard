@@ -45,7 +45,7 @@ def parse_paths():
     paginator = s3.get_paginator("list_objects_v2")
     result = []
 
-    for page in paginator.paginate(Bucket=BUCKET_NAME, Prefix="logs/stage/"):
+    for page in paginator.paginate(Bucket=BUCKET_NAME, Prefix="logs/"):
         if "Contents" in page:
             for obj in page["Contents"]:
                 if obj["Key"].endswith(DASHBOARD_LOG_FILE_SUFFIX):
@@ -108,7 +108,8 @@ def extract_timestamp(path):
 
 def extract_environment(path):
     if "logs/stage/" in path:
-        # Stage logs count as both stage and dev
+        # For now stage logs count as both stage and dev
+        # We don't have a separate dev generation
         return ["stage", "dev"]
     elif "logs/prod/" in path:
         return ["prod"]
@@ -117,7 +118,7 @@ def extract_environment(path):
     return ["dev"]  # Default to dev if not found
 
 
-def get_default_metrics_from_config(original_config, eval_name, env="staging"):
+def get_default_metrics_from_config(original_config, eval_name, env):
     """Search through original config to find default metrics for a given evaluation."""
     if not original_config or not env or env not in original_config:
         return None, None
