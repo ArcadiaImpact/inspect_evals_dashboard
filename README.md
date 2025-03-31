@@ -21,33 +21,14 @@ A Streamlit-based web application for visualizing results of AI evaluations base
 ├── pyproject.toml
 ├── Makefile
 ├── .streamlit
-│   ├── config.toml
-│   └── secrets.toml
 ├── tests
 ├── src
 │   ├── pages
 │   │   ├── evaluations
-│   │   │   ├── agents.py
-│   │   │   ├── assistants.py
-│   │   │   ├── coding.py
-│   │   │   ├── cybersecurity.py
-│   │   │   ├── knowledge.py
-│   │   │   ├── mathematics.py
-│   │   │   ├── multimodal.py
-│   │   │   ├── reasoning.py
-│   │   │   ├── safeguards.py
-│   │   │   └── template.py
 │   │   ├── changelog.py
 │   │   └── docs.py
 │   ├── plots
-│   │   ├── bar.py
-│   │   ├── cutoff_scatter.py
-│   │   ├── pairwise.py
-│   │   ├── radar.py
-│   │   └── plot_utils.py
 │   ├── log_utils
-│   │   ├── dashboard_log_utils.py
-│   │   └── load_eval_logs.py
 │   └── config.py
 ```
 
