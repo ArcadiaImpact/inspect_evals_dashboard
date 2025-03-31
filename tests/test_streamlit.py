@@ -53,5 +53,5 @@ def test_smoke_page(file_path):
 
     This test checks that there are no exceptions raised while the app runs.
     """
-    at = AppTest.from_file(file_path, default_timeout=100).run()
+    at = AppTest.from_file(file_path, default_timeout=5).run()
     assert not at.exception

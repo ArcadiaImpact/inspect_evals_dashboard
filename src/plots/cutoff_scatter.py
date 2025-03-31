@@ -51,8 +51,7 @@ def create_cutoff_scatter(
     df = df.sort_values("date")
     fig = go.Figure()
 
-    providers = sorted(df["provider"].unique())  # Sort providers alphanumerically
-    # Use a color palette for different providers
+    providers = sorted(df["provider"].unique())
     color_palette = get_provider_color_palette(set(providers))
 
     for provider_name in providers:

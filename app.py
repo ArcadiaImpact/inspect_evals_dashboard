@@ -8,13 +8,6 @@ from src.log_utils.load_eval_logs import get_log_paths, load_evaluation_logs
 from src.plots.radar import create_radar_chart
 
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
-if SENTRY_DSN:
-    sentry_sdk.init(
-        dsn=SENTRY_DSN,
-        # Add data like request headers and IP for users,
-        # see https://docs.sentry.io/platforms/python/data-management/data-collected/ for more info
-        send_default_pii=True,
-    )
 
 st.set_page_config(
     page_title="Inspect Evals Dashboard", page_icon="🤖", layout="centered"
@@ -61,7 +54,7 @@ st.markdown(
 # This code might stop working in a future version
 @st.cache_data()
 def sentry_patch_streamlit():
-    """Streamlit catches all exceptions, this monkey patch send exceptions to Sentry."""
+    """Streamlit catches all exceptions, this monkey patch sends exceptions to Sentry."""
     import sys
 
     script_runner = sys.modules["streamlit.runtime.scriptrunner.exec_code"]
@@ -75,6 +68,13 @@ def sentry_patch_streamlit():
 
 
 if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        environment=os.environ.get("STREAMLIT_ENV")
+        if os.environ.get("STREAMLIT_ENV")
+        else "unknown",
+        send_default_pii=True,
+    )
     sentry_patch_streamlit()
 
 
