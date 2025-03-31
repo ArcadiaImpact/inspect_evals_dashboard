@@ -16,6 +16,43 @@ if SENTRY_DSN:
         send_default_pii=True,
     )
 
+st.set_page_config(
+    page_title="Inspect Evals Dashboard", page_icon="🤖", layout="centered"
+)
+
+# Global styles
+st.markdown(
+    """
+    <style>
+    .stMainBlockContainer.block-container {
+        max-width: 1024px;
+        padding-top: 16px;
+    }
+
+    .stMainBlockContainer.block-container h1,
+    .stMainBlockContainer.block-container h2,
+    .stMainBlockContainer.block-container h3,
+    .stMainBlockContainer.block-container h4,
+    .stMainBlockContainer.block-container h5,
+    .stMainBlockContainer.block-container h6 {
+      padding-bottom: 6px;
+    }
+
+    .flex-center-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+    }
+    .header-without-anchor span {
+        display: none !important;
+    }
+    </style>
+""",
+    unsafe_allow_html=True,
+)
+
 
 # There is no official sentry/streamlit integration
 # But people found some workarounds in the discussion:
@@ -37,37 +74,11 @@ def sentry_patch_streamlit():
     script_runner.handle_uncaught_app_exception = sentry_patched_func
 
 
+if SENTRY_DSN:
+    sentry_patch_streamlit()
+
+
 def home_content():
-    st.set_page_config(
-        page_title="Inspect Evals Dashboard", page_icon="🤖", layout="centered"
-    )
-
-    if SENTRY_DSN:
-        sentry_patch_streamlit()
-
-    template = pio.templates[pio.templates.default]
-    template.layout.hoverlabel.align = "left"  # make tooltips consistently aligned
-    pio.templates.default = template
-
-    # Global styles
-    st.markdown(
-        """
-        <style>
-        .flex-center-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-        }
-        .header-without-anchor span {
-            display: none !important;
-        }
-        </style>
-    """,
-        unsafe_allow_html=True,
-    )
-
     st.title("Inspect Evals Dashboard")
 
     st.markdown(
@@ -201,6 +212,17 @@ def home_content():
         ```
     """
     )
+
+
+# Initially pio.templates.default is a name of one of the preset templates
+# We pull that template, update it and then set the object as default (rather than the name)
+#
+# To make sure this code works correctly and isn't executed twice we check
+# if the default template is a string (i.e. a name, and not an object yet)
+if isinstance(pio.templates.default, str):
+    template = pio.templates[pio.templates.default]
+    template.layout.hoverlabel.align = "left"  # make tooltips consistently aligned
+    pio.templates.default = template
 
 
 home = st.Page(home_content, title="Home", icon="🏠", default=True)
