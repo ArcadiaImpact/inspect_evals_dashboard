@@ -87,7 +87,7 @@ def parse_paths():
 
 def extract_eval_name(path):
     """Extract evaluation name from an S3 path."""
-    match = re.search(r"logs/stage/([^/]+)/", path)
+    match = re.search(r"logs/[^/]+/([^/]+)/", path)
     if match:
         return match.group(1).lower().replace("-", "_")
     return None
