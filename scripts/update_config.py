@@ -109,7 +109,7 @@ def extract_timestamp(path):
 def extract_environment(path):
     if "logs/stage/" in path:
         # For now stage logs count as both stage and dev
-        # We don't have a separate dev generation
+        # We don't have a separate dev generation currently, though this might change in the future
         return ["stage", "dev"]
     elif "logs/prod/" in path:
         return ["prod"]
