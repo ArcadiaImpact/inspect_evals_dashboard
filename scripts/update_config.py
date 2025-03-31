@@ -8,15 +8,21 @@ import boto3
 import yaml
 
 MAPPING = {
-    "agents": ["cybench", "gaia", "gdm", "piqa", "swe_bench"],
+    "agents": [
+        "cybench",
+        "gaia",
+        "gdm_intercode_ctf",
+        "piqa",
+        "swe_bench_verified_mini",
+    ],
     "assistants": ["gaia", "piqa"],
-    "coding": ["cybench", "humaneval", "mbpp", "osworld", "swe_bench"],
+    "coding": ["cybench", "humaneval", "mbpp", "osworld", "swe_bench_verified_mini"],
     "cybersecurity": [
         "cybench",
         "cyse2_vulnerability_exploit",
         "cyse2_interpreter_abuse",
         "cyse2_prompt_injection",
-        "gdm",
+        "gdm_intercode_ctf",
     ],
     "knowledge": ["commonsense_qa", "gpqa_diamond", "mmlu_pro"],
     "mathematics": ["gsm8k", "mathvista"],
@@ -288,15 +294,28 @@ def create_config(paths_list, original_config=None):
                     raise Exception(f'No evaluations for category "{category}"')
 
     # Check for inconsistencies
-    check_inconsistencies(config)
+    check_inconsistencies(config, env_eval_paths)
 
     return config
 
 
-def check_inconsistencies(config):
+def check_inconsistencies(config, env_eval_paths):
     # Create a dictionary to track all paths and their settings
     path_settings = {}
     inconsistencies = []
+
+    # Check for evals not in any category in MAPPING
+    all_mapped_evals = set()
+    for category, evals in MAPPING.items():
+        all_mapped_evals.update(evals)
+
+    # Check each environment for evals that aren't in MAPPING
+    for env, eval_to_paths in env_eval_paths.items():
+        for eval_name in eval_to_paths.keys():
+            if eval_name not in all_mapped_evals:
+                inconsistencies.append(
+                    f"Eval '{eval_name}' in environment '{env}' is not in any category in MAPPING"
+                )
 
     # Check for duplicate paths with different settings
     for env, env_config in config.items():
