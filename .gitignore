@@ -169,3 +169,13 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Local data files and logs for development
+data/
+logs/
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# VSCode
+.vscode/
