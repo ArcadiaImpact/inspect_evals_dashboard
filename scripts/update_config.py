@@ -2,6 +2,7 @@ import argparse
 import json
 import os
 import re
+import sys
 from collections import defaultdict
 
 import boto3
@@ -12,10 +13,11 @@ MAPPING = {
         "cybench",
         "gaia",
         "gdm_intercode_ctf",
-        "piqa",
+        "osworld",
         "swe_bench_verified_mini",
+        "agentharm",
     ],
-    "assistants": ["gaia", "piqa"],
+    "assistants": ["gaia", "agentharm"],
     "coding": ["cybench", "humaneval", "mbpp", "osworld", "swe_bench_verified_mini"],
     "cybersecurity": [
         "cybench",
@@ -24,8 +26,8 @@ MAPPING = {
         "cyse2_prompt_injection",
         "gdm_intercode_ctf",
     ],
-    "knowledge": ["commonsense_qa", "gpqa_diamond", "mmlu_pro"],
-    "mathematics": ["gsm8k", "mathvista"],
+    "knowledge": ["bbh", "commonsense_qa", "gpqa_diamond", "mmlu_pro"],
+    "mathematics": ["bbh", "gsm8k", "mathvista"],
     "multimodal": ["mathvista", "mmmu_open", "mmmu_multiple_choice"],
     "reasoning": [
         "bbh",
@@ -34,8 +36,14 @@ MAPPING = {
         "mmmu_open",
         "mmmu_multiple_choice",
         "mmlu_pro",
+        "piqa",
     ],
-    "safeguards": ["agentharm"],
+    "safeguards": [
+        "agentharm",
+        "cyse2_vulnerability_exploit",
+        "cyse2_interpreter_abuse",
+        "cyse2_prompt_injection",
+    ],
 }
 
 DASHBOARD_LOG_FILE_SUFFIX = ".dashboard.json"
@@ -64,9 +72,10 @@ def parse_paths():
     for path in paths:
         eval_name = extract_eval_name(path)
         model_name = extract_model(path)
+        env = extract_environment(path)
 
         if eval_name and model_name:
-            key = f"{eval_name}:{model_name}"
+            key = f"{env}:{eval_name}:{model_name}"
             eval_model_paths[key].append(path)
 
     # Sort by date and get the most recent path for each eval-model combination
@@ -353,9 +362,7 @@ def check_inconsistencies(config, env_eval_paths):
                 for eval_config in evals:
                     eval_name = eval_config["name"]
 
-                    # pubmedqa is an eval we were using as a placeholder
-                    # TODO: remove the `and eval_name != 'pubmedqa'` when the project ships
-                    if eval_name not in MAPPING[category] and eval_name != "pubmedqa":
+                    if eval_name not in MAPPING[category]:
                         inconsistencies.append(
                             f"Inconsistency with MAPPING: {eval_name} in category {category} not in MAPPING"
                         )
@@ -404,11 +411,22 @@ def extract_comments(file_path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate YAML config for dashboard.")
-    parser.add_argument(
-        "--input", help="Original YAML config file to get default metrics from"
+    parser = argparse.ArgumentParser(
+        description="Automatically generate and validate a YAML config from S3",
+        epilog="Example: python3 scripts/update_config.py --input config.yml --output config.yml",
     )
-    parser.add_argument("--output", help="Output file for YAML config (optional)")
+
+    parser.add_argument(
+        "--input",
+        help="Original YAML config file to get default metrics from",
+        required=True,
+    )
+    parser.add_argument("--output", help="Output file for YAML config", required=True)
+
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit(1)
+
     args = parser.parse_args()
 
     # Load original config if provided
@@ -435,12 +453,8 @@ def main():
     if comments:
         yaml_config = "\n".join(comments) + "\n" + yaml_config
 
-    # Output
-    if args.output:
-        with open(args.output, "w") as f:
-            f.write(yaml_config)
-    else:
-        print(yaml_config)
+    with open(args.output, "w") as f:
+        f.write(yaml_config)
 
 
 if __name__ == "__main__":

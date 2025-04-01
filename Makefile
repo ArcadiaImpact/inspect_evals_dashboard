@@ -6,6 +6,12 @@ hooks-install:
 hooks-update:
 	pre-commit autoupdate
 
+
+.PHONY: config
+config:
+	python3 scripts/update_config.py --input config.yml --output config.yml
+
+
 .PHONY: check
 check:
 	ruff check --fix
