@@ -42,18 +42,6 @@ prod:
       - s3://$AWS_S3_BUCKET/logs/prod/piqa/openrouter+deepseek+deepseek-chat/2025-03-22-12-25-46-5c6a0194/2025-03-22T12-34-17+00-00_piqa_7nGsLMWLX5jqs63UdxFmic.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/prod/piqa/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-22-12-25-46-5c6a0194/2025-03-22T12-34-17+00-00_piqa_PShCuKcmFwwtHRhSp4DxeK.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/prod/piqa/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-22-12-25-46-5c6a0194/2025-03-22T12-34-17+00-00_piqa_HWLsTLRHQkfrNaMNAkwHN9.eval.dashboard.json
-    - name: swe_bench_verified_mini
-      default_scorer: swe_bench_scorer
-      default_metric: mean
-      paths:
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/google+gemini-2.0-flash-001/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_QXkFG5LGoR35kKmY6qEbAN.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/grok+grok-2-1212/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_BF7xRDFN4WaXgKm5XQA7nq.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/mistral+mistral-large-latest/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_VDxSMz7dq48nEzHmWzZJf5.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/mistral+mistral-small-latest/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_XNvusevEeqf7tvrUHX672M.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openai+gpt-4o-mini/2025-03-30-10-43-56-e2cdd4f2/2025-03-30T21-44-13+11-00_swe-bench-verified-mini_5kfC32PY7unQTpRrTCktWn.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openai+gpt-4o/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_NS43jooWQ9TDKrRFaMbFzv.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openrouter+deepseek+deepseek-chat/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_Z2CSaCJSWG7x62Pyn6UCHu.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_kjwoQijeG7SGaXbaCEEtdH.eval.dashboard.json
     assistants:
     - name: piqa
       default_scorer: choice
@@ -110,18 +98,6 @@ prod:
       - s3://$AWS_S3_BUCKET/logs/prod/mbpp/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-22-12-10-14-84fa272c/2025-03-22T12-15-17+00-00_mbpp_8bYFtzvuAFuHWXiYcgUVaY.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/prod/mbpp/openrouter+mistralai+codestral-2501/2025-03-22-12-10-14-84fa272c/2025-03-22T12-15-17+00-00_mbpp_6QrPaBwjhk7UoeAKFr7gUz.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/prod/mbpp/openrouter+qwen+qwen-2.5-coder-32b-instruct/2025-03-22-12-10-14-84fa272c/2025-03-22T12-15-17+00-00_mbpp_fCL3ba3aNDCAb4VQATgmjT.eval.dashboard.json
-    - name: swe_bench_verified_mini
-      default_scorer: swe_bench_scorer
-      default_metric: mean
-      paths:
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/google+gemini-2.0-flash-001/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_QXkFG5LGoR35kKmY6qEbAN.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/grok+grok-2-1212/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_BF7xRDFN4WaXgKm5XQA7nq.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/mistral+mistral-large-latest/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_VDxSMz7dq48nEzHmWzZJf5.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/mistral+mistral-small-latest/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_XNvusevEeqf7tvrUHX672M.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openai+gpt-4o-mini/2025-03-30-10-43-56-e2cdd4f2/2025-03-30T21-44-13+11-00_swe-bench-verified-mini_5kfC32PY7unQTpRrTCktWn.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openai+gpt-4o/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_NS43jooWQ9TDKrRFaMbFzv.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openrouter+deepseek+deepseek-chat/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_Z2CSaCJSWG7x62Pyn6UCHu.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_kjwoQijeG7SGaXbaCEEtdH.eval.dashboard.json
     cybersecurity:
     - name: cybench
       default_scorer: includes
