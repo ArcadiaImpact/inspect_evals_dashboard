@@ -16,11 +16,7 @@ def create_bar_chart(
 
     metric_values = [
         next(
-            # TODO: find a proper solution for displaying bar for 0.0 values.
-            # Without this hack the bars would be empty and no tooltips would be shown for them.
-            # With this hack the tooltip still shows 0.0 (as it should).
-            # That said, getting the tooltip displayed requires some amount of "pixel hunting"
-            v.value if v.value > (3 * 1e-4) else (3 * 1e-4)
+            v.value
             for k, v in get_scorer_by_name(log, scorer).metrics.items()
             if k == metric
         )
