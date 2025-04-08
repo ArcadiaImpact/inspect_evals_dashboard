@@ -179,3 +179,7 @@ logs/
 
 # VSCode
 .vscode/
+
+# Thumbnails
+.DS_Store
+thumbs.db
