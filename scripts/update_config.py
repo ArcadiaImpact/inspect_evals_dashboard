@@ -11,13 +11,13 @@ import yaml
 MAPPING = {
     "agents": [
         "cybench",
-        "gaia",
+        "gaia_level3",
         "gdm_intercode_ctf",
         "osworld",
         "swe_bench_verified_mini",
         "agentharm",
     ],
-    "assistants": ["gaia", "agentharm"],
+    "assistants": ["gaia_level3", "agentharm"],
     "coding": ["cybench", "humaneval", "mbpp", "osworld", "swe_bench_verified_mini"],
     "cybersecurity": [
         "cybench",
