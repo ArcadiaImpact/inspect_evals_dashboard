@@ -41,7 +41,7 @@ def load_evaluation_logs(evaluation_paths: list[str]) -> list[DashboardLog]:
             data = load_json_from_s3(path, conn)
         else:
             data = load_json_from_local(path)
-        data["location"] = path  # Set location from downloaded path
+        data["location"] = path  # Set location of DashboardLog from downloaded path
         dashboard_logs.append(DashboardLog(**data))
 
     return dashboard_logs
