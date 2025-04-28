@@ -18,7 +18,7 @@ class EvaluationConfig(BaseModel):
         models = set()
         for path in self.paths:
             # Extract model name from path like: s3://$AWS_S3_BUCKET/logs/prod/bbh/anthropic+claude-3-7-sonnet-20250219/...
-            match = re.search(r'/logs/\w+/\w+/([^/]+)/', path)
+            match = re.search(r"/logs/\w+/\w+/([^/]+)/", path)
             if match:
                 models.add(match.group(1))
         return models
@@ -68,7 +68,9 @@ class EnvironmentConfig(BaseModel):
     @property
     def total_tasks(self) -> int:
         # Get unique task names across all categories
-        unique_tasks = {task.name for field in self.model_fields for task in getattr(self, field)}
+        unique_tasks = {
+            task.name for field in self.model_fields for task in getattr(self, field)
+        }
         return len(unique_tasks)
 
     @property
