@@ -145,7 +145,7 @@ def home_content():
         # Add model selector
         selected_model = st.selectbox(
             "Select a model to view its performance",
-            sorted(all_models),
+            sorted(all_models, key=str.lower),
             help="Choose a model to see its performance across different evaluation categories",
         )
 
