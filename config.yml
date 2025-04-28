@@ -28,6 +28,19 @@ prod:
       - s3://$AWS_S3_BUCKET/logs/prod/cybench/openai+gpt-4o/2025-03-21-02-07-44-c64b7513/2025-03-21T02-41-00+00-00_cybench_SEmqQZG2r2HhNWEKyQEYN2.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/prod/cybench/openrouter+deepseek+deepseek-chat/2025-03-21-02-07-44-c64b7513/2025-03-22T06-28-42+00-00_cybench_dXmqoLvymm4sYQV6AEFxaL.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/prod/cybench/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-21-02-07-44-c64b7513/2025-03-21T02-41-00+00-00_cybench_5xiMCRagFvWTDGa4HRYYxC.eval.dashboard.json
+    - name: gaia_level3
+      default_scorer: gaia_scorer
+      default_metric: accuracy
+      paths:
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/anthropic+claude-3-7-sonnet-20250219/2025-04-11-04-20-17-23207b4c/2025-04-14T09-58-16+00-00_gaia-level3_VjsUFrGvpbQ554jRktgG8L.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/google+gemini-2.0-flash-001/2025-04-11-04-20-17-23207b4c/2025-04-11T04-25-52+00-00_gaia-level3_ganS2nJbJFecb5tii6d7o8.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/grok+grok-2-1212/2025-04-11-04-20-17-23207b4c/2025-04-14T10-17-32+00-00_gaia-level3_FSxLN3q52vDuGamNgF7uhe.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/mistral+mistral-large-latest/2025-04-11-04-20-17-23207b4c/2025-04-14T09-58-19+00-00_gaia-level3_XgibG7donx4R8T3jPSasFW.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/mistral+mistral-small-latest/2025-04-11-04-20-17-23207b4c/2025-04-14T09-58-18+00-00_gaia-level3_SBq5TBkptjtkPJvYq8udnr.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/openai+gpt-4o-mini/2025-04-11-04-20-17-23207b4c/2025-04-11T04-25-52+00-00_gaia-level3_igWe8fPjjY6pgyDpUBixag.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/openai+gpt-4o/2025-04-11-04-20-17-23207b4c/2025-04-14T10-31-03+00-00_gaia-level3_cQhyKPBJiYLTFoY9eqEtez.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/openai+o1-mini/2025-04-11-04-20-17-23207b4c/2025-04-11T04-25-51+00-00_gaia-level3_YKAjS9PMDik8mNR7K58ma7.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/openai+o3-mini/2025-04-11-04-20-17-23207b4c/2025-04-11T04-25-51+00-00_gaia-level3_aFZbjW2m7eTe7kZeEDxHfX.eval.dashboard.json
     - name: gdm_intercode_ctf
       default_scorer: includes
       default_metric: accuracy
@@ -44,14 +57,15 @@ prod:
       default_scorer: swe_bench_scorer
       default_metric: mean
       paths:
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/google+gemini-2.0-flash-001/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_QXkFG5LGoR35kKmY6qEbAN.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/grok+grok-2-1212/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_BF7xRDFN4WaXgKm5XQA7nq.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/mistral+mistral-large-latest/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_VDxSMz7dq48nEzHmWzZJf5.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/mistral+mistral-small-latest/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_XNvusevEeqf7tvrUHX672M.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openai+gpt-4o-mini/2025-03-30-10-43-56-e2cdd4f2/2025-03-30T21-44-13+11-00_swe-bench-verified-mini_5kfC32PY7unQTpRrTCktWn.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openai+gpt-4o/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_NS43jooWQ9TDKrRFaMbFzv.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openrouter+deepseek+deepseek-chat/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_Z2CSaCJSWG7x62Pyn6UCHu.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_kjwoQijeG7SGaXbaCEEtdH.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/anthropic+claude-3-7-sonnet-20250219/2025-04-11-04-22-40-ffef8b5c/2025-04-14T10-05-45+00-00_swe-bench-verified-mini_aMGcH92kBT3Kco96tK6ruV.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/google+gemini-2.0-flash-001/2025-04-11-04-22-40-ffef8b5c/2025-04-11T04-40-08+00-00_swe-bench-verified-mini_PmUDmLMBavhMUBfv55Pn6f.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/grok+grok-2-1212/2025-04-11-04-22-40-ffef8b5c/2025-04-11T04-40-08+00-00_swe-bench-verified-mini_CrPaSo45QnweAqeL4ALVLi.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/mistral+mistral-large-latest/2025-04-11-04-22-40-ffef8b5c/2025-04-11T04-40-09+00-00_swe-bench-verified-mini_jMMd5y7PXqTW3sBiXqivp8.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/mistral+mistral-small-latest/2025-04-11-04-22-40-ffef8b5c/2025-04-14T11-23-11+00-00_swe-bench-verified-mini_UZLitXtssBF72RXsgpDx8B.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openai+gpt-4o-mini/2025-04-11-04-22-40-ffef8b5c/2025-04-11T04-40-08+00-00_swe-bench-verified-mini_3D29tgaMYpbDRekz8x8hpQ.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openai+gpt-4o/2025-04-11-04-22-40-ffef8b5c/2025-04-14T10-05-45+00-00_swe-bench-verified-mini_Zue9zm5SE523Ny8R5GcqDv.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openrouter+deepseek+deepseek-chat/2025-04-11-04-22-40-ffef8b5c/2025-04-11T04-40-09+00-00_swe-bench-verified-mini_eQkYAoXgdCYkGrtBviwvwm.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openrouter+meta-llama+llama-3.3-70b-instruct/2025-04-11-04-22-40-ffef8b5c/2025-04-15T01-23-07+00-00_swe-bench-verified-mini_hkQL5pATzG6iRhtVppNvAu.eval.dashboard.json
     assistants:
     - name: agentharm
       default_scorer: combined_scorer
@@ -65,6 +79,19 @@ prod:
       - s3://$AWS_S3_BUCKET/logs/prod/agentharm/openai+gpt-4o/2025-03-24-00-42-50-52d71604/2025-03-24T03-06-50+00-00_agentharm_Rjoac8n7hPaGwt44bxLaTQ.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/prod/agentharm/openrouter+deepseek+deepseek-chat/2025-03-24-00-42-50-52d71604/2025-03-24T03-06-50+00-00_agentharm_ABwHhTekcokE4Yc6Qscpaf.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/prod/agentharm/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-24-00-42-50-52d71604/2025-03-24T02-54-38+00-00_agentharm_RC3GekdRpikexrfMV3B3Tq.eval.dashboard.json
+    - name: gaia_level3
+      default_scorer: gaia_scorer
+      default_metric: accuracy
+      paths:
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/anthropic+claude-3-7-sonnet-20250219/2025-04-11-04-20-17-23207b4c/2025-04-14T09-58-16+00-00_gaia-level3_VjsUFrGvpbQ554jRktgG8L.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/google+gemini-2.0-flash-001/2025-04-11-04-20-17-23207b4c/2025-04-11T04-25-52+00-00_gaia-level3_ganS2nJbJFecb5tii6d7o8.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/grok+grok-2-1212/2025-04-11-04-20-17-23207b4c/2025-04-14T10-17-32+00-00_gaia-level3_FSxLN3q52vDuGamNgF7uhe.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/mistral+mistral-large-latest/2025-04-11-04-20-17-23207b4c/2025-04-14T09-58-19+00-00_gaia-level3_XgibG7donx4R8T3jPSasFW.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/mistral+mistral-small-latest/2025-04-11-04-20-17-23207b4c/2025-04-14T09-58-18+00-00_gaia-level3_SBq5TBkptjtkPJvYq8udnr.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/openai+gpt-4o-mini/2025-04-11-04-20-17-23207b4c/2025-04-11T04-25-52+00-00_gaia-level3_igWe8fPjjY6pgyDpUBixag.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/openai+gpt-4o/2025-04-11-04-20-17-23207b4c/2025-04-14T10-31-03+00-00_gaia-level3_cQhyKPBJiYLTFoY9eqEtez.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/openai+o1-mini/2025-04-11-04-20-17-23207b4c/2025-04-11T04-25-51+00-00_gaia-level3_YKAjS9PMDik8mNR7K58ma7.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/gaia_level3/openai+o3-mini/2025-04-11-04-20-17-23207b4c/2025-04-11T04-25-51+00-00_gaia-level3_aFZbjW2m7eTe7kZeEDxHfX.eval.dashboard.json
     coding:
     - name: cybench
       default_scorer: includes
@@ -110,14 +137,15 @@ prod:
       default_scorer: swe_bench_scorer
       default_metric: mean
       paths:
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/google+gemini-2.0-flash-001/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_QXkFG5LGoR35kKmY6qEbAN.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/grok+grok-2-1212/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_BF7xRDFN4WaXgKm5XQA7nq.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/mistral+mistral-large-latest/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_VDxSMz7dq48nEzHmWzZJf5.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/mistral+mistral-small-latest/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_XNvusevEeqf7tvrUHX672M.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openai+gpt-4o-mini/2025-03-30-10-43-56-e2cdd4f2/2025-03-30T21-44-13+11-00_swe-bench-verified-mini_5kfC32PY7unQTpRrTCktWn.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openai+gpt-4o/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_NS43jooWQ9TDKrRFaMbFzv.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openrouter+deepseek+deepseek-chat/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_Z2CSaCJSWG7x62Pyn6UCHu.eval.dashboard.json
-      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-30-10-47-53-08a565a2/2025-03-30T11-01-08+00-00_swe-bench-verified-mini_kjwoQijeG7SGaXbaCEEtdH.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/anthropic+claude-3-7-sonnet-20250219/2025-04-11-04-22-40-ffef8b5c/2025-04-14T10-05-45+00-00_swe-bench-verified-mini_aMGcH92kBT3Kco96tK6ruV.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/google+gemini-2.0-flash-001/2025-04-11-04-22-40-ffef8b5c/2025-04-11T04-40-08+00-00_swe-bench-verified-mini_PmUDmLMBavhMUBfv55Pn6f.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/grok+grok-2-1212/2025-04-11-04-22-40-ffef8b5c/2025-04-11T04-40-08+00-00_swe-bench-verified-mini_CrPaSo45QnweAqeL4ALVLi.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/mistral+mistral-large-latest/2025-04-11-04-22-40-ffef8b5c/2025-04-11T04-40-09+00-00_swe-bench-verified-mini_jMMd5y7PXqTW3sBiXqivp8.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/mistral+mistral-small-latest/2025-04-11-04-22-40-ffef8b5c/2025-04-14T11-23-11+00-00_swe-bench-verified-mini_UZLitXtssBF72RXsgpDx8B.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openai+gpt-4o-mini/2025-04-11-04-22-40-ffef8b5c/2025-04-11T04-40-08+00-00_swe-bench-verified-mini_3D29tgaMYpbDRekz8x8hpQ.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openai+gpt-4o/2025-04-11-04-22-40-ffef8b5c/2025-04-14T10-05-45+00-00_swe-bench-verified-mini_Zue9zm5SE523Ny8R5GcqDv.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openrouter+deepseek+deepseek-chat/2025-04-11-04-22-40-ffef8b5c/2025-04-11T04-40-09+00-00_swe-bench-verified-mini_eQkYAoXgdCYkGrtBviwvwm.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/prod/swe_bench_verified_mini/openrouter+meta-llama+llama-3.3-70b-instruct/2025-04-11-04-22-40-ffef8b5c/2025-04-15T01-23-07+00-00_swe-bench-verified-mini_hkQL5pATzG6iRhtVppNvAu.eval.dashboard.json
     cybersecurity:
     - name: cybench
       default_scorer: includes
@@ -622,6 +650,7 @@ stage:
       - s3://$AWS_S3_BUCKET/logs/stage/humaneval/mistral+mistral-small-latest/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_2jD3BjMKgrLy4ypQQKP4d6.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/humaneval/openai+gpt-4o-mini/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_JpJPXJe6Gpch8ZM7NHZCkP.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/humaneval/openai+gpt-4o/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_BX4KUbpBhuoADZmpH6owkQ.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/humaneval/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T08-36-01+00-00_humaneval_CPFdGUD5k9iZ47RtSgvMAz.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/humaneval/openrouter+deepseek+deepseek-chat/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_W5SF5vQurmkdqNw4PAA8ip.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/humaneval/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_5suLhYY2kEmshRTfR6w23f.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/humaneval/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_BXSpiy7578RdRrgfPkAKcj.eval.dashboard.json
@@ -736,6 +765,7 @@ stage:
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+gpt-4o/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_49YhWkhkFcFtfCn37QQqqo.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o1-mini/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-14-01+00-00_bbh_DbxAEA7wvfePoAddRcza57.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o3-mini/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-14-01+00-00_bbh_LYiUYn24dFUB6YDXUwwBCR.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T05-36-59+00-00_bbh_MwmoTGSkrUaEuhmJCvAhcc.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+deepseek+deepseek-chat/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_XisL3dpLtjBf9zWcWxjYrg.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+deepseek+deepseek-r1/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-46-14+00-00_bbh_bU42pEgKVLkSzdpqvx33cG.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_Gh8QAFG2USJs2mEZx4tGkY.eval.dashboard.json
@@ -801,6 +831,7 @@ stage:
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+gpt-4o/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_49YhWkhkFcFtfCn37QQqqo.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o1-mini/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-14-01+00-00_bbh_DbxAEA7wvfePoAddRcza57.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o3-mini/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-14-01+00-00_bbh_LYiUYn24dFUB6YDXUwwBCR.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T05-36-59+00-00_bbh_MwmoTGSkrUaEuhmJCvAhcc.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+deepseek+deepseek-chat/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_XisL3dpLtjBf9zWcWxjYrg.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+deepseek+deepseek-r1/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-46-14+00-00_bbh_bU42pEgKVLkSzdpqvx33cG.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_Gh8QAFG2USJs2mEZx4tGkY.eval.dashboard.json
@@ -817,6 +848,7 @@ stage:
       - s3://$AWS_S3_BUCKET/logs/stage/gsm8k/mistral+mistral-small-latest/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_oGYtVysKrr3THnnd4Dv7cu.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/gsm8k/openai+gpt-4o-mini/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_Yqb2W9tGQveuNxMJbREdhk.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/gsm8k/openai+gpt-4o/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_RkFTQodnGh7eYyCDm7UP6a.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/gsm8k/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T06-31-16+00-00_gsm8k_8qvsbUtU7e6kLskjD5ifVq.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/gsm8k/openrouter+deepseek+deepseek-chat/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_4doXVuP4qHiMeayWBENZqf.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/gsm8k/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_fYRSsWdrTN3PRa6toYQskf.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/gsm8k/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_8sm4vz6Mi3VW6sSm3HVLck.eval.dashboard.json
@@ -857,6 +889,7 @@ stage:
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openai+gpt-4o-mini/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_KecRXQTPCHeDmhVucnQCsE.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openai+gpt-4o/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_QkEnqrGpgg9pbgUfz7f9d6.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openai+o1-mini/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_WYVgRVDJwefG2of2bLdFQv.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T08-55-22+00-00_mmmu-multiple-choice_3VkhZcqPDurbs2Ud9gJtDD.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openrouter+deepseek+deepseek-chat/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_Pu4wQquRtRUjjShnLLgd6h.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openrouter+deepseek+deepseek-r1/2025-03-20-13-01-03-7c3c3eaf/2025-03-23T04-10-27+00-00_mmmu-multiple-choice_7DCgBa4fykTv9MaUCfRDcB.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_Emg5DATRZUWVSCoLkjpzXr.eval.dashboard.json
@@ -891,6 +924,7 @@ stage:
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+gpt-4o/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_49YhWkhkFcFtfCn37QQqqo.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o1-mini/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-14-01+00-00_bbh_DbxAEA7wvfePoAddRcza57.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o3-mini/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-14-01+00-00_bbh_LYiUYn24dFUB6YDXUwwBCR.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T05-36-59+00-00_bbh_MwmoTGSkrUaEuhmJCvAhcc.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+deepseek+deepseek-chat/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_XisL3dpLtjBf9zWcWxjYrg.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+deepseek+deepseek-r1/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-46-14+00-00_bbh_bU42pEgKVLkSzdpqvx33cG.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_Gh8QAFG2USJs2mEZx4tGkY.eval.dashboard.json
@@ -910,6 +944,7 @@ stage:
       - s3://$AWS_S3_BUCKET/logs/stage/hellaswag/openai+gpt-4o/2025-03-19-03-51-21-467ef46a/2025-03-19T11-23-05+00-00_hellaswag_b5kiBjmiJf99RxmCd7kVcc.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/hellaswag/openai+o1-mini/2025-03-28-00-36-30-a6c8bee6/2025-03-28T01-31-30+00-00_hellaswag_a26MUPvboLtad5dFbUKa2Y.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/hellaswag/openai+o3-mini/2025-03-28-00-36-30-a6c8bee6/2025-03-28T01-31-30+00-00_hellaswag_35KbXVYMmt9Wzqynzob9up.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/hellaswag/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T06-48-02+00-00_hellaswag_hMZgNHzvC5Fh5N2KDHHgdv.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/hellaswag/openrouter+deepseek+deepseek-chat/2025-03-19-03-51-21-467ef46a/2025-03-19T12-59-50+00-00_hellaswag_5jhMUpwnaNAwRmVpumSQ8y.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/hellaswag/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-51-21-467ef46a/2025-03-19T11-23-05+00-00_hellaswag_mr2625xZk54gFhkAjFoC82.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/hellaswag/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-03-51-21-467ef46a/2025-03-19T11-23-05+00-00_hellaswag_TEAke8jfAHbzSNxS7gRVei.eval.dashboard.json
@@ -927,6 +962,7 @@ stage:
       - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openai+gpt-4o/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_R7LEM3A5aV75oDc36PsP7m.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openai+o1-mini/2025-03-20-04-37-39-6cd4c920/2025-03-20T04-40-47+00-00_ifeval_b7vtnkLEx7iGCEExw7otM8.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openai+o3-mini/2025-03-20-04-37-39-6cd4c920/2025-03-20T04-40-47+00-00_ifeval_3U6NBwWFQ5KFLk4J3j2sL4.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T08-40-08+00-00_ifeval_JwVfV6BJhvv9D2FYvSFKB8.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+deepseek+deepseek-chat/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_i5sTjSQ4JhVqo7tv7Qomw5.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+deepseek+deepseek-r1/2025-03-20-04-37-39-6cd4c920/2025-03-20T23-24-31+11-00_ifeval_TJzhamQrcm5kUeZ7TFEWey.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_nrZLj6qBMkLc4gGHwGbXsH.eval.dashboard.json
@@ -958,6 +994,7 @@ stage:
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openai+gpt-4o-mini/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_KecRXQTPCHeDmhVucnQCsE.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openai+gpt-4o/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_QkEnqrGpgg9pbgUfz7f9d6.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openai+o1-mini/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_WYVgRVDJwefG2of2bLdFQv.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T08-55-22+00-00_mmmu-multiple-choice_3VkhZcqPDurbs2Ud9gJtDD.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openrouter+deepseek+deepseek-chat/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_Pu4wQquRtRUjjShnLLgd6h.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openrouter+deepseek+deepseek-r1/2025-03-20-13-01-03-7c3c3eaf/2025-03-23T04-10-27+00-00_mmmu-multiple-choice_7DCgBa4fykTv9MaUCfRDcB.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_Emg5DATRZUWVSCoLkjpzXr.eval.dashboard.json
@@ -1165,6 +1202,7 @@ dev:
       - s3://$AWS_S3_BUCKET/logs/stage/humaneval/mistral+mistral-small-latest/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_2jD3BjMKgrLy4ypQQKP4d6.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/humaneval/openai+gpt-4o-mini/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_JpJPXJe6Gpch8ZM7NHZCkP.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/humaneval/openai+gpt-4o/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_BX4KUbpBhuoADZmpH6owkQ.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/humaneval/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T08-36-01+00-00_humaneval_CPFdGUD5k9iZ47RtSgvMAz.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/humaneval/openrouter+deepseek+deepseek-chat/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_W5SF5vQurmkdqNw4PAA8ip.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/humaneval/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_5suLhYY2kEmshRTfR6w23f.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/humaneval/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-03-51-23-dc6e825d/2025-03-20T06-52-31+00-00_humaneval_BXSpiy7578RdRrgfPkAKcj.eval.dashboard.json
@@ -1279,6 +1317,7 @@ dev:
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+gpt-4o/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_49YhWkhkFcFtfCn37QQqqo.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o1-mini/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-14-01+00-00_bbh_DbxAEA7wvfePoAddRcza57.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o3-mini/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-14-01+00-00_bbh_LYiUYn24dFUB6YDXUwwBCR.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T05-36-59+00-00_bbh_MwmoTGSkrUaEuhmJCvAhcc.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+deepseek+deepseek-chat/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_XisL3dpLtjBf9zWcWxjYrg.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+deepseek+deepseek-r1/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-46-14+00-00_bbh_bU42pEgKVLkSzdpqvx33cG.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_Gh8QAFG2USJs2mEZx4tGkY.eval.dashboard.json
@@ -1344,6 +1383,7 @@ dev:
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+gpt-4o/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_49YhWkhkFcFtfCn37QQqqo.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o1-mini/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-14-01+00-00_bbh_DbxAEA7wvfePoAddRcza57.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o3-mini/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-14-01+00-00_bbh_LYiUYn24dFUB6YDXUwwBCR.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T05-36-59+00-00_bbh_MwmoTGSkrUaEuhmJCvAhcc.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+deepseek+deepseek-chat/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_XisL3dpLtjBf9zWcWxjYrg.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+deepseek+deepseek-r1/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-46-14+00-00_bbh_bU42pEgKVLkSzdpqvx33cG.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_Gh8QAFG2USJs2mEZx4tGkY.eval.dashboard.json
@@ -1360,6 +1400,7 @@ dev:
       - s3://$AWS_S3_BUCKET/logs/stage/gsm8k/mistral+mistral-small-latest/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_oGYtVysKrr3THnnd4Dv7cu.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/gsm8k/openai+gpt-4o-mini/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_Yqb2W9tGQveuNxMJbREdhk.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/gsm8k/openai+gpt-4o/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_RkFTQodnGh7eYyCDm7UP6a.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/gsm8k/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T06-31-16+00-00_gsm8k_8qvsbUtU7e6kLskjD5ifVq.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/gsm8k/openrouter+deepseek+deepseek-chat/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_4doXVuP4qHiMeayWBENZqf.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/gsm8k/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_fYRSsWdrTN3PRa6toYQskf.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/gsm8k/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-11-19-21-f0368014/2025-03-19T11-22-04+00-00_gsm8k_8sm4vz6Mi3VW6sSm3HVLck.eval.dashboard.json
@@ -1400,6 +1441,7 @@ dev:
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openai+gpt-4o-mini/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_KecRXQTPCHeDmhVucnQCsE.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openai+gpt-4o/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_QkEnqrGpgg9pbgUfz7f9d6.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openai+o1-mini/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_WYVgRVDJwefG2of2bLdFQv.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T08-55-22+00-00_mmmu-multiple-choice_3VkhZcqPDurbs2Ud9gJtDD.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openrouter+deepseek+deepseek-chat/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_Pu4wQquRtRUjjShnLLgd6h.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openrouter+deepseek+deepseek-r1/2025-03-20-13-01-03-7c3c3eaf/2025-03-23T04-10-27+00-00_mmmu-multiple-choice_7DCgBa4fykTv9MaUCfRDcB.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_Emg5DATRZUWVSCoLkjpzXr.eval.dashboard.json
@@ -1434,6 +1476,7 @@ dev:
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+gpt-4o/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_49YhWkhkFcFtfCn37QQqqo.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o1-mini/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-14-01+00-00_bbh_DbxAEA7wvfePoAddRcza57.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o3-mini/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-14-01+00-00_bbh_LYiUYn24dFUB6YDXUwwBCR.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/bbh/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T05-36-59+00-00_bbh_MwmoTGSkrUaEuhmJCvAhcc.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+deepseek+deepseek-chat/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_XisL3dpLtjBf9zWcWxjYrg.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+deepseek+deepseek-r1/2025-03-20-00-10-55-745f1ee4/2025-03-20T00-46-14+00-00_bbh_bU42pEgKVLkSzdpqvx33cG.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/bbh/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-50-35-693a222d/2025-03-19T03-53-59+00-00_bbh_Gh8QAFG2USJs2mEZx4tGkY.eval.dashboard.json
@@ -1453,6 +1496,7 @@ dev:
       - s3://$AWS_S3_BUCKET/logs/stage/hellaswag/openai+gpt-4o/2025-03-19-03-51-21-467ef46a/2025-03-19T11-23-05+00-00_hellaswag_b5kiBjmiJf99RxmCd7kVcc.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/hellaswag/openai+o1-mini/2025-03-28-00-36-30-a6c8bee6/2025-03-28T01-31-30+00-00_hellaswag_a26MUPvboLtad5dFbUKa2Y.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/hellaswag/openai+o3-mini/2025-03-28-00-36-30-a6c8bee6/2025-03-28T01-31-30+00-00_hellaswag_35KbXVYMmt9Wzqynzob9up.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/hellaswag/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T06-48-02+00-00_hellaswag_hMZgNHzvC5Fh5N2KDHHgdv.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/hellaswag/openrouter+deepseek+deepseek-chat/2025-03-19-03-51-21-467ef46a/2025-03-19T12-59-50+00-00_hellaswag_5jhMUpwnaNAwRmVpumSQ8y.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/hellaswag/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-19-03-51-21-467ef46a/2025-03-19T11-23-05+00-00_hellaswag_mr2625xZk54gFhkAjFoC82.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/hellaswag/openrouter+meta-llama+llama-3.3-70b-instruct/2025-03-19-03-51-21-467ef46a/2025-03-19T11-23-05+00-00_hellaswag_TEAke8jfAHbzSNxS7gRVei.eval.dashboard.json
@@ -1470,6 +1514,7 @@ dev:
       - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openai+gpt-4o/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_R7LEM3A5aV75oDc36PsP7m.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openai+o1-mini/2025-03-20-04-37-39-6cd4c920/2025-03-20T04-40-47+00-00_ifeval_b7vtnkLEx7iGCEExw7otM8.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openai+o3-mini/2025-03-20-04-37-39-6cd4c920/2025-03-20T04-40-47+00-00_ifeval_3U6NBwWFQ5KFLk4J3j2sL4.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T08-40-08+00-00_ifeval_JwVfV6BJhvv9D2FYvSFKB8.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+deepseek+deepseek-chat/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_i5sTjSQ4JhVqo7tv7Qomw5.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+deepseek+deepseek-r1/2025-03-20-04-37-39-6cd4c920/2025-03-20T23-24-31+11-00_ifeval_TJzhamQrcm5kUeZ7TFEWey.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/ifeval/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-20-13-11-35-a9deffd5/2025-03-20T13-15-43+00-00_ifeval_nrZLj6qBMkLc4gGHwGbXsH.eval.dashboard.json
@@ -1501,6 +1546,7 @@ dev:
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openai+gpt-4o-mini/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_KecRXQTPCHeDmhVucnQCsE.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openai+gpt-4o/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_QkEnqrGpgg9pbgUfz7f9d6.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openai+o1-mini/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_WYVgRVDJwefG2of2bLdFQv.eval.dashboard.json
+      - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openai+o4-mini/2025-04-23-02-02-21-40c2cc98/2025-04-24T08-55-22+00-00_mmmu-multiple-choice_3VkhZcqPDurbs2Ud9gJtDD.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openrouter+deepseek+deepseek-chat/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_Pu4wQquRtRUjjShnLLgd6h.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openrouter+deepseek+deepseek-r1/2025-03-20-13-01-03-7c3c3eaf/2025-03-23T04-10-27+00-00_mmmu-multiple-choice_7DCgBa4fykTv9MaUCfRDcB.eval.dashboard.json
       - s3://$AWS_S3_BUCKET/logs/stage/mmmu_multiple_choice/openrouter+meta-llama+llama-3.2-90b-vision-instruct/2025-03-20-13-01-03-7c3c3eaf/2025-03-21T11-39-29+00-00_mmmu-multiple-choice_Emg5DATRZUWVSCoLkjpzXr.eval.dashboard.json
