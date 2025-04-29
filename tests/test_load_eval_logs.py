@@ -22,4 +22,6 @@ def test_load_evaluation_logs(eval_logs):
 
     with open("tests/data/test_task/1.json") as f:
         data = json.load(f)
+        # Location is set by load_evaluation_logs to the path the file was downloaded from
+        data["location"] = "tests/data/test_task/1.json"
         assert DashboardLog(**data) == eval_logs[0]
