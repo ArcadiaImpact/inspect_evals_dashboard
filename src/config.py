@@ -74,7 +74,7 @@ class EnvironmentConfig(BaseModel):
 
 @st.cache_data
 def load_config() -> EnvironmentConfig:
-    """Load evaluation logs configuration from config.yaml."""
+    """Load evaluation logs configuration from config.yml."""
     env = os.getenv("STREAMLIT_ENV", "dev")
 
     config_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config.yml")
