@@ -14,6 +14,17 @@ class EvaluationConfig(BaseModel):
     paths: list[str]
 
     @property
+    def model_names(self) -> set[str]:
+        """Extract model names from paths."""
+        models = set()
+        for path in self.paths:
+            # Extract model name from path like: s3://$AWS_S3_BUCKET/logs/prod/bbh/anthropic+claude-3-7-sonnet-20250219/...
+            match = re.search(r"/logs/\w+/\w+/([^/]+)/", path)
+            if match:
+                models.add(match.group(1))
+        return models
+
+    @property
     def prefixed_name(self) -> str:
         return f"inspect_evals/{self.name}"
 
@@ -57,20 +68,31 @@ class EnvironmentConfig(BaseModel):
 
     @property
     def total_tasks(self) -> int:
-        return sum(len(getattr(self, field)) for field in self.model_fields)
+        # Get unique task names across all categories
+        unique_tasks = {
+            task.name for field in self.model_fields for task in getattr(self, field)
+        }
+        return len(unique_tasks)
 
     @property
     def total_runs(self) -> int:
-        return sum(
-            len(task.paths)
-            for field in self.model_fields
-            for task in getattr(self, field)
-        )
+        unique_paths = set()
+        for field in self.model_fields:
+            for task in getattr(self, field):
+                for path in task.paths:
+                    unique_paths.add(path)
+
+        return len(unique_paths)
 
     @property
     def total_models(self) -> int:
-        # This is an imperfect proxy to get the number of models from the first task in knowledge
-        return len(self.knowledge[0].paths) if self.knowledge else 0
+        # Extract all unique model names from all paths
+        all_models = set()
+        for field in self.model_fields:
+            for task in getattr(self, field):
+                all_models.update(task.model_names)
+
+        return len(all_models)
 
 
 @st.cache_data
