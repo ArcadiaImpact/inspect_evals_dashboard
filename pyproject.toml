@@ -7,7 +7,7 @@ dependencies = { file = ["requirements.txt"] }
 
 [project]
 name = "inspect_evals_dashboard"
-version = "0.1.0"
+version = "0.1.1"
 description = "A Streamlit dashboard for visualizing AI evaluation results from inspect_evals"
 readme = "README.md"
 classifiers = [
