@@ -1,12 +1,12 @@
-boto3==1.37.1
-inspect_ai==0.3.76
+boto3==1.38.11
+inspect_ai==0.3.94
 inspect_evals @ git+https://github.com/UKGovernmentBEIS/inspect_evals@5fa9a9a4c38f65f1bc48988ec143cf10d71e5d11
 inspect_evals_dashboard_schema @ git+https://github.com/ArcadiaImpact/inspect_evals_dashboard_schema@549ee960688fc5faa1b89007169acc8c95e009
-orjson==3.10.15
+orjson==3.10.18
 plotly==6.0.1
 pyyaml==6.0.2
 requests==2.32.3
-s3fs==2024.12.0
-sentry-sdk==2.24.1
+s3fs==2025.3.2
+sentry-sdk==2.27.0
 st-files-connection==0.1.0
-streamlit==1.43.2
+streamlit==1.45.0
