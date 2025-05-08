@@ -40,7 +40,7 @@ def create_presigned_url(
 def parse_s3_url_for_presigned_url(s3_url: str) -> tuple[str, str]:
     """Parse an S3 URL and return the bucket name and object name.
 
-    Note, that `.zip` is appended to the object name.
+    Note that the object name is transformed from the dashboard JSON path to the eval zip path.
 
     Args:
         s3_url (str): The S3 URL to parse
@@ -50,4 +50,12 @@ def parse_s3_url_for_presigned_url(s3_url: str) -> tuple[str, str]:
 
     """
     o = urlparse(s3_url, allow_fragments=False)
-    return o.netloc, o.path.lstrip("/") + ".zip"
+    bucket_name = o.netloc
+    dashboard_log_key = o.path.lstrip("/")
+
+    # Transform dashboard JSON path to eval zip path
+    # From: logs/prod/.../filename.eval.dashboard.json
+    # To:   logs/prod/.../filename.eval.zip
+    zipped_eval_log_key = dashboard_log_key.replace(".dashboard.json", ".zip")
+
+    return bucket_name, zipped_eval_log_key

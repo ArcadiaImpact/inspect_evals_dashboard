@@ -1,5 +1,6 @@
 import os
 import re
+from pathlib import Path
 
 import streamlit as st
 import yaml
@@ -11,6 +12,17 @@ class EvaluationConfig(BaseModel):
     default_scorer: str
     default_metric: str
     paths: list[str]
+
+    @property
+    def model_names(self) -> set[str]:
+        """Extract model names from paths."""
+        models = set()
+        for path in self.paths:
+            # Extract model name from path like: s3://$AWS_S3_BUCKET/logs/prod/bbh/anthropic+claude-3-7-sonnet-20250219/...
+            match = re.search(r"/logs/\w+/\w+/([^/]+)/", path)
+            if match:
+                models.add(match.group(1))
+        return models
 
     @property
     def prefixed_name(self) -> str:
@@ -56,28 +68,39 @@ class EnvironmentConfig(BaseModel):
 
     @property
     def total_tasks(self) -> int:
-        return sum(len(getattr(self, field)) for field in self.model_fields)
+        # Get unique task names across all categories
+        unique_tasks = {
+            task.name for field in self.model_fields for task in getattr(self, field)
+        }
+        return len(unique_tasks)
 
     @property
     def total_runs(self) -> int:
-        return sum(
-            len(task.paths)
-            for field in self.model_fields
-            for task in getattr(self, field)
-        )
+        unique_paths = set()
+        for field in self.model_fields:
+            for task in getattr(self, field):
+                for path in task.paths:
+                    unique_paths.add(path)
+
+        return len(unique_paths)
 
     @property
     def total_models(self) -> int:
-        # This is an imperfect proxy to get the number of models from the first task in knowledge
-        return len(self.knowledge[0].paths) if self.knowledge else 0
+        # Extract all unique model names from all paths
+        all_models = set()
+        for field in self.model_fields:
+            for task in getattr(self, field):
+                all_models.update(task.model_names)
+
+        return len(all_models)
 
 
 @st.cache_data
 def load_config() -> EnvironmentConfig:
-    """Load evaluation logs configuration from config.yaml."""
+    """Load evaluation logs configuration from config.yml."""
     env = os.getenv("STREAMLIT_ENV", "dev")
 
-    config_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config.yml")
+    config_path = Path(__file__).parent.parent / "config.yml"
     try:
         with open(config_path, "r") as f:
             raw_config = yaml.safe_load(f)
