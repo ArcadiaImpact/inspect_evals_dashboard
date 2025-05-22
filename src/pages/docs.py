@@ -49,7 +49,7 @@ st.markdown(
 
     ### **Purpose of the Dashboard**
     The dashboard centralizes evaluation results to support downstream analysis, benchmarking, and decision-making. It allows users to:
-    - Explore results across eight evaluation categories.
+    - Explore results across nine evaluation categories.
     - Compare model performance through bar charts and scatter plots.
     - Perform statistical pairwise analysis of models within categories.
     - Filter results by model family, provider, and other parameters.

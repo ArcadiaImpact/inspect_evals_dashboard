@@ -176,7 +176,7 @@ def home_content():
         3. Technical teams who run internal evaluations against industry benchmarks
 
         ### This dashboard lets you:
-        * Explore results across eight categories of evaluations, these are:
+        * Explore results across nine categories of evaluations, these are:
             * Agents
             * Assistants
             * Coding
