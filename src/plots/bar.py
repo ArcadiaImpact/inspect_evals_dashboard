@@ -34,13 +34,13 @@ def create_bar_chart(
         for log in eval_logs
     ]
 
-    # Zip and sort models, metric_values, metric_errors together by the value in metric_values (in reverse order)
-    # Then unpack them back in 3 separate lists
-    models, metric_values, metric_errors = map(
+    # Zip and sort models, metric_values, metric_errors, and eval_logs together by the value in metric_values (in reverse order)
+    # Then unpack them back in 4 separate lists
+    models, metric_values, metric_errors, sorted_eval_logs = map(
         list,
         zip(
             *sorted(
-                zip(models, metric_values, metric_errors),
+                zip(models, metric_values, metric_errors, eval_logs),
                 key=itemgetter(1),
                 reverse=True,
             )
@@ -51,7 +51,7 @@ def create_bar_chart(
 
     # Create hover text with detailed information
     hover_texts = []
-    for log in eval_logs:
+    for log in sorted_eval_logs:
         hover_text = create_hover_text(log, human_baseline)
         hover_texts.append(hover_text)
 
